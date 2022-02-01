@@ -1,4 +1,4 @@
-# CS321-Group-Project
+# CS321-Group-Project (Group 9: Cameron Beck, Emily Burns, Joshua Cantrell, Erik Overberg)
 
 
 
