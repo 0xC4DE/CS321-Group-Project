@@ -1,4 +1,4 @@
-package bookviewer.dataparser;
+package movieviewer.dataparser;
 
 public class DataParser {
     private String data;

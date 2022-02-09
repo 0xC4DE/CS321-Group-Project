@@ -1,7 +1,7 @@
-package bookviewer.main;
+package movieviewer.main;
 
 
-import bookviewer.dataparser.DataParser;
+import movieviewer.dataparser.DataParser;
 
 public class main {
     public static void main(String []args) {
