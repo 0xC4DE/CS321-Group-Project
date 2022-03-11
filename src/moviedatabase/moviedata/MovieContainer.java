@@ -18,8 +18,7 @@ public class MovieContainer {
     private Gson movieCollection = new Gson();
     private List<Movie> movieList = null;
 
-    // ?
-    private static MovieContainer instance = null;
+    private static MovieContainer instance;
 
     public static MovieContainer getInstance(){
         if(instance == null ){
