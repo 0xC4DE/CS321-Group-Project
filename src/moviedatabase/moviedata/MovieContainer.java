@@ -19,7 +19,6 @@ public class MovieContainer {
     private static MovieContainer instance = null;
 
     private void MovieCollection(){
-        instance = this;
     }
 
     public static MovieContainer getInstance(){
