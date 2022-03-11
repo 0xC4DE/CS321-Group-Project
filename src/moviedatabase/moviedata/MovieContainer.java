@@ -7,19 +7,19 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
+
 
 public class MovieContainer {
-    //thinking if this is a container class it will make more sense, an interface cant
+    // thinking if this is a container class it will make more sense, an interface cant
     // have member variables, so if it's just a class that returns instences of itself
     // that'll get the job done better
 
     private Gson movieCollection = new Gson();
-    private ArrayList<Movie> movieList;
-    private static MovieContainer instance = null;
+    private List<Movie> movieList = null;
 
-    private void MovieCollection(){
-    }
+    // ?
+    private static MovieContainer instance = null;
 
     public static MovieContainer getInstance(){
         if(instance == null ){
@@ -41,10 +41,10 @@ public class MovieContainer {
         };
         try {
             Reader file = new FileReader(String.valueOf(filepath));
-            allMovies = movieList.fromJson(file, Movie.class);
+            movieList = movieCollection.fromJson(file, List.class);
             return true;
         } catch (FileNotFoundException e) {
             return false;
-        };
-    };
+        }
+    }
 }

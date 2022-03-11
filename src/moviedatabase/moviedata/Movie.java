@@ -1,5 +1,7 @@
 package moviedatabase.moviedata;
-/*{"Title":"Spiderman","Year":"1990","Rated":"N/A","Released":"N/A","Runtime":"5 min",
+
+/*
+{"Title":"Spiderman","Year":"1990","Rated":"N/A","Released":"N/A","Runtime":"5 min",
 "Genre":"Short","Director":"Christian Davi","Writer":"N/A","Actors":"N/A","Plot":"N/A",
 "Language":"German","Country":"Switzerland","Awards":"N/A","Poster":"N/A","Ratings":
 [{"Source":"Internet Movie Database","Value":"5.6/10"}],"Metascore":"N/A"
