@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09e8c871-8e1d-43b8-92f7-500473b1ca23" name="Changes" comment="renamed to bookviewer instead of movie viewer">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/Run Application.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/Run Application.run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moviedatabase/moviedata/MovieContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/moviedatabase/moviedata/MovieContainer.java" afterDir="false" />
-    </list>
+    <list default="true" id="09e8c871-8e1d-43b8-92f7-500473b1ca23" name="Changes" comment="renamed to bookviewer instead of movie viewer" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +29,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/moviedatabase" />
+    <property name="last_opened_file_path" value="$USER_HOME$/cs321-group-project" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -41,6 +37,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\src" />
       <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\src\main" />
       <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\src\main\java" />
       <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\.idea" />
