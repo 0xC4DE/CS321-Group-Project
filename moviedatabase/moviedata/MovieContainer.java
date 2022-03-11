@@ -14,9 +14,9 @@ public class MovieContainer {
     // have member variables, so if it's just a class that returns instences of itself
     // that'll get the job done better
 
-    Gson movieCollection = new Gson();
+    private Gson movieCollection = new Gson();
     private ArrayList<Movie> allMovies;
-    private  static MovieContainer instance = null;
+    private static MovieContainer instance = null;
     private void MovieCollection(){
         instance = this;
     }
