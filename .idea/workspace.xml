@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09e8c871-8e1d-43b8-92f7-500473b1ca23" name="Changes" comment="renamed to bookviewer instead of movie viewer">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +39,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\src\main" />
+      <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\src\main\java" />
       <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project\.idea" />
       <recent name="C:\Users\joshc\IdeaProjects\cs321-group-project" />
     </key>
