@@ -29,12 +29,14 @@ public class MovieContainer {
         return instance;
     }
 
+    public static MovieContainer setInstance(MovieContainer cont){
+        instance = cont;
+        return instance;
+    }
 
     /*
     MovieCollection contains a collection of movies in a list (possible later a vector list)
      */
-    // my idea for this is to collect the movies in the startup, after
-    // the location of the data is specified
     public boolean collectMovies(Path filepath) {
         if (filepath == null) {
             filepath = Paths.get("data/data.json");
@@ -46,5 +48,9 @@ public class MovieContainer {
         } catch (FileNotFoundException e) {
             return false;
         }
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;
     }
 }
