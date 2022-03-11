@@ -1,12 +1,132 @@
 package moviedatabase.moviedata;
 
 /*
-{"Title":"Spiderman","Year":"1990","Rated":"N/A","Released":"N/A","Runtime":"5 min",
-"Genre":"Short","Director":"Christian Davi","Writer":"N/A","Actors":"N/A","Plot":"N/A",
-"Language":"German","Country":"Switzerland","Awards":"N/A","Poster":"N/A","Ratings":
-[{"Source":"Internet Movie Database","Value":"5.6/10"}],"Metascore":"N/A"
-,"imdbRating":"5.6","imdbVotes":"96","imdbID":"tt0100669",
-"Type":"movie","DVD":"N/A","BoxOffice":"N/A","Production":"N/A","Website":"N/A","Response":"True"},
+Here's the schema.
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Title": {
+      "type": "string"
+    },
+    "Year": {
+      "type": "string"
+    },
+    "Rated": {
+      "type": "string"
+    },
+    "Released": {
+      "type": "string"
+    },
+    "Runtime": {
+      "type": "string"
+    },
+    "Genre": {
+      "type": "string"
+    },
+    "Director": {
+      "type": "string"
+    },
+    "Writer": {
+      "type": "string"
+    },
+    "Actors": {
+      "type": "string"
+    },
+    "Plot": {
+      "type": "string"
+    },
+    "Language": {
+      "type": "string"
+    },
+    "Country": {
+      "type": "string"
+    },
+    "Awards": {
+      "type": "string"
+    },
+    "Poster": {
+      "type": "string"
+    },
+    "Ratings": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "Source": {
+              "type": "string"
+            },
+            "Value": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "Source",
+            "Value"
+          ]
+        }
+      ]
+    },
+    "Metascore": {
+      "type": "string"
+    },
+    "imdbRating": {
+      "type": "string"
+    },
+    "imdbVotes": {
+      "type": "string"
+    },
+    "imdbID": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "DVD": {
+      "type": "string"
+    },
+    "BoxOffice": {
+      "type": "string"
+    },
+    "Production": {
+      "type": "string"
+    },
+    "Website": {
+      "type": "string"
+    },
+    "Response": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Title",
+    "Year",
+    "Rated",
+    "Released",
+    "Runtime",
+    "Genre",
+    "Director",
+    "Writer",
+    "Actors",
+    "Plot",
+    "Language",
+    "Country",
+    "Awards",
+    "Poster",
+    "Ratings",
+    "Metascore",
+    "imdbRating",
+    "imdbVotes",
+    "imdbID",
+    "Type",
+    "DVD",
+    "BoxOffice",
+    "Production",
+    "Website",
+    "Response"
+  ]
+}
  */
 public class Movie {
     private String title;

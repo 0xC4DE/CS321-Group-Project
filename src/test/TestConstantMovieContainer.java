@@ -13,7 +13,7 @@ public class TestConstantMovieContainer extends Tester {
         System.out.println("Testing whether or not MovieContainer is constant throughout multiple accesses.");
         MovieContainer container = new MovieContainer();
         if (MovieContainer.getInstance().getMovieList() != null) {
-            System.out.println("Test Passed.");
+            System.out.println("Test Passed..");
             return;
         }
         MovieContainer.setInstance(container);
