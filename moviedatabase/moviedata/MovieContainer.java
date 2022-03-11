@@ -18,7 +18,6 @@ public class MovieContainer {
     private ArrayList<Movie> allMovies;
     private  static MovieContainer instance = null;
     private void MovieCollection(){
-        instance = this;
     }
     public static MovieContainer getInstance(){
         if(instance == null ){
