@@ -2,7 +2,7 @@
   <configuration default="false" name="Run Application" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="src.main.java.main" />
+    <option name="MAIN_CLASS_NAME" value="src.main.main" />
     <module name="bookviewer" />
     <method v="2">
       <option name="Make" enabled="true" />
