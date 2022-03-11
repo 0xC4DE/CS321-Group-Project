@@ -15,11 +15,13 @@ public class MovieContainer {
     // that'll get the job done better
 
     private Gson movieCollection = new Gson();
-    private ArrayList<Movie> allMovies;
+    private ArrayList<Movie> movieList;
     private static MovieContainer instance = null;
+
     private void MovieCollection(){
         instance = this;
     }
+
     public static MovieContainer getInstance(){
         if(instance == null ){
             instance = new MovieContainer(); {
@@ -34,19 +36,16 @@ public class MovieContainer {
      */
     // my idea for this is to collect the movies in the startup, after
     // the location of the data is specified
-
     public boolean collectMovies(Path filepath) {
-        if (filepath == null){
+        if (filepath == null) {
             filepath = Paths.get("data/data.json");
-        }
-        Reader file = null;
+        };
         try {
-            file = new FileReader(String.valueOf(filepath));
-            allMovies = movieCollection.fromJson(file, Movie.class);
+            Reader file = new FileReader(String.valueOf(filepath));
+            allMovies = movieList.fromJson(file, Movie.class);
             return true;
         } catch (FileNotFoundException e) {
             return false;
-        }
-    }
-
+        };
+    };
 }
