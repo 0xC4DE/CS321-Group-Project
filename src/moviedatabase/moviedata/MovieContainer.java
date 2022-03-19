@@ -11,25 +11,24 @@ import java.util.List;
 
 
 public class MovieContainer {
-    // thinking if this is a container class it will make more sense, an interface cant
-    // have member variables, so if it's just a class that returns instences of itself
-    // that'll get the job done better
+     // init constructor vals
+    private List movieList;
+    private Gson movieCollection;
 
-    private Gson movieCollection = new Gson();
-    private List<Movie> movieList = null;
-
+    // singleton instance of the movie list
     private static MovieContainer instance;
 
-    public static MovieContainer getInstance(){
-        if(instance == null ){
-            instance = new MovieContainer(); {
-            }
-        }
-        return instance;
+    // private singleton constructor
+    private MovieContainer() {
+        List<Movie> movieList = null;
+        movieCollection = new Gson();
     }
 
-    public static MovieContainer setInstance(MovieContainer cont){
-        instance = cont;
+    // public getInstance
+    public static MovieContainer getInstance(){
+        if(instance == null) {
+            instance = new MovieContainer();
+        }
         return instance;
     }
 
@@ -42,7 +41,7 @@ public class MovieContainer {
         };
         try {
             Reader file = new FileReader(String.valueOf(filepath));
-            movieList = movieCollection.fromJson(file, List.class);
+            movieList = (movieCollection.fromJson(file, List.class));
             return true;
         } catch (FileNotFoundException e) {
             return false;
