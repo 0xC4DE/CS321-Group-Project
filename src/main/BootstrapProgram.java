@@ -31,7 +31,7 @@ public class BootstrapProgram {
         }
     }
     public void loadMovies(){
-        MovieContainer temp = new MovieContainer();
+        MovieContainer temp = MovieContainer.getInstance();
         temp.collectMovies(Path.of(movieFile));
     }
 

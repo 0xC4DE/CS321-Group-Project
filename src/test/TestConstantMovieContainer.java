@@ -11,12 +11,13 @@ public class TestConstantMovieContainer extends Tester {
 
     public void run() {
         System.out.println("Testing whether or not MovieContainer is constant throughout multiple accesses.");
-        MovieContainer container = new MovieContainer();
+        //MovieContainer container = new MovieContainer();
+        MovieContainer container = MovieContainer.getInstance();
         if (MovieContainer.getInstance().getMovieList() != null) {
             System.out.println("Test Passed..");
-            return;
+            //return;
         }
-        MovieContainer.setInstance(container);
+        //MovieContainer.setInstance(container);
         if (container.collectMovies(null)) {
 
             // Debug prints
@@ -26,6 +27,7 @@ public class TestConstantMovieContainer extends Tester {
             // Test if the getInstance is the same as the object we constructed earlier
             if (MovieContainer.getInstance().getMovieList() == container.getMovieList()) {
                 System.out.println("Test Passed.");
+                System.out.println(container.getMovieList().stream().findFirst().get());
                 testSuccess = true;
             } else {
                 System.out.println("Test Failed.");

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String []args) throws IOException {
-        MovieContainer cont = new MovieContainer();
+        MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
         // TODO: Make GSON actually eat the movie data instead of dying.
