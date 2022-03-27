@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public class MovieContainer {
-     // init constructor vals
     private List movieList;
     private Gson movieCollection;
 
