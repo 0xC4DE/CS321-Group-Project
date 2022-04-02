@@ -10,9 +10,9 @@ import java.util.List;
 class SingleMovieView {
     public void show(Movie movieToShow) {
         JFrame jFrame = new JFrame();
-        //JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\n"+movieToShow.getDirector()+"\n"+
-        //        movieToShow.getMovieRating()+"\n"+movieToShow.getCountry()+"\n"+movieToShow.getGenre()+"\n"+movieToShow.getLanguage()+"\n"+
-        //        movieToShow.getRuntime()+"\n"+movieToShow.getYear());
+        JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\n"+movieToShow.getDirector()+"\n"+
+        movieToShow.getRated()+"\n"+movieToShow.getCountry()+"\n"+movieToShow.getGenre()+"\n"+movieToShow.getLanguage()+"\n"+
+               movieToShow.getRuntime()+"\n"+movieToShow.getYear());
 
     }
     public String findSimilar(Movie base){
