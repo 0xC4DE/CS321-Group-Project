@@ -1,34 +1,48 @@
-package src.main.java;
+package main;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Properties;
 import java.util.Scanner;
 
 public class BootstrapProgram {
     private String movieFile;
     private String configFile;
-    public void setConfigFile(String newConfig){
-        configFile = newConfig;
+    private String reviewPath;
+    public void BoostrapProgram(){
+        try(FileInputStream in = new FileInputStream("/resources/config.properties")) {
+            Properties props = new Properties();
+            props.load(in);
+            props.setProperty("moviePath", "../../data/data.json");
+            props.setProperty("reviewPath", "../../data/reviews.json");
+        }
+        catch (IOException e){
+        }
     }
-    public boolean loadConfig() throws FileNotFoundException {
-        try{
-            File configObj = new File(configFile);
-            Scanner configReader = new Scanner(configObj);
-            while (configReader.hasNextLine()){
-                movieFile = configReader.nextLine();
-            }
-            return true;
-        }
-        catch(Exception e){
-            return false;
-        }
+
+    public void setConfigFile(String newMoviePath, String newReviewPath) throws IOException {
+        FileInputStream in = new FileInputStream(configFile);
+        Properties props = new Properties();
+        props.load(in);
+        props.setProperty("moviePath",newMoviePath);
+        props.setProperty("reviewPath",newReviewPath);
+    }
+    public boolean loadConfig()  {
+       try( FileInputStream in = new FileInputStream(configFile)) {
+           Properties configInfo = new Properties();
+           configInfo.load(in);
+           movieFile = configInfo.getProperty("moviePath");
+           reviewPath = configInfo.getProperty("reviewPath");
+           return true;
+       }
+       catch (IOException e){
+           return false;
+       }
+
     }
     public void loadMovies(){
         MovieContainer temp = MovieContainer.getInstance();
