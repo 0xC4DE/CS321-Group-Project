@@ -129,31 +129,43 @@ Here's the schema.
 }
  */
 public class Movie {
-    private String title;
-    private String year;
-    private String movieRating;
-    private String rated;
-    private String released;
-    private String runtime;
-    private String genre;
-    private String director;
-    private String writer;
-    private String actors;
-    private String plotSum;
-    private String language;
-    private String country;
-    private String awards;
-    private String poster;
+    private String Title;
+    private String Year;
+    private String Rated;
+    private String Released;
+    private String Runtime;
+    private String Genre;
+    private String Director;
+    private String Writer;
+    private String Actors;
+    private String Plot;
+    private String Language;
+    private String Country;
+    private String Awards;
+    private String Poster;
+    private Object Ratings;
+    private String Metascore;
+    private String imdbRating;
+    private String imdbVotes;
+    private String imdbID;
+    private String Type;
+    private String DVD;
+    private String BoxOffice;
+    private String Production;
+    private String Website;
+    private String Response;
+    //private String userReview;
 
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public String getYear() {
-        return year;
+        return Year;
     }
 
+    /**
     public String getRuntime() {
         return runtime;
     }
@@ -176,5 +188,10 @@ public class Movie {
 
     public String getCountry() {
         return country;
+    }
+     **/
+
+    public Movie() {
+
     }
 }
