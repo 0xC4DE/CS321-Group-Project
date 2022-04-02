@@ -14,11 +14,11 @@ public class Main {
         cont.collectMovies(null);
 
         // TODO: Make GSON actually eat the movie data instead of dying.
-        System.out.println("Stream: " + cont.getMovieList().stream().findFirst());//.get(0).getTitle());
+        //System.out.println("Stream: " + cont.getMovieList().stream().findFirst());//.get(0).getTitle());
 
-        List<Movie> blah = cont.getMovieList();
+        List<Movie> test = cont.getMovieList();
         Movie tempList = cont.getMovieList().get(0);
-        System.out.println("Movie: " + blah);
+        System.out.println("Movie: " + test);
         System.out.println("Title: " + tempList.getTitle());
 
         //new TestConstantMovieContainer();

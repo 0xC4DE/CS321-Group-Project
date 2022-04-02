@@ -43,11 +43,7 @@ public class MovieContainer {
         };
         try {
             Reader file = new FileReader(String.valueOf(filepath));
-            //movieList = (movieCollection.fromJson(file, List.class));
-            //String test = String.valueOf(movieCollection.fromJson(file, List.class));
-            // BAD movieList = movieCollection.fromJson(file, Movie[].class);
             Movie[] tempMovie = movieCollection.fromJson(file, Movie[].class);
-            System.out.println("Temp: " + tempMovie);
             movieList = Arrays.asList(tempMovie);
             return true;
         } catch (FileNotFoundException e) {
