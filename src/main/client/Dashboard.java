@@ -8,7 +8,7 @@ public class Dashboard {
      *
      */
     Dashboard() {
-        JFrame window =new JFrame("Dashboard");
+        JFrame window = new JFrame("Dashboard");
 
         JPanel searchPanel = new JPanel();
         JPanel wishlistPanel = new JPanel();
