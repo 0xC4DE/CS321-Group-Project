@@ -154,10 +154,20 @@ public class Movie {
     private String Production;
     private String Website;
     private String Response;
-    //private String userReview;
 
     public Movie() {
     }
+
+    public String getUserReview() {
+        return userReview;
+    }
+
+    public void setUserReview(String userReview) {
+        this.userReview = userReview;
+    }
+
+    private String userReview;
+
 
     public String getTitle() {
         return Title;
