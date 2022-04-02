@@ -7,11 +7,14 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class MovieContainer {
-    private List movieList;
+    private List<Movie> movieList;
+    private Movie[] tempMovie;
     private Gson movieCollection;
 
     // singleton instance of the movie list
@@ -40,7 +43,8 @@ public class MovieContainer {
         };
         try {
             Reader file = new FileReader(String.valueOf(filepath));
-            movieList = (movieCollection.fromJson(file, List.class));
+            Movie[] tempMovie = movieCollection.fromJson(file, Movie[].class);
+            movieList = Arrays.asList(tempMovie);
             return true;
         } catch (FileNotFoundException e) {
             return false;
