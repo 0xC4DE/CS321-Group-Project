@@ -5,6 +5,7 @@ import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
 import javax.swing.*;
+import java.util.List;
 
 class SingleMovieView {
     public void show(Movie movieToShow) {
@@ -12,7 +13,14 @@ class SingleMovieView {
         JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\n"+movieToShow.getDirector()+"\n"+
                 movieToShow.getMovieRating()+"\n"+movieToShow.getCountry()+"\n"+movieToShow.getGenre()+"\n"+movieToShow.getLanguage()+"\n"+
                 movieToShow.getRuntime()+"\n"+movieToShow.getYear());
-        //JDialog jd = new JDialog(jFrame);
+
+    }
+    public String findSimilar(Movie base){
+        Movie result = new Movie();
+        MovieContainer test = MovieContainer.getInstance();
+        List<Movie> myMovies = test.getMovieList();
+        //call movies by genre
+        return result.getTitle();
 
     }
 
