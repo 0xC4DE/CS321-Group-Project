@@ -1,10 +1,12 @@
 package moviedatabase.userdata;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import moviedatabase.exceptions.PasswordDoesNotMatchException;
 import moviedatabase.exceptions.UserAlreadyExistsException;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,7 +16,7 @@ import java.util.*;
 
 
 public class User {
-    private final int uuid;
+    private int uuid;
     private String Username;
     private String passwordHash;
 
@@ -65,7 +67,8 @@ public class User {
      */
     private Integer getNextUUID() throws IOException {
         Gson users = new Gson();
-        List<User> userList = users.fromJson(getUserFileReader(null), List.class);
+        Type userType = new TypeToken<ArrayList<User>>(){}.getType();
+        List<User> userList = users.fromJson(getUserFileReader(null), userType);
         int uuid = 0;
         for (User u: userList) {
             if (u.uuid > uuid) {
@@ -91,16 +94,17 @@ public class User {
         try {
             // Find the file that stores users
             Gson users = new Gson();
-            List<User> userList = users.fromJson(getUserFileReader(userFile), List.class);
+            Type userType = new TypeToken<ArrayList<User>>(){}.getType();
+            List<User> userList = users.fromJson(getUserFileReader(userFile), userType);
 
             // Check if user already exists
             boolean user_found = false;
+
             for (User user : userList){
                 if (Objects.equals(user.getUsername(), username)) {
-                    continue;
+                    user_found = true;
+                    break;
                 }
-                user_found = true;
-                break;
             }
             if (user_found) { throw new UserAlreadyExistsException(); }
 
@@ -131,7 +135,8 @@ public class User {
         try {
             Reader user_file = new FileReader(String.valueOf(userFile));
             Gson users = new Gson();
-            List<User> userList = users.fromJson(user_file, List.class);
+            Type userType = new TypeToken<ArrayList<User>>(){}.getType();
+            List<User> userList = users.fromJson(user_file, userType);
 
             // find the user
             User user_found = new User();
@@ -206,7 +211,9 @@ public class User {
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
         md5.update(password.getBytes());
-        return Arrays.toString(Base64.getDecoder().decode(md5.digest())).toUpperCase();
+        byte[] digest = md5.digest();
+        String hash = HexFormat.of().formatHex(digest);
+        return hash;
     }
 }
 
