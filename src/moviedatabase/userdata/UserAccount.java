@@ -1,6 +1,9 @@
 package moviedatabase.userdata;
 
+import moviedatabase.moviedata.Movie;
+
 import java.nio.file.Path;
+import java.util.List;
 
 public class UserAccount {
 
@@ -23,6 +26,12 @@ public class UserAccount {
         user.setUsername(newName);
         return true;
     }
+
+    public List<Movie> getWishlist(){return user.wishlistsToStore;}
+    public void SetList(List<Movie> listToSet){
+        user.wishlistsToStore = listToSet;
+    }
+
 
     public void createAccount(String username, String password, Path userFile){
         this.user = User.createUser(username, password, userFile);
