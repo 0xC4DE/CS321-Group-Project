@@ -3,6 +3,7 @@ package moviedatabase.userdata;
 import com.google.gson.Gson;
 import moviedatabase.exceptions.PasswordDoesNotMatchException;
 import moviedatabase.exceptions.UserAlreadyExistsException;
+import moviedatabase.moviedata.Movie;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -19,6 +20,7 @@ public class User {
     private Integer uuid;
     private String Username;
     private String passwordHash;
+    public List<Movie> wishlistsToStore;
 
     // guest login
     User() {
