@@ -5,6 +5,7 @@ import moviedatabase.moviedata.Movie;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ public class UserAccount {
         return true;
     }
 
-    public List<Movie> getWishlist(){return user.wishlistsToStore;}
-    public void SetList(List<Movie> listToSet){
+    public List<ArrayList<Movie>> getWishlist(){return user.wishlistsToStore;}
+    public void SetList(List<ArrayList<Movie>> listToSet){
         user.wishlistsToStore = listToSet;
     }
 
