@@ -22,7 +22,7 @@ public class User {
     private int uuid;
     private String Username;
     private String passwordHash;
-    public List<Movie> wishlistsToStore;
+    public List<ArrayList<Movie>> wishlistsToStore;
 
     /**
      * This is a guest login. Guest's shouldn't be able to leave reviews
