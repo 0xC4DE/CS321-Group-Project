@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import moviedatabase.exceptions.PasswordDoesNotMatchException;
 import moviedatabase.exceptions.UserAlreadyExistsException;
+import moviedatabase.exceptions.UserDoesNotExistException;
+import moviedatabase.exceptions.WrongPasswordException;
 import moviedatabase.moviedata.Movie;
 
 import java.io.*;
@@ -108,7 +110,10 @@ public class User {
                     break;
                 }
             }
-            if (user_found) { throw new UserAlreadyExistsException(); }
+            if (user_found) {
+                // User already exists
+                return null;
+            }
 
             // Save user to file
             User new_user = new User(username, password, getNextUUID());
@@ -116,7 +121,7 @@ public class User {
             new_user.saveUserFile(userList, userFile);
             return new_user;
 
-        } catch (UserAlreadyExistsException | NoSuchAlgorithmException | IOException e) {
+        } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -141,15 +146,21 @@ public class User {
             List<User> userList = users.fromJson(user_file, userType);
 
             // find the user
-            User user_found = new User();
+            User user_found = null;
             for (User user : userList){
                 if (Objects.equals(user.getUsername(), username)){
                     user_found = user;
                 }
             }
 
+            if (user_found == null){
+                // User not found, cannot login
+                return null;
+            }
+
             if (!user_found.checkPassword(password)){
-                throw new Exception("Wrong Password.");
+                // Invalid password
+                return null;
             }
 
             return user_found;
