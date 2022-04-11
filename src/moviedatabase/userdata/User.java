@@ -2,10 +2,6 @@ package moviedatabase.userdata;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import moviedatabase.exceptions.PasswordDoesNotMatchException;
-import moviedatabase.exceptions.UserAlreadyExistsException;
-import moviedatabase.exceptions.UserDoesNotExistException;
-import moviedatabase.exceptions.WrongPasswordException;
 import moviedatabase.moviedata.Movie;
 
 import java.io.*;
@@ -137,13 +133,10 @@ public class User {
 
         // sanitize username entry
         username = username.toLowerCase().replace(" ", "");
-
+        //System.out.println(String.format("username is %s", username));
         // read the file and parse data
         try {
-            Reader user_file = new FileReader(String.valueOf(userFile));
-            Gson users = new Gson();
-            Type userType = new TypeToken<ArrayList<User>>(){}.getType();
-            List<User> userList = users.fromJson(user_file, userType);
+            List<User> userList = getUserFileList(userFile);
 
             // find the user
             User user_found = null;
@@ -155,6 +148,7 @@ public class User {
 
             if (user_found == null){
                 // User not found, cannot login
+                System.out.println("uesr not found");
                 return null;
             }
 
@@ -177,13 +171,16 @@ public class User {
     Returns true if the **current** user was successfully deleted, false if not found or improper login.
      */
     public Boolean delUser(Path userFile) throws IOException, NoSuchAlgorithmException {
-        Gson users = new Gson();
-        List<User> userList = users.fromJson(getUserFileReader(userFile), List.class);
+        List<User> userList = getUserFileList(userFile);
 
-        if (userList.remove(this)){
-            saveUserFile(userList, userFile);
-            return true;
+        for (User user : userList){
+            if (user.getUsername().equals(this.getUsername())){
+                userList.remove(user);
+                saveUserFile(userList, userFile);
+                return true;
+            }
         }
+
 
         return false;
     }
@@ -202,11 +199,13 @@ public class User {
     /*
     Given the CORRECT current password, and a new password, set a new hashed password.
      */
-    public void setPassword(String current_password, String password) throws Exception {
+    public boolean setPassword(String current_password, String password) throws Exception {
         if (!checkPassword(current_password)){
-            throw new PasswordDoesNotMatchException();
+            // Password did not match and cannot be changed.
+            return false;
         }
         passwordHash = hashPassword(password);
+        return true;
     }
 
     /*
@@ -215,6 +214,7 @@ public class User {
      */
     private Boolean checkPassword(String password) throws NoSuchAlgorithmException {
         String hash = hashPassword(password);
+        //System.out.println(String.format("Password hashes %s %s", passwordHash, hash));
         return (hash.equals(passwordHash));
     }
 
@@ -227,6 +227,15 @@ public class User {
         byte[] digest = md5.digest();
         String hash = HexFormat.of().formatHex(digest);
         return hash;
+    }
+
+    private List<User> getUserFileList(Path userFile) throws FileNotFoundException {
+        Reader user_file = new FileReader(String.valueOf(userFile));
+        Gson users = new Gson();
+        Type userType = new TypeToken<ArrayList<User>>(){}.getType();
+        List<User> userList = users.fromJson(user_file, userType);
+
+        return userList;
     }
 }
 
