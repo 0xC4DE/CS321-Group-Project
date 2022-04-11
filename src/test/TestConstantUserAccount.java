@@ -24,29 +24,34 @@ public class TestConstantUserAccount extends Tester {
 
         // Now that we know users are constant we can create one
         user.createAccount("testuser", "test", Paths.get(".testdata"));
-        if (UserAccount.getInstance().getUserName() != "testuser"){
-            throw new RuntimeException("User creation did not work properly.");
+        if (UserAccount.getInstance() == null){
+            throw new RuntimeException("User already created, assuming it is proper for test.");
+        } else {
+            System.out.println("testuser created Successfully.");
         }
-        System.out.println("testuser created Successfully.");
         // Now we go back to guest and login as our new user
         user = new UserAccount();
 
         if (!user.login("user does not exist", "badpassword", Paths.get(".testdata"))){
-            System.out.println("User Did not Exist");
+            System.out.println("Non-User Did not Exist, check passed");
         } else {
             throw new RuntimeException("User existed but shouldn't");
         }
 
         user = new UserAccount();
-        user.login("testuser", "test", Paths.get(".testdata"));
-
-        if (UserAccount.getInstance().getUserName() == "testuser"){
+        if (!user.login("testuser", "test", Paths.get(".testdata"))){
+            throw new RuntimeException("User Login failed!");
+        }
+        System.out.println(UserAccount.getInstance().getUserName());
+        if (UserAccount.getInstance().getUserName().equals("testuser")){
             System.out.println("Test user successfully logged in with persistence!");
         }
 
         Boolean deleted = user.delUser(Paths.get(".testdata"));
         if (deleted) {
             System.out.println("Deleted User successfully");
+        } else {
+            System.out.println("User was not deleted");
         }
 
 
