@@ -13,14 +13,21 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-
+/**
+ * The class for a generic User, users are generally not constructed and this is a class used in UserAccount
+ *
+ * implements methods that make users. added as a result of !9
+ */
 public class User {
     private int uuid;
     private String Username;
     private String passwordHash;
     public List<Movie> wishlistsToStore;
 
-    // guest login
+    /**
+     * This is a guest login. Guest's shouldn't be able to leave reviews
+     * (Check for uuid==-1 to prevent reviews for guests)
+     */
     public User() {
         uuid = -1;
         Username = "guest";
@@ -31,8 +38,13 @@ public class User {
     public String getUsername() { return Username; }
     public String getPasswordHash() { return passwordHash; }
 
-    /*
-    This isn't intended to be constructed directly. rather you use login
+    /**
+     * This is the constructor for a proper User ONLY to be used for getUser.
+     * @param username
+     * @param password
+     * @param uuid
+     * @throws NoSuchAlgorithmException
+     * @throws FileNotFoundException
      */
     private User(String username, String password, Integer uuid) throws NoSuchAlgorithmException, FileNotFoundException {
         this.Username = username;
@@ -40,6 +52,13 @@ public class User {
         this.uuid = uuid;
     }
 
+    /**
+     * Gets the absolute path to the user file, creates file if it doesn't exist
+     * creates because GSON throws a fit if the file does not already exist.
+     * @param userFile
+     * @return
+     * @throws IOException
+     */
     private Path getUserFilePath(Path userFile) throws IOException {
         if (userFile == null){
             userFile = Paths.get(System.getProperty("user.home"), ".users");
@@ -56,19 +75,13 @@ public class User {
         return userFile;
     }
 
-    private Reader getUserFileReader(Path userFile) throws IOException {
-        userFile = getUserFilePath(userFile);
-
-        return new FileReader(String.valueOf(userFile));
-    }
-
-    /*
-    Gets the next UUID in sequence, as each user has a unique UUID, and it needs to find the next unfilled UUID
+    /**
+     * Used for user creation, finds the next highest UUID so that they never match (these are to be matched against reviews)
+     * @return
+     * @throws IOException
      */
-    private Integer getNextUUID() throws IOException {
-        Gson users = new Gson();
-        Type userType = new TypeToken<ArrayList<User>>(){}.getType();
-        List<User> userList = users.fromJson(getUserFileReader(null), userType);
+    private Integer getNextUUID(Path userFile) throws IOException {
+        List<User> userList = getUserFileList(userFile);
         int uuid = 0;
         for (User u: userList) {
             if (u.uuid > uuid) {
@@ -78,6 +91,14 @@ public class User {
         return uuid+1;
     }
 
+    /**
+     * Given a List of User, and a path, this will save the user file with all users.
+     * This also overwrites the previous file (includes all old users)
+     * This is not ideal for large scale, but since this is for a small-scale application it should work fine.
+     * @param userList
+     * @param userFile
+     * @throws IOException
+     */
     public void saveUserFile(List<User> userList, Path userFile) throws IOException {
         FileWriter writer = new FileWriter(String.valueOf(getUserFilePath(userFile)));
         Gson users = new Gson();
@@ -86,6 +107,14 @@ public class User {
         writer.close();
     }
 
+    /**
+     * Creates a User, then returns User
+     * This will return null if the user already exists
+     * @param username
+     * @param password
+     * @param userFile
+     * @return User or null (user already exists)
+     */
     public User createUser(String username, String password, Path userFile){
         // sanitize username entry
         username = username.toLowerCase().replace(" ", "");
@@ -93,9 +122,8 @@ public class User {
         // read the file and parse data
         try {
             // Find the file that stores users
-            Gson users = new Gson();
-            Type userType = new TypeToken<ArrayList<User>>(){}.getType();
-            List<User> userList = users.fromJson(getUserFileReader(userFile), userType);
+
+            List<User> userList = getUserFileList(userFile);
 
             // Check if user already exists
             boolean user_found = false;
@@ -112,7 +140,7 @@ public class User {
             }
 
             // Save user to file
-            User new_user = new User(username, password, getNextUUID());
+            User new_user = new User(username, password, getNextUUID(userFile));
             userList.add(new_user);
             new_user.saveUserFile(userList, userFile);
             return new_user;
@@ -123,8 +151,14 @@ public class User {
         return null;
     }
 
-    /*
-    Gets a User given the username, password, and file containing that user.
+    /**
+     * this could also be called loginUser or userLogin, (named for parity with other functions)
+     * given a username, password, and path to userfile. will return a User if the user was logged in
+     * returns null if the username doesn't exist, or if the password was incorrect.
+     * @param username
+     * @param password
+     * @param userFile
+     * @return
      */
     public User getUser(String username, String password, Path userFile){
         if (userFile == null) {
@@ -167,8 +201,12 @@ public class User {
         return null;
     }
 
-    /*
-    Returns true if the **current** user was successfully deleted, false if not found or improper login.
+    /**
+     * Given that a user is ***logged in***, the user is removed from the database, and it is saved
+     * @param userFile
+     * @return Boolean (User was successfully deleted)
+     * @throws IOException
+     * @throws NoSuchAlgorithmException
      */
     public Boolean delUser(Path userFile) throws IOException, NoSuchAlgorithmException {
         List<User> userList = getUserFileList(userFile);
@@ -180,24 +218,29 @@ public class User {
                 return true;
             }
         }
-
-
         return false;
     }
 
-    /*
-    This is a method intended to be called by a setting in the profile, where the user can freely change their name
+    /**
+     * Sets the username of a user, doesn't do any matching and doesn't require authentication, since it works only off logged in users
+     * NOTE: Removes spaces and makes it lower case (easier to deal with.)
+     * If there is any authentication to be done on a username it should be added here, and in createUser
+     * @param newName
      */
     public void setUsername(String newName){
         // Sanitizing the name
         newName = newName.toLowerCase();
         newName = newName.replace("", " ");
-
         Username = newName;
     }
 
-    /*
-    Given the CORRECT current password, and a new password, set a new hashed password.
+    /**
+     * To change a user's password, you provide the current password, and the password to change it to
+     * if the current password is wrong, the password is not change and returns false
+     * @param current_password
+     * @param password
+     * @return Boolean (Password was changed)
+     * @throws Exception
      */
     public boolean setPassword(String current_password, String password) throws Exception {
         if (!checkPassword(current_password)){
@@ -208,9 +251,11 @@ public class User {
         return true;
     }
 
-    /*
-    Given a password, will check it against the current password hash.
-    (Used for login)
+    /**
+     * Given the password, it will check for equality to the hash of the current users' password
+     * @param password
+     * @return Boolean (Password is equal or not)
+     * @throws NoSuchAlgorithmException
      */
     private Boolean checkPassword(String password) throws NoSuchAlgorithmException {
         String hash = hashPassword(password);
@@ -218,8 +263,11 @@ public class User {
         return (hash.equals(passwordHash));
     }
 
-    /*
-    Returns the hash of the string inserted. This would work better as an util, but we have no such util
+    /**
+     * Returns the MD5 hash of the string provided, Usually doesn't throw exceptions
+     * @param password
+     * @return String (Hash)
+     * @throws NoSuchAlgorithmException
      */
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md5 = MessageDigest.getInstance("MD5");
@@ -229,6 +277,14 @@ public class User {
         return hash;
     }
 
+    /**
+     * Given the path to a file that contains JSON of users, return List\<User\>
+     * This is often used to check if a user exists in the database, or to modify and save.
+     * This will halt if the file does not exist. For files to exist properly, use getUser to test for user existence first using getUser.
+     * @param userFile
+     * @return
+     * @throws FileNotFoundException
+     */
     private List<User> getUserFileList(Path userFile) throws FileNotFoundException {
         Reader user_file = new FileReader(String.valueOf(userFile));
         Gson users = new Gson();
