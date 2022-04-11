@@ -2,7 +2,9 @@ package moviedatabase.userdata;
 
 import moviedatabase.moviedata.Movie;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class UserAccount {
@@ -40,9 +42,13 @@ public class UserAccount {
         this.user = user.createUser(username, password, userFile);
     }
 
-    public void login(String username, String password, Path userFile){
+    public Boolean login(String username, String password, Path userFile){
         User user = new User();
         this.user = user.getUser(username, password, null);
+        if (this.user == null) {
+            return false;
+        }
+        return true;
     }
 
     /*
@@ -54,5 +60,12 @@ public class UserAccount {
 
     public String getUserName(){
         return instance.user.getUsername();
+    }
+
+    /*
+    Deletes the CURRENTLY logged in user, if none it doesn't work.
+     */
+    public Boolean delUser(Path path) throws IOException, NoSuchAlgorithmException {
+        return instance.user.delUser(path);
     }
 }
