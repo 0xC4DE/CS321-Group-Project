@@ -20,7 +20,6 @@ class SingleMovieView {
         List<Movie> results;
         Search test = new Search();
         results = test.searchByGenre(base.getGenre());
-
         return results.get(0).getTitle();
 
     }
