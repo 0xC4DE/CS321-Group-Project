@@ -3,6 +3,7 @@ package main.client;
 // it on a parent frame
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
+import moviedatabase.moviesearch.Search;
 
 import javax.swing.*;
 import java.util.List;
@@ -12,15 +13,15 @@ class SingleMovieView {
         JFrame jFrame = new JFrame();
         JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\n"+movieToShow.getDirector()+"\n"+
         movieToShow.getRated()+"\n"+movieToShow.getCountry()+"\n"+movieToShow.getGenre()+"\n"+movieToShow.getLanguage()+"\n"+
-               movieToShow.getRuntime()+"\n"+movieToShow.getYear());
+               movieToShow.getRuntime()+"\n"+movieToShow.getYear()+"\n\tSimilar:  "+findSimilar(movieToShow));
 
     }
     public String findSimilar(Movie base){
-        Movie result = new Movie();
-        MovieContainer test = MovieContainer.getInstance();
-        List<Movie> myMovies = test.getMovieList();
-        //call movies by genre
-        return result.getTitle();
+        List<Movie> results;
+        Search test = new Search();
+        results = test.searchByGenre(base.getGenre());
+
+        return results.get(0).getTitle();
 
     }
 
