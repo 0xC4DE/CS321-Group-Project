@@ -5,7 +5,7 @@ import moviedatabase.moviedata.MovieContainer;
 public class TestConstantMovieContainer extends Tester {
     public Boolean testSuccess;
 
-    public TestConstantMovieContainer(){
+    public TestConstantMovieContainer() throws Exception {
         super();
     }
 
