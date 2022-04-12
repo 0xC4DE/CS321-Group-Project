@@ -15,8 +15,8 @@ public class Main {
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
-        //new TestConstantMovieContainer();
-        //new TestConstantMovieContainer();
+        new TestConstantMovieContainer();
+        new TestConstantMovieContainer();
 
         //new TestGSON();
         new TestConstantUserAccount();

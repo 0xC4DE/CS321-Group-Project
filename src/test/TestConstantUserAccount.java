@@ -1,6 +1,5 @@
 package test;
 
-import moviedatabase.userdata.User;
 import moviedatabase.userdata.UserAccount;
 
 import java.nio.file.Paths;
@@ -18,7 +17,7 @@ public class TestConstantUserAccount extends Tester {
         UserAccount user = new UserAccount();
         user.loginAsGuest();
 
-        if (UserAccount.getInstance().getUserName() != "guest"){
+        if (!UserAccount.getInstance().getUserName().equals("guest")){
             throw new Exception("Guest account does not initialize properly");
         };
 

@@ -11,27 +11,34 @@ import java.util.Properties;
  * An admin user can edit this, and change where our data is pointed too
  */
 public class BootstrapProgram {
+    private File configFile;
     private Path moviePath;
-    private Path configFile;
     private Path reviewPath;
 
-    /**
-     * Base constructor BootstrapProgram, sets up a .properties file in the bsae directory of the project, and sets the locations of the data files to the users home directory
-     */
-    public BootstrapProgram() {
-        Path test = Paths.get(System.getProperty("user.home"));
-        Properties props = new Properties();
-        //these are defaults
-        props.setProperty("moviePath", String.valueOf(test));
-        props.setProperty("reviewPath", String.valueOf(test));
-        try {
-            //this will actually create the file, in the base directory of the project
-            props.store(new FileWriter("config.properties"), "This contains the file locations of our data");
-            configFile = Paths.get("config.properties");
+    public void BoostrapProgram() throws IOException {
+        this.configFile = new File("user.home/movieconfig.properties");
+        this.configFile.createNewFile(); // does nothing if file exists
+        try(FileInputStream in = new FileInputStream(configFile)) {
+            Properties props = new Properties();
+            props.load(in);
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            // TODO: Make the user select these manually (use these values as default)
+            props.setProperty("moviePath", "data/data.json");
+            props.setProperty("reviewPath", "data/reviews.json");
+
+            props.store(new FileOutputStream("xyz.properties"), null);
         }
+        catch (IOException e){
+        }
+    }
+
+    public void setConfigAttr(String newAttr, String attrName) throws IOException{
+        FileInputStream fileStream = new FileInputStream(configFile);
+        Properties prop = new Properties();
+        prop.load(fileStream);
+        prop.setProperty(attrName, newAttr);
+
+        prop.store(new FileOutputStream(configFile), null);
     }
 
     /**
@@ -51,6 +58,7 @@ public class BootstrapProgram {
         props.store(new FileOutputStream("configFile"), null);
     }
 
+
     /**
      * loadConfig will load the previously created .properties file, populating the moviePath and reviewsPath
      * @return true if successful, false if writing failed
@@ -68,6 +76,7 @@ public class BootstrapProgram {
        }
 
     }
+
     //run this main to see how the Properties stuff works if you'd like to see :)
     public static void main(String []args)  {
         BootstrapProgram test = new BootstrapProgram();
