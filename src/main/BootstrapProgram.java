@@ -11,26 +11,43 @@ import java.util.Scanner;
 
 public class BootstrapProgram {
     private String movieFile;
-    private String configFile;
+    private File configFile;
     private String reviewPath;
-    public void BoostrapProgram(){
-        try(FileInputStream in = new FileInputStream("/resources/config.properties")) {
+    public void BoostrapProgram() throws IOException {
+        this.configFile = new File("user.home/movieconfig.properties");
+        this.configFile.createNewFile(); // does nothing if file exists
+        try(FileInputStream in = new FileInputStream(configFile)) {
             Properties props = new Properties();
             props.load(in);
-            props.setProperty("moviePath", "../../data/data.json");
-            props.setProperty("reviewPath", "../../data/reviews.json");
+            props.setProperty("moviePath", "data/data.json");
+            props.setProperty("reviewPath", "data/reviews.json");
+
+            props.store(new FileOutputStream("xyz.properties"), null);
         }
         catch (IOException e){
         }
+    }
+
+    public void setConfigAttr(String newAttr, String attrName) throws IOException{
+        FileInputStream fileStream = new FileInputStream(configFile);
+        Properties prop = new Properties();
+        prop.load(fileStream);
+        prop.setProperty(attrName, newAttr);
+
+        prop.store(new FileOutputStream(configFile), null);
     }
 
     public void setConfigFile(String newMoviePath, String newReviewPath) throws IOException {
         FileInputStream in = new FileInputStream(configFile);
         Properties props = new Properties();
         props.load(in);
-        props.setProperty("moviePath",newMoviePath);
-        props.setProperty("reviewPath",newReviewPath);
+        props.setProperty("moviePath", newMoviePath);
+        props.setProperty("reviewPath", newReviewPath);
+
+        // need to store changed props
+        props.store(new FileOutputStream("configFile"), null);
     }
+
     public boolean loadConfig()  {
        try( FileInputStream in = new FileInputStream(configFile)) {
            Properties configInfo = new Properties();
