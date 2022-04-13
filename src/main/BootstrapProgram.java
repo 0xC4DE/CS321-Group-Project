@@ -10,13 +10,13 @@ public class BootstrapProgram {
     private Path moviePath;
     private Path configFile;
     private Path reviewPath;
-    public BootstrapProgram(){
+    public BootstrapProgram() {
         Path test = Paths.get(System.getProperty("user.home"));
-            Properties props = new Properties();
-            props.setProperty("moviePath", String.valueOf(test));
-            props.setProperty("reviewPath", String.valueOf(test));
+        Properties props = new Properties();
+        props.setProperty("moviePath", String.valueOf(test));
+        props.setProperty("reviewPath", String.valueOf(test));
         try {
-            props.store(new FileWriter("config.properties"),"This contains the file locations of our data");
+            props.store(new FileWriter("config.properties"), "This contains the file locations of our data");
             configFile = Paths.get("config.properties");
 
         } catch (IOException e) {
@@ -28,9 +28,13 @@ public class BootstrapProgram {
         FileInputStream in = new FileInputStream(String.valueOf(configFile));
         Properties props = new Properties();
         props.load(in);
-        props.setProperty("moviePath",newMoviePath);
-        props.setProperty("reviewPath",newReviewPath);
+        props.setProperty("moviePath", newMoviePath);
+        props.setProperty("reviewPath", newReviewPath);
+
+        // need to store changed props
+        props.store(new FileOutputStream("configFile"), null);
     }
+
     public boolean loadConfig()  {
        try( FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
            Properties configInfo = new Properties();
@@ -48,6 +52,7 @@ public class BootstrapProgram {
         MovieContainer temp = MovieContainer.getInstance();
         temp.collectMovies(moviePath);
     }
+    //run this main to see how the Properties stuff works if you'd like to see :)
     public static void main(String []args)  {
         BootstrapProgram test = new BootstrapProgram();
         test.loadConfig();
