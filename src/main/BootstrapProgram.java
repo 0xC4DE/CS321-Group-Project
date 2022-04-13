@@ -32,6 +32,13 @@ public class BootstrapProgram {
         }
     }
 
+    /**
+     * Optional alternative to setConfigFile, where you dont have to update moviepath or reviewpath
+     * Can also set other attributes, should the config file need more attributes.
+     * @param newAttr
+     * @param attrName
+     * @throws IOException
+     */
     public void setConfigAttr(String newAttr, String attrName) throws IOException{
         FileInputStream fileStream = new FileInputStream(configFile);
         Properties prop = new Properties();
@@ -73,7 +80,6 @@ public class BootstrapProgram {
        catch (IOException e){
            return false;
        }
-
     }
 
     //run this main to see how the Properties stuff works if you'd like to see :)
