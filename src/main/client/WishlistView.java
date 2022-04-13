@@ -52,15 +52,16 @@ public class WishlistView extends Frame {
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(e->
                 {
-                    SingleMovieView hey = new SingleMovieView();
-                    hey.show(testMovie);
+
+                    SingleMovieView movieShow = new SingleMovieView();
+                    movieShow.show(testMovie);
                 });
 
                 // adding the buttons so that it can be displayed
                 add(buttons.get(j));
 
         }
-        // the buttons will be placed horizontally
+        // the buttons will be placed vertically, when we have a nested list, it should display in columns
         setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
         setSize(400,400);
         setVisible(true);
