@@ -58,7 +58,6 @@ public class BootstrapProgram {
         props.store(new FileOutputStream("configFile"), null);
     }
 
-
     /**
      * loadConfig will load the previously created .properties file, populating the moviePath and reviewsPath
      * @return true if successful, false if writing failed
