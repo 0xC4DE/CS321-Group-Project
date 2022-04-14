@@ -20,7 +20,7 @@ import java.util.List;
 
 public class WishlistView extends Frame {
     private List<ArrayList<Movie>> wishLists;
-    ArrayList<JButton> buttons = new ArrayList<JButton>();
+   private ArrayList<JButton> buttons = new ArrayList<JButton>();
     /* ArrayList<JButton> buttons = new ArrayList<JButton>();
         List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
 
@@ -41,6 +41,10 @@ public class WishlistView extends Frame {
             setSize(400,400);
             setVisible(true);
         }*/
+
+    /**
+     * Default Contrructor, creates a list of buttons matiching the wishlists pulled in
+     */
     public WishlistView () {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
@@ -66,6 +70,14 @@ public class WishlistView extends Frame {
         setSize(400,400);
         setVisible(true);
     }
+
+    /**
+     * Takes in a movie object, and its new and old location, and moves the object inside the wishlist matrix accordingly
+     * @param movieToMove
+     * @param newList
+     * @param oldList
+     * @param oldListIndex
+     */
     private void moveList(Movie movieToMove, int newList, int oldList, int oldListIndex){
         //removing movie from previous list
         wishLists.get(oldList).remove(oldListIndex);
