@@ -7,6 +7,7 @@ import moviedatabase.userdata.UserAccount;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.*;
 
 import java.awt.Insets;
 import java.awt.Dimension;
@@ -64,6 +65,27 @@ public class WishlistView extends Frame {
         // TODO: delete this line
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
+        // capture mouse click
+        myFrame.addMouseListener(new MouseListener() {
+            public void mousePressed(MouseEvent me) { }
+            public void mouseReleased(MouseEvent me) { }
+            public void mouseEntered(MouseEvent me) { }
+            public void mouseExited(MouseEvent me) { }
+            public void mouseClicked(MouseEvent me) {
+//                if(me.getButton() == MouseEvent.BUTTON1) {
+//                    label.setText("Left Click!");
+//                }
+//                if(me.getButton() == MouseEvent.BUTTON2) {
+//                    label.setText("Middle Click!");
+//                }
+                if(me.getButton() == MouseEvent.BUTTON3) {
+                    //label.setText("Right Click!");
+                    System.out.println("right");
+
+                }
+            }
+        });
+
     }
 
     /**
@@ -105,6 +127,8 @@ public class WishlistView extends Frame {
     public void removeMovieFromList() {
 
     }
+
+
     
     // main method
     public static void main(String args[]){
