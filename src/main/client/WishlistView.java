@@ -30,6 +30,12 @@ public class WishlistView extends Frame {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
         List<Movie> test = MovieContainer.getInstance().getMovieList();
+        ArrayList<ArrayList<Movie>> practiceList = new ArrayList<ArrayList<Movie>>();
+        for(int i=0;i<10;i++){
+            for(int j = 0;j<4;j++) {
+                practiceList.get(j).add(test.get(i+j));
+            }
+        }
 
         for (int j = 0;j<5;j++) {
 
