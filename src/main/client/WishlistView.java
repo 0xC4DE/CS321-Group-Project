@@ -27,18 +27,22 @@ public class WishlistView extends Frame {
      * Default Constructor, creates a list of buttons matching the wishlists pulled in
      */
     public WishlistView () {
+        JPanel WishLists = new JPanel();
         ArrayList<JButton> buttons = new ArrayList<JButton>();
        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
         List<Movie> test = MovieContainer.getInstance().getMovieList();
         ArrayList<ArrayList<Movie>> practiceList = new ArrayList<ArrayList<Movie>>();
-        for(int i=0;i<10;i++){
+        //sets up our test wishlists, 3 lists of 4 movies
+        for(int i=0;i<3;i++){
+            practiceList.add(new ArrayList<Movie>());
             for(int j = 0;j<4;j++) {
-                practiceList.get(j).add(test.get(i+j));
+                practiceList.get(i).add(test.get(i+j));
             }
         }
 
-        for (int j = 0;j<5;j++) {
-
+        for(int i=0;i<practiceList.size();i++){
+            JPanel listPanel = new JPanel();
+            for(int j=0;j<practiceList.get(i).size();j++){
                 Movie testMovie = test.get(j);
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(e->
@@ -47,15 +51,17 @@ public class WishlistView extends Frame {
                     SingleMovieView movieShow = new SingleMovieView();
                     movieShow.show(testMovie);
                 });
-
-                // adding the buttons so that it can be displayed
-                add(buttons.get(j));
-
+                listPanel.add(buttons.get(j));
+            }
+            setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+            WishLists.add(listPanel);
         }
         // the buttons will be placed vertically, when we have a nested list, it should display in columns
-        setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
-        setSize(400,400);
-        setVisible(true);
+        setLayout (new BoxLayout (WishLists, BoxLayout.Y_AXIS));
+        JFrame myFrame = new JFrame();
+        myFrame.add(WishLists);
+        myFrame.setVisible(true);
+
     }
 
     /**
