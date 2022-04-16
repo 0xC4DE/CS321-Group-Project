@@ -50,7 +50,13 @@ public class SearchView extends Frame implements ActionListener {
             List<Movie> foundMovies;
             Search searchFor = new Search();
             String text = textField.getText();
-            foundMovies = searchFor.searchByName(text);
+            if(searchBy.equals("Title")) {
+                foundMovies = searchFor.searchByName(text);
+            }
+            if(searchBy.equals("Director")) {
+                foundMovies = searchFor.searchByDirector(text);
+            }
+            foundMovies = searchFor.searchByGenre(text);
             showMovies(foundMovies);
 
         });
