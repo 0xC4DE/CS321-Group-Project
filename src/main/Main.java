@@ -19,12 +19,6 @@ public class Main {
         //System.out.println(cont.getMovieList().get(0).getTitle());
         Dashboard d = new Dashboard();
 
-        new TestConstantMovieContainer();
-        new TestConstantMovieContainer();
-
-        //new TestGSON();
-        new TestConstantUserAccount();
-
 
     }
 }
