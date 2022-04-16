@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: add search "button"
+
 public class SearchView extends JPanel implements ActionListener {
     private String searchBy;
     private JRadioButton actor = new JRadioButton("Actor", false);
@@ -61,8 +63,10 @@ public class SearchView extends JPanel implements ActionListener {
             }
             if(searchBy.equals("Genre")) {
                 foundMovies = searchFor.searchByGenre(text);
+            } else { // search by title
+                foundMovies = searchFor.searchByName(text);
             }
-            foundMovies = searchFor.searchByName(text);
+
             ArrayList<JButton> buttons = new ArrayList<JButton>();
 
             for (int j = 0;j<foundMovies.size();j++) {
@@ -111,7 +115,7 @@ public class SearchView extends JPanel implements ActionListener {
         else if(genre.isSelected()){
             searchBy = "Genre";
         }
-        else{
+        else {
             searchBy = "Title";
         }
     }

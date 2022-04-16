@@ -11,6 +11,7 @@ public class Dashboard {
      */
     public Dashboard() {
         JFrame window = new JFrame("Dashboard");
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
         SearchView searchPanel = new SearchView();
         JPanel wishlistPanel = new JPanel();

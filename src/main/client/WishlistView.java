@@ -20,30 +20,11 @@ import java.util.List;
 
 public class WishlistView extends Frame {
     private List<ArrayList<Movie>> wishLists;
-   private ArrayList<JButton> buttons = new ArrayList<JButton>();
-    /* ArrayList<JButton> buttons = new ArrayList<JButton>();
-        List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
+    private ArrayList<JButton> buttons = new ArrayList<JButton>();
 
-        for (int j = 0;j<5;j++) {
-            for(int i =0;i<test.get(j).size();i++) {
-                Movie testMovie = test.get(j).get(i);
-                buttons.add(j, new JButton(testMovie.getTitle()));
-                buttons.get(j).addActionListener(e ->
-                {
-                    SingleMovieView hey = new SingleMovieView();
-                    hey.show(testMovie);
-                });
-
-                // adding the buttons so that it can be displayed
-                add(buttons.get(j));
-            }
-            setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
-            setSize(400,400);
-            setVisible(true);
-        }*/
 
     /**
-     * Default Contrructor, creates a list of buttons matiching the wishlists pulled in
+     * Default Constructor, creates a list of buttons matiching the wishlists pulled in
      */
     public WishlistView () {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
