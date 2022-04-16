@@ -24,7 +24,7 @@ public class WishlistView extends Frame {
 
 
     /**
-     * Default Constructor, creates a list of buttons matiching the wishlists pulled in
+     * Default Constructor, creates a list of buttons matching the wishlists pulled in
      */
     public WishlistView () {
         ArrayList<JButton> buttons = new ArrayList<JButton>();

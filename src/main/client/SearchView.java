@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: add search "button"
+// results below bar
+// remove previous results
+// scroll bar for results
+// make results instantly active (mine only show after click)
 
 public class SearchView extends JPanel implements ActionListener {
     private String searchBy = "Title";
@@ -51,21 +55,20 @@ public class SearchView extends JPanel implements ActionListener {
         JPanel boxPanel = new JPanel();
 
         boxPanel.setSize(100,30);
+        //boxPanel.setLocale();
+        //setLayout(boxPanel, BoxLayout.Y_AXIS);
         textField.addActionListener(e -> {
             List<Movie> foundMovies;
             Search searchFor = new Search();
             String text = textField.getText();
-            if(searchBy.equals("Actor")) {
-                foundMovies = searchFor.searchByActor(text);
-            }
-            if(searchBy.equals("Director")) {
-                foundMovies = searchFor.searchByDirector(text);
-            }
-            if(searchBy.equals("Genre")) {
-                foundMovies = searchFor.searchByGenre(text);
-            } else { // search by title
-                foundMovies = searchFor.searchByName(text);
-            }
+
+            foundMovies = switch (searchBy) {
+                case "Actor" -> searchFor.searchByActor(text);
+                case "Director" -> searchFor.searchByDirector(text);
+                case "Genre" -> searchFor.searchByGenre(text);
+                default ->  // search by title
+                        searchFor.searchByName(text);
+            };
 
             ArrayList<JButton> buttons = new ArrayList<JButton>();
 
@@ -75,13 +78,14 @@ public class SearchView extends JPanel implements ActionListener {
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(f->
                 {
-                    SingleMovieView hey = new SingleMovieView();
-                    hey.show(testMovie);
+                    SingleMovieView aMovie = new SingleMovieView();
+                    aMovie.show(testMovie);
                 });
-                // adding the buttons so that it can be displayed
+                // adding the buttons so that Movies can be displayed
                 boxPanel.add(buttons.get(j));
 
             }
+
             setLayout (new BoxLayout (boxPanel, BoxLayout.X_AXIS));
             setSize(400,400);
             setVisible(true);

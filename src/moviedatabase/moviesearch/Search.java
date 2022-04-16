@@ -7,6 +7,13 @@ import java.util.Objects;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
+//TODO:
+// tokenize the genre, actors, etc so we search for each
+// search using "contains" for the multi-value fields
+// change to different search alg
+// implement fuzzy searching
+
+
 public class Search {
     private final List<Movie> movieList = MovieContainer.getInstance().getMovieList();
     public  List<Movie> searchByName(String name) {
