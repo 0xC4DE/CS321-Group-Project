@@ -75,11 +75,10 @@ public class SearchView extends Frame implements ActionListener {
     }
     private void showMovies(List<Movie> moviesToShow){
         ArrayList<JButton> buttons = new ArrayList<JButton>();
-        List<Movie> test = MovieContainer.getInstance().getMovieList();
 
-        for (int j = 0;j<5;j++) {
+        for (int j = 0;j<moviesToShow.size();j++) {
 
-            Movie testMovie = test.get(j);
+            Movie testMovie = moviesToShow.get(j);
             buttons.add(j,new JButton(testMovie.getTitle()));
             buttons.get(j).addActionListener(e->
             {
@@ -97,6 +96,8 @@ public class SearchView extends Frame implements ActionListener {
     }
 
     public static void main(String[] args) {
+        MovieContainer cont = MovieContainer.getInstance();
+        cont.collectMovies(null);
         SearchView test = new SearchView();
         test.SearchBox();
     }

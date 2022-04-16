@@ -1,5 +1,6 @@
 package moviedatabase.moviesearch;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import moviedatabase.moviedata.MovieContainer;
 public class Search {
     private final List<Movie> movieList = MovieContainer.getInstance().getMovieList();
     public  List<Movie> searchByName(String name) {
-        List<Movie> results = null;
+        List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
             if (Objects.equals(movie.getTitle(), name)) {
                 results.add(movie);
