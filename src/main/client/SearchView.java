@@ -3,13 +3,19 @@ package main.client;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 import moviedatabase.moviesearch.Search;
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchView extends Frame {
+public class SearchView extends Frame implements ActionListener {
+    private String searchBy;
+    private  JRadioButton test = new JRadioButton("Title");
+    private JRadioButton director = new JRadioButton("Director Name");
     public void SearchBox() {
         /*JFrame myFrame = new JFrame();
         JTextField test = new JTextField(35);
@@ -25,8 +31,19 @@ public class SearchView extends Frame {
         setSize(400,400);
         setVisible(true);*/
         JFrame myFrame = new JFrame();
+        myFrame.setLayout(new FlowLayout());
+        JPanel panel = new JPanel();
+        test.setBounds(100,50,100,30);
+        director.setBounds(100,50,100,30);
+        // create a panel for the radio buttons
+        test.addActionListener(this);
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(test);
+        panel.add(test);
+        panel.add(director);
         JTextField textField = new JTextField(20);
         myFrame.add(textField);
+        myFrame.add(panel);
         myFrame.setSize(100,10);
         myFrame.setVisible(true);
         textField.addActionListener(e -> {
@@ -67,4 +84,13 @@ public class SearchView extends Frame {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(test.isSelected()){
+            searchBy = "Title";
+        }
+        else if(director.isSelected()){
+            searchBy = "Director";
+        }
+    }
 }
