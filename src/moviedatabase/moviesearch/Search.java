@@ -21,7 +21,7 @@ public class Search {
     public  List<Movie> searchByDirector(String director) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getTitle(), director)) {
+            if (Objects.equals(movie.getDirector(), director)) {
                 results.add(movie);
             }
         }
@@ -39,7 +39,7 @@ public class Search {
     public  List<Movie> searchByActor(String actor) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getTitle(), actor)) {
+            if (Objects.equals(movie.getActors(), actor)) {
                 results.add(movie);
             }
         }
