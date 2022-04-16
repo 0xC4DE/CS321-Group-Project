@@ -4,11 +4,7 @@ import moviedatabase.moviedata.MovieContainer;
 //import moviedatabase.userdata.User;
 import moviedatabase.userdata.UserAccount;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.Box;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
@@ -18,6 +14,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO:
+//
 public class WishlistView extends Frame {
     private List<ArrayList<Movie>> wishLists;
     private ArrayList<JButton> buttons = new ArrayList<JButton>();
@@ -42,6 +40,7 @@ public class WishlistView extends Frame {
 
         for(int i=0;i<practiceList.size();i++){
             JPanel listPanel = new JPanel();
+            listPanel.add(new JLabel("Wishlist #" + i));
             for(int j=0;j<practiceList.get(i).size();j++){
                 Movie testMovie = test.get(j);
                 buttons.add(j,new JButton(testMovie.getTitle()));
@@ -60,6 +59,10 @@ public class WishlistView extends Frame {
         JFrame myFrame = new JFrame();
         myFrame.add(WishLists);
         myFrame.setVisible(true);
+        myFrame.setSize(400, 400);
+
+        // TODO: delete this line
+        myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
     }
 
