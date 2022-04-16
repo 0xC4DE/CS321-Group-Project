@@ -50,6 +50,16 @@ public class WishlistView extends Frame {
                     SingleMovieView movieShow = new SingleMovieView();
                     movieShow.show(testMovie);
                 });
+                buttons.get(j).addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent me) {
+                        if(me.getButton() == MouseEvent.BUTTON3) {
+                            //label.setText("Right Click!");
+                            System.out.println("right");
+
+                        }
+                    }
+                });
+
                 listPanel.add(buttons.get(j));
             }
             setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
@@ -66,25 +76,6 @@ public class WishlistView extends Frame {
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
         // capture mouse click
-        myFrame.addMouseListener(new MouseListener() {
-            public void mousePressed(MouseEvent me) { }
-            public void mouseReleased(MouseEvent me) { }
-            public void mouseEntered(MouseEvent me) { }
-            public void mouseExited(MouseEvent me) { }
-            public void mouseClicked(MouseEvent me) {
-//                if(me.getButton() == MouseEvent.BUTTON1) {
-//                    label.setText("Left Click!");
-//                }
-//                if(me.getButton() == MouseEvent.BUTTON2) {
-//                    label.setText("Middle Click!");
-//                }
-                if(me.getButton() == MouseEvent.BUTTON3) {
-                    //label.setText("Right Click!");
-                    System.out.println("right");
-
-                }
-            }
-        });
 
     }
 
