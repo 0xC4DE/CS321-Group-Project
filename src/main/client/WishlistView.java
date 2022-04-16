@@ -30,7 +30,7 @@ public class WishlistView extends Frame {
         ArrayList<JButton> buttons = new ArrayList<JButton>();
        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
         List<Movie> test = MovieContainer.getInstance().getMovieList();
-        ArrayList<ArrayList<Movie>> practiceList = new ArrayList<ArrayList<Movie>>();
+        List<ArrayList<Movie>> practiceList = new ArrayList<ArrayList<Movie>>();
         //sets up our test wishlists, 3 lists of 4 movies
         for(int i=0;i<3;i++){
             practiceList.add(new ArrayList<Movie>());
@@ -113,19 +113,19 @@ public class WishlistView extends Frame {
     }
 
     public void createList() {
-
+    wishLists.add(new ArrayList<Movie>());
     }
 
-    public void deleteList() {
-
+    public void deleteList(int indexToRemove) {
+    wishLists.remove(indexToRemove);
     }
 
-    public void addMovietoList() {
-
+    public void addMovietoList(int whichList, Movie movieToAdd) {
+        wishLists.get(whichList).add(movieToAdd);
     }
 
-    public void removeMovieFromList() {
-
+    public void removeMovieFromList(int whichList, Movie movieToRemove) {
+    wishLists.get(whichList).remove(movieToRemove);
     }
 
 
