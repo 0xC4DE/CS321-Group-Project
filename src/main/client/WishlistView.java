@@ -43,7 +43,6 @@ public class WishlistView extends Frame {
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(e->
                 {
-
                     SingleMovieView movieShow = new SingleMovieView();
                     movieShow.show(testMovie);
                 });
@@ -65,11 +64,11 @@ public class WishlistView extends Frame {
      * @param oldList
      * @param oldListIndex
      */
-    private void moveList(Movie movieToMove, int newList, int oldList, int oldListIndex){
+    public void swapMovieList (Movie movieToMove, int newList, int oldList, int oldListIndex){
         //removing movie from previous list
         wishLists.get(oldList).remove(oldListIndex);
         wishLists.get(newList).add(movieToMove);
-        //adds a new button that corrosponds to the moved movie
+        //adds a new button that corresponds to the moved movie
         buttons.add(new JButton(movieToMove.getTitle()));
         //adds the action that clicking will bring up a single movie view of the movie
         buttons.get(buttons.size()-1).addActionListener(e->{
@@ -82,6 +81,22 @@ public class WishlistView extends Frame {
         setVisible(true);
     }
 
+    public void createList() {
+
+    }
+
+    public void deleteList() {
+
+    }
+
+    public void addMovietoList() {
+
+    }
+
+    public void removeMovieFromList() {
+
+    }
+    
     // main method
     public static void main(String args[]){
         //maybe do a for loop, change the view to do one wishlist at a time
