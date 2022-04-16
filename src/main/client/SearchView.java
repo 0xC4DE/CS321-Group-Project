@@ -4,53 +4,47 @@ import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 import moviedatabase.moviesearch.Search;
 import javax.swing.*;
-import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchView extends JPanel implements ActionListener {
     private String searchBy;
-    private  JRadioButton test = new JRadioButton("Actor");
-    private JRadioButton director = new JRadioButton("Director Name");
-    private JRadioButton genre = new JRadioButton("Genre");
-    private JRadioButton title = new JRadioButton("Title");
-    public JPanel SearchBox() {
-        /*JFrame myFrame = new JFrame();
-        JTextField test = new JTextField(35);
-        test.addActionListener(e -> {
-            List<Movie> foundMovies;
-            Search searchFor = new Search();
-            String text = test.getText();
-            foundMovies = searchFor.searchByName(text);
-            showMovies(foundMovies);
+    private JRadioButton actor = new JRadioButton("Actor", false);
+    private JRadioButton director = new JRadioButton("Director Name", false);
+    private JRadioButton genre = new JRadioButton("Genre", false);
+    private JRadioButton title = new JRadioButton("Title", true);
 
-        });
-        myFrame.add(test);
-        setSize(400,400);
-        setVisible(true);*/
+    public JPanel SearchBox() {
+
         JFrame myFrame = new JFrame();
         myFrame.setLayout(new FlowLayout());
         JPanel panel = new JPanel();
-        test.setBounds(100,50,100,30);
+
+        actor.setBounds(100,50,100,30);
         director.setBounds(100,50,100,30);
         genre.setBounds(100,50,100,30);
         title.setBounds(100,50,100,30);
+
         // create a panel for the radio buttons
-        test.addActionListener(this);
+        actor.addActionListener(this);
         director.addActionListener(this);
         genre.addActionListener(this);
         title.addActionListener(this);
+
         ButtonGroup bg = new ButtonGroup();
-        bg.add(test);
-        panel.add(test);
+        bg.add(actor);
+        bg.add(director);
+        bg.add(genre);
+        bg.add(title);
+
+        panel.add(actor);
         panel.add(director);
         panel.add(genre);
         panel.add(title);
+
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
 
@@ -108,7 +102,7 @@ public class SearchView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(test.isSelected()){
+        if(actor.isSelected()){
             searchBy = "Actor";
         }
         else if(director.isSelected()){
