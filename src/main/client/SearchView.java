@@ -14,8 +14,10 @@ import java.util.List;
 
 public class SearchView extends Frame implements ActionListener {
     private String searchBy;
-    private  JRadioButton test = new JRadioButton("Title");
+    private  JRadioButton test = new JRadioButton("Actor");
     private JRadioButton director = new JRadioButton("Director Name");
+    private JRadioButton genre = new JRadioButton("Genre");
+    private JRadioButton title = new JRadioButton("Title");
     public void SearchBox() {
         /*JFrame myFrame = new JFrame();
         JTextField test = new JTextField(35);
@@ -35,12 +37,19 @@ public class SearchView extends Frame implements ActionListener {
         JPanel panel = new JPanel();
         test.setBounds(100,50,100,30);
         director.setBounds(100,50,100,30);
+        genre.setBounds(100,50,100,30);
+        title.setBounds(100,50,100,30);
         // create a panel for the radio buttons
         test.addActionListener(this);
+        director.addActionListener(this);
+        genre.addActionListener(this);
+        title.addActionListener(this);
         ButtonGroup bg = new ButtonGroup();
         bg.add(test);
         panel.add(test);
         panel.add(director);
+        panel.add(genre);
+        panel.add(title);
         JTextField textField = new JTextField(20);
         myFrame.add(textField);
         myFrame.add(panel);
@@ -50,13 +59,16 @@ public class SearchView extends Frame implements ActionListener {
             List<Movie> foundMovies;
             Search searchFor = new Search();
             String text = textField.getText();
-            if(searchBy.equals("Title")) {
-                foundMovies = searchFor.searchByName(text);
+            if(searchBy.equals("Actor")) {
+                foundMovies = searchFor.searchByActor(text);
             }
             if(searchBy.equals("Director")) {
                 foundMovies = searchFor.searchByDirector(text);
             }
-            foundMovies = searchFor.searchByGenre(text);
+            if(searchBy.equals("Genre")) {
+                foundMovies = searchFor.searchByGenre(text);
+            }
+            foundMovies = searchFor.searchByName(text);
             showMovies(foundMovies);
 
         });
@@ -93,10 +105,16 @@ public class SearchView extends Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(test.isSelected()){
-            searchBy = "Title";
+            searchBy = "Actor";
         }
         else if(director.isSelected()){
             searchBy = "Director";
+        }
+        else if(genre.isSelected()){
+            searchBy = "Genre";
+        }
+        else{
+            searchBy = "Title";
         }
     }
 }
