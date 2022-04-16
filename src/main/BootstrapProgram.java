@@ -1,4 +1,5 @@
 package main;
+import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
 import java.io.*;

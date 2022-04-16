@@ -1,6 +1,6 @@
 package main;
 
-import moviedatabase.moviedata.Movie;
+import main.client.Dashboard;
 import moviedatabase.moviedata.MovieContainer;
 import test.TestConstantMovieContainer;
 import test.TestConstantUserAccount;
@@ -15,8 +15,12 @@ public class Main {
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
-        //new TestConstantMovieContainer();
-        //new TestConstantMovieContainer();
+        // TODO: Make GSON actually eat the movie data instead of dying.
+        //System.out.println(cont.getMovieList().get(0).getTitle());
+        Dashboard d = new Dashboard();
+
+        new TestConstantMovieContainer();
+        new TestConstantMovieContainer();
 
         //new TestGSON();
         new TestConstantUserAccount();
