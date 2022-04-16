@@ -8,7 +8,7 @@ import javax.swing.*;
 class SingleMovieView {
     public void show(Movie movieToShow) {
         JFrame jFrame = new JFrame();
-        JOptionPane.showMessageDialog(jFrame, "Hello there! How are you today?");
+        JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\n");
     }
 }
 
