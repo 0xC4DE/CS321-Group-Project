@@ -19,8 +19,12 @@ class SingleMovieView {
     public String findSimilar(Movie base){
         List<Movie> results;
         Search test = new Search();
-        results = test.searchByGenre(base.getGenre());
-        return results.get(0).getTitle();
+        String similar=" ";
+        results = test.searchByDirector(base.getDirector());
+            for(int  i=0;i<results.size();i++){
+                similar+=results.get(i).getTitle()+", ";
+            }
+        return similar;
 
     }
 

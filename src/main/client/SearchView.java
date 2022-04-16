@@ -13,7 +13,7 @@ import java.util.List;
 // TODO: add search "button"
 
 public class SearchView extends JPanel implements ActionListener {
-    private String searchBy;
+    private String searchBy = "Title";
     private JRadioButton actor = new JRadioButton("Actor", false);
     private JRadioButton director = new JRadioButton("Director Name", false);
     private JRadioButton genre = new JRadioButton("Genre", false);

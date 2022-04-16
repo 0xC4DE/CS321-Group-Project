@@ -30,7 +30,7 @@ public class Search {
     public  List<Movie> searchByGenre(String genre) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getTitle(), genre)) {
+            if (movie.getGenre().contains(genre)) {
                 results.add(movie);
             }
         }
