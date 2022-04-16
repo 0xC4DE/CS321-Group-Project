@@ -7,7 +7,7 @@ public class Dashboard {
     /**
      *
      */
-    Dashboard() {
+    public Dashboard() {
         JFrame window = new JFrame("Dashboard");
 
         JPanel searchPanel = new JPanel();
@@ -28,7 +28,4 @@ public class Dashboard {
         window.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        Dashboard d = new Dashboard();
-    }
 }
