@@ -44,6 +44,10 @@ public class UserAccount {
         user.setUsername(newName);
         return true;
     }
+    public void changePassword(String oldPass, String newPass) throws Exception {
+        user.setPassword(oldPass,newPass);
+    }
+
 
     public List<ArrayList<Movie>> getWishlist(){return user.wishlistsToStore;}
     public void SetList(List<ArrayList<Movie>> listToSet){
@@ -91,7 +95,7 @@ public class UserAccount {
     public String getUserName(){
         return instance.user.getUsername();
     }
-    //TODO: implement this, all we need is to save the user to a file, and then set user to null. 
+    //TODO: implement this, all we need is to save the user to a file, and then set user to null.
     public void logout(){
     }
 
