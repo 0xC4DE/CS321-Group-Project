@@ -61,6 +61,7 @@ public class UserProfile {
         });
     profileView.add(logout);
     profileView.add(changeName);
+    profileView.add(changePass);
     profileView.setSize(100,100);
     return profileView;
     }
