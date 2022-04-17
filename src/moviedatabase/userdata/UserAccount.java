@@ -91,6 +91,7 @@ public class UserAccount {
     public String getUserName(){
         return instance.user.getUsername();
     }
+    //TODO: implement this, all we need is to save the user to a file, and then set user to null. 
     public void logout(){
     }
 
