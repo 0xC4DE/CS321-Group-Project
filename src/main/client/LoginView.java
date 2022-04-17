@@ -59,8 +59,15 @@ public class LoginView {
         create.addActionListener(e ->{
             lock.lock();
             try {
-                myUser.createAccount(username.getText(), password.getText(), null);
-                loggedIn.signal();
+                if(myUser.createAccount(username.getText(), password.getText(), null)) {
+                    loggedIn.signal();
+                }
+                else{
+                    JLabel error = new JLabel("User already Exists");
+                    myFrame.add(error);
+                    wait(1000);
+                    myFrame.remove(error);
+                }
             }
             catch(Exception t){
 
