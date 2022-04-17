@@ -15,7 +15,7 @@ public class Dashboard {
 
         SearchView searchPanel = new SearchView();
         WishlistView wishlistPanel = new WishlistView();
-        JPanel profilePanel = new JPanel();
+        UserProfile profilePanel = new UserProfile();
 
         JTabbedPane tabPanel = new JTabbedPane();
         tabPanel.setBounds(50,30,600,300);
@@ -23,7 +23,7 @@ public class Dashboard {
         // tab text is white when selected on macOS
         tabPanel.add("Search", searchPanel.SearchBox());
         tabPanel.add("Wishlists", wishlistPanel.showWishlists());
-        tabPanel.add("Profile", profilePanel);
+        tabPanel.add("Profile", profilePanel.showProfile());
         window.add(tabPanel);
         window.setSize(700,400);
         window.setLayout(null);
