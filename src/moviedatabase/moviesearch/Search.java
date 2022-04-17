@@ -13,11 +13,19 @@ import moviedatabase.moviedata.MovieContainer;
 // change to different search alg
 // implement fuzzy searching
 
-
+/**
+ * This is the class used to search the MovieList by whichever perameter is needed
+ */
 public class Search {
     private final List<Movie> movieList = MovieContainer.getInstance().getMovieList();
+
+    /**
+     * takes in a string name and returns a list of all matches
+     * @param name is a string
+     * @return returns a list of results
+     */
     public  List<Movie> searchByName(String name) {
-        List<Movie> results = new ArrayList<Movie>();
+        List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
             if (Objects.equals(movie.getTitle(), name)) {
                 results.add(movie);
@@ -25,6 +33,12 @@ public class Search {
         }
         return results;
     }
+
+    /**
+     * see above
+     * @param director string
+     * @return list
+     */
     public  List<Movie> searchByDirector(String director) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
@@ -34,6 +48,12 @@ public class Search {
         }
         return results;
     }
+
+    /**
+     * again, see above
+     * @param genre string
+     * @return list
+     */
     public  List<Movie> searchByGenre(String genre) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {
@@ -43,6 +63,12 @@ public class Search {
         }
         return results;
     }
+
+    /**
+     * All these searches work the same, why are you even reading this?
+     * @param actor string
+     * @return list
+     */
     public  List<Movie> searchByActor(String actor) {
         List<Movie> results = new ArrayList<Movie>();
         for (Movie movie : movieList) {

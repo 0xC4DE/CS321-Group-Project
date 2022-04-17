@@ -128,6 +128,10 @@ Here's the schema.
   ]
 }
  */
+
+/**
+ * please don't make me do javadocs for all this, just read the function name
+ */
 public class Movie {
     private String Title;
     private String Year;

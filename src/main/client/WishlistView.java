@@ -89,7 +89,9 @@ public class WishlistView extends Frame {
         return wishlistPanel;
     }
 
-
+    /**
+     * sets up the layout of the popup menus :)
+     */
     public void setupPopUp(){
         // popup menu setup
         JMenuItem pAdd = new JMenuItem("Add");
@@ -123,6 +125,12 @@ public class WishlistView extends Frame {
         // end popup menu setup
     }
 
+    /**
+     * used to handle what happens when the mouse in clicked on a button
+     * @param button button being acted upon
+     * @param wishlistIndex ???
+     * @param movieObj ???
+     */
     public void handleMouse(JButton button, int wishlistIndex, Movie movieObj) {
         // handle the button click event
         button.addMouseListener(new MouseAdapter() {
