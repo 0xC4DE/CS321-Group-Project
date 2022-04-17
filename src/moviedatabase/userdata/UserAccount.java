@@ -49,9 +49,9 @@ public class UserAccount {
     }
 
 
-    public List<ArrayList<Movie>> getWishlist(){return user.wishlistsToStore;}
+    public List<ArrayList<Movie>> getWishlist(){return user.getWishlistsToStore();}
     public void SetList(List<ArrayList<Movie>> listToSet){
-        user.wishlistsToStore = listToSet;
+        user.setWishlistsToStore(listToSet);
     }
 
     /**

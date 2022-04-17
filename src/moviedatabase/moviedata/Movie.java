@@ -155,6 +155,9 @@ public class Movie {
     private String Website;
     private String Response;
 
+
+    private String userReview;
+
     public Movie() {
     }
 
@@ -166,7 +169,7 @@ public class Movie {
         this.userReview = userReview;
     }
 
-    private String userReview;
+
 
 
     public String getTitle() {
