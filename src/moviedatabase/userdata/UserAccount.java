@@ -57,11 +57,16 @@ public class UserAccount {
      * @param password
      * @param userFile
      */
-    public void createAccount(String username, String password, Path userFile){
+    public boolean createAccount(String username, String password, Path userFile){
         // I dont like this pattern, which indicates createUser should be a util, instead of being in user
         // TODO: Make createUser a util instead of a user
         User user = new User();
         this.user = user.createUser(username, password, userFile);
+        //lets other classes hinge on successful creation by returning true or false if creation was done
+        if(user == null){
+            return false;
+        }
+        return true;
     }
 
     /**
