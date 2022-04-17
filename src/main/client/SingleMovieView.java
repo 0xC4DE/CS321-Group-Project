@@ -12,12 +12,18 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 class SingleMovieView {
+    /**
+     * Creates a popup with the selected movies info, with the option to add the movie to a wishlist,
+     * which is entered as a number in a text box
+     * @param movieToShow
+     */
     public void show(Movie movieToShow) {
         String chosenList = "1";
         JFrame jFrame = new JFrame();
         JPanel options = new JPanel(new GridLayout(8,1));
         JPanel whichList = new JPanel(new GridLayout(2,1));
 
+        //Movie info
         JButton add = new JButton("Add to Wishlist");
         JLabel title = new JLabel("Title: "+movieToShow.getTitle());
         JLabel director = new JLabel("Director: "+movieToShow.getDirector());
@@ -27,6 +33,8 @@ class SingleMovieView {
         JLabel language = new JLabel("Language: "+movieToShow.getLanguage());
         JLabel similar = new JLabel("Similar Movies: "+findSimilar(movieToShow));
         JLabel runtime = new JLabel("Runtime: "+movieToShow.getRuntime());
+
+        //adding that info into the panel
         options.add(title);
         options.add(director);
         options.add(rated);
@@ -35,21 +43,23 @@ class SingleMovieView {
         options.add(language);
         options.add(runtime);
 
+        //creates the pane for adding the movie to a wishlist
         add.addActionListener(e -> {
             WishlistView addCall = new WishlistView();
             List< ArrayList<Movie>> ourList = UserAccount.getInstance().getWishlist();
+            //I could not make an array of buttons work, so we ask the user to enter the wishlist number in a text feild
             JTextField choose = new JTextField();
             choose.addActionListener(enter->{
              int list =  Integer.parseInt(choose.getText());
-              if(list>0 && list<ourList.size()){
-                  
-                  addCall.addMovietoList(list,movieToShow);
+              if(list>=1 && list<ourList.size()){
+
+                  addCall.addMovietoList((list-1),movieToShow);
               }
             });
             JLabel hint = new JLabel("Enter which list to add too, numbers 1 to "+ourList.size());
             whichList.add(hint);
             whichList.add(choose);
-
+            //dialog for adding the movie to a list
             JOptionPane.showOptionDialog(null,whichList,"Add movie to a list",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
         });
 
@@ -62,6 +72,13 @@ class SingleMovieView {
         */
 
     }
+
+    /**
+     * uses Erik's search functions to find a couple of movies with the same genre, put the titles of the similar movies into a string,
+     * and returns it for use in the single movie dialog
+     * @param base
+     * @return
+     */
     public String findSimilar(Movie base){
         List<Movie> results;
         Search test = new Search();
