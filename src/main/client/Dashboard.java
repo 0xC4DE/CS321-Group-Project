@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Dashboard {
 
     /**
-     *
+     *Creates the dashboard
      */
     public Dashboard() {
         JFrame window = new JFrame("Dashboard");
