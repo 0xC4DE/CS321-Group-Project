@@ -14,20 +14,21 @@ public class Dashboard {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
         SearchView searchPanel = new SearchView();
-        JPanel wishlistPanel = new JPanel();
+        WishlistView wishlistPanel = new WishlistView();
         JPanel profilePanel = new JPanel();
 
         JTabbedPane tabPanel = new JTabbedPane();
-        tabPanel.setBounds(50,50,500,200);
+        tabPanel.setBounds(50,30,600,300);
 
         // tab text is white when selected on macOS
         tabPanel.add("Search", searchPanel.SearchBox());
-        tabPanel.add("Wishlists", wishlistPanel);
+        tabPanel.add("Wishlists", wishlistPanel.showWishlists());
         tabPanel.add("Profile", profilePanel);
         window.add(tabPanel);
-        window.setSize(400,400);
+        window.setSize(700,400);
         window.setLayout(null);
         window.setVisible(true);
+
     }
 
 }
