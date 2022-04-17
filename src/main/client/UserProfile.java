@@ -4,6 +4,7 @@ import moviedatabase.userdata.UserAccount;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class UserProfile {
     public JPanel showProfile(){
@@ -47,7 +48,12 @@ public class UserProfile {
             profileView.remove(newName);
         });
         logout.addActionListener(e -> {
-            //logout
+            try {
+                user.logOut();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.exit(0);
         });
         changeName.addActionListener(e->{
             //makes text field visible for changing name

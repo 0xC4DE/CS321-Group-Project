@@ -34,6 +34,9 @@ public class UserAccount {
     public static UserAccount getInstance(){
         return instance;
     }
+    public void logOut() throws IOException {
+        user.logout();
+    }
 
     /**
      * This will change the name of a user, this is mainly a wrapper, so there is less exposed GSON code
@@ -94,9 +97,6 @@ public class UserAccount {
 
     public String getUserName(){
         return instance.user.getUsername();
-    }
-    //TODO: implement this, all we need is to save the user to a file, and then set user to null.
-    public void logout(){
     }
 
 

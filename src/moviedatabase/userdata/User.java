@@ -288,6 +288,12 @@ public class User {
         return hash;
     }
 
+    public void logout() throws IOException {
+        saveUserFile(getUserFileList(null),null);
+
+    }
+
+
     /**
      * Given the path to a file that contains JSON of users, return List\<User\>
      * This is often used to check if a user exists in the database, or to modify and save.
