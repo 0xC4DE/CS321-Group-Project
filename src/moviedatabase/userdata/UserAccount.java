@@ -91,6 +91,9 @@ public class UserAccount {
     public String getUserName(){
         return instance.user.getUsername();
     }
+    public void logout(){
+    }
+
 
     /**
      * Deletes the currently logged-in user
