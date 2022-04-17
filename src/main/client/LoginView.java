@@ -1,11 +1,26 @@
 package main.client;
 
+import moviedatabase.userdata.UserAccount;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.security.spec.ECField;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class LoginView {
-    LoginView(){
-        JFrame myFrame = new JFrame("Login");
+    private UserAccount myUser = UserAccount.getInstance();
+    private JFrame myFrame = new JFrame("Login");
+
+    /**
+     * Takes a thread lock and a Condition object to signal once the user has successfully logged in
+     * This is used so we don't continue execution until the user has logged in somehow
+     * @param loggedIn
+     * @param lock
+     */
+    public void loginLoop(Condition loggedIn, Lock lock){
 
         JPanel infoSection = new JPanel(new GridLayout(3,2));
         JTextField username  = new JTextField();
@@ -24,15 +39,52 @@ public class LoginView {
         myFrame.add(infoSection);
         myFrame.add(buttonSection);
         myFrame.setLayout(new GridLayout(4,4));
-       /* myFrame.add(login);
-        myFrame.add(guest);
-        myFrame.add(create);*/
+        //For each of these buttons, they have to be able to lock and unlock the thread, so we need the try catch finally in each, so the can lock, signal, then unlock
+        login.addActionListener(e -> {
+            lock.lock();
+            try {
+
+                if (myUser.login(username.getText(), password.getText(), null)) {
+                    loggedIn.signal();
+                }
+            }
+            catch(Exception t){
+
+            }
+            finally {
+                lock.unlock();
+            }
+        });
+
+        create.addActionListener(e ->{
+            lock.lock();
+            try {
+                myUser.createAccount(username.getText(), password.getText(), null);
+                loggedIn.signal();
+            }
+            catch(Exception t){
+
+            }
+            finally {
+                lock.unlock();
+            }
+        } );
+        guest.addActionListener(e->{
+            lock.lock();
+            try {
+                myUser.loginAsGuest();
+                loggedIn.signal();
+            }
+            catch(Exception t){
+
+            }
+            finally {
+                lock.unlock();
+            }
+        });
         myFrame.setSize(700,400);
         myFrame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        LoginView test = new LoginView();
-    }
 
 }
