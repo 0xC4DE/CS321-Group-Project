@@ -1,6 +1,7 @@
 package main.client;
 // Java Program to create a popup and display
 // it on a parent frame
+import main.reviews.ReviewManager;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviesearch.Search;
 import moviedatabase.userdata.UserAccount;
@@ -54,7 +55,9 @@ class SingleMovieView {
         });
 
         review.addActionListener(e->{
-            //write to reviewManager.addReview()
+            ReviewManager allReviews = new ReviewManager();
+            allReviews.addToTable(movieToShow.getImdbID(),review.getText());
+
         });
         //creates the pane for adding the movie to a wishlist
         add.addActionListener(e -> {
