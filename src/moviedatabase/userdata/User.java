@@ -285,7 +285,8 @@ public class User {
      * @return
      * @throws FileNotFoundException
      */
-    private List<User> getUserFileList(Path userFile) throws FileNotFoundException {
+    private List<User> getUserFileList(Path userFile) throws IOException {
+        userFile = getUserFilePath(userFile);
         Reader user_file = new FileReader(String.valueOf(userFile));
         Gson users = new Gson();
         Type userType = new TypeToken<ArrayList<User>>(){}.getType();
