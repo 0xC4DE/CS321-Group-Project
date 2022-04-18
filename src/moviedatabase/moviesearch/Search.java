@@ -11,6 +11,7 @@ import moviedatabase.moviedata.MovieContainer;
 // tokenize the genre, actors, etc so we search for each
 // search using "contains" for the multi-value fields
 // change to different search alg
+// ^^^ no <3 ^^^
 // implement fuzzy searching
 
 /**
@@ -27,7 +28,7 @@ public class Search {
     public  List<Movie> searchByName(String name) {
         List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getTitle(), name)) {
+            if (movie.getTitle().contains(name)) {
                 results.add(movie);
             }
         }
@@ -42,7 +43,7 @@ public class Search {
     public  List<Movie> searchByDirector(String director) {
         List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getDirector(), director)) {
+            if (movie.getDirector().contains(director)) {
                 results.add(movie);
             }
         }
@@ -72,7 +73,7 @@ public class Search {
     public  List<Movie> searchByActor(String actor) {
         List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
-            if (Objects.equals(movie.getActors(), actor)) {
+            if (movie.getActors().contains(actor)) {
                 results.add(movie);
             }
         }
