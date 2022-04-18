@@ -25,19 +25,12 @@ public class ConfigurationView extends JFrame {
         PopupFactory pop = PopupFactory.getSharedInstance();
         JFrame popupFrame = new JFrame("Popup");
         JPanel popupPanel = new JPanel();
+        popupPanel.setLayout(new GridLayout(1,2));
         JLabel l = new JLabel("Invalid Path!");
+        JButton ok = new JButton("Close");
         popupPanel.add(l);
-        Popup popup = pop.getPopup(popupFrame, popupPanel, 100, 100);
+        popupPanel.add(ok);
 
-
-        l.addFocusListener(new FocusAdapter(){
-            @Override
-            public void focusLost(FocusEvent e){
-                if (popup != null) {
-                    popup.hide();
-                }
-            }
-        });
 
         setTitle("Config");
         setSize(550,120);
@@ -48,6 +41,12 @@ public class ConfigurationView extends JFrame {
         reviewButton.addActionListener(e -> {
             try {
                 if (!Files.exists(Paths.get(reviewFile.getText()))){
+                    Popup popup = pop.getPopup(popupFrame, popupPanel, reviewFile.getX(), reviewFile.getY());
+
+                    ok.addActionListener(eee -> {
+                        popup.hide();
+                    });
+
                     popup.show();
                     l.requestFocus();
                 }
@@ -66,9 +65,17 @@ public class ConfigurationView extends JFrame {
         movieButton.addActionListener(e -> {
             try {
                 if (!Files.exists(Paths.get(movieFile.getText()))){
+                    Popup popup = pop.getPopup(popupFrame, popupPanel, movieFile.getX(), movieFile.getY());
 
-                };
-                p.setProperty("moviePath", movieFile.getText());
+                    ok.addActionListener(eee -> {
+                        popup.hide();
+                    });
+
+                    popup.show();
+                    l.requestFocus();
+                } else {
+                    p.setProperty("moviePath", movieFile.getText());
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
