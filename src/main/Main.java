@@ -15,8 +15,6 @@ public class Main {
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
-        // TODO: Make GSON actually eat the movie data instead of dying.
-        //System.out.println(cont.getMovieList().get(0).getTitle());
         Dashboard d = new Dashboard();
     }
 }
