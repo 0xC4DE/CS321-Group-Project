@@ -1,4 +1,4 @@
-# CS321-Group-Project (Group 9: Cameron Beck, Emily Burns, Joshua Cantrell, Erik Overberg)
+# CS321-Group-Project (Group 9: Cameron Beck, Emily Burns, Joshua Cantrell(IdioticProphet), Erik Overberg)
 
 
 
@@ -61,3 +61,6 @@ If there's anything else that you run into, I'll add it here so we all have a co
 ### Link to Team TO-do's
 
 https://docs.google.com/document/d/1GJ-j878ql_xxWqJB5B4GEoD9rIKlTqVw1Ug70EIWkO8/edit?usp=sharing
+
+### Note
+You may see an alias "IdioticProphet", that's just me (Joshua Cantrell) under a more public alias.
