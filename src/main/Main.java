@@ -20,11 +20,12 @@ public class Main {
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
-        //new TestConstantMovieContainer();
-        //new TestConstantMovieContainer();
+        new TestConstantMovieContainer();
+        new TestConstantMovieContainer();
 
         //new TestGSON();
-       // new TestConstantUserAccount();
+        //new TestConstantUserAccount();
+
         Condition finished= lock.newCondition();
         LoginView test = new LoginView();
         //locking execution to start the await process

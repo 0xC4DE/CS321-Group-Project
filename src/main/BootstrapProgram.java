@@ -1,5 +1,4 @@
 package main;
-
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
@@ -25,6 +24,7 @@ public class BootstrapProgram {
     }
 
     private Path reviewPath;
+
     private boolean loaded=false;
 
     /**
@@ -84,9 +84,10 @@ public class BootstrapProgram {
         }
         return true;
     }
+    
 
     //run this main to see how the Properties stuff works if you'd like to see :)
-    public static void main(String[] args) {
+    public static void main(String []args) throws IOException {
         BootstrapProgram test = new BootstrapProgram();
         test.loadConfig();
         System.out.println(test.moviePath);

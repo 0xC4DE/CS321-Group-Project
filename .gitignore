@@ -25,3 +25,7 @@ out/
 *.ipr
 *.iws
 *.*~
+
+.DS_Store
+config.properties
+.testdata
