@@ -4,8 +4,6 @@ import main.BootstrapProgram;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
