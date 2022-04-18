@@ -3,12 +3,12 @@ package main.reviews;
 
 import com.google.gson.Gson;
 import main.BootstrapProgram;
+import moviedatabase.moviedata.Movie;
+import moviedatabase.moviedata.MovieContainer;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public class ReviewManager {
     public Map getReviewTable() {
@@ -42,20 +42,11 @@ public class ReviewManager {
         Gson reviewJson = new Gson();
         Reader reviewReader = new FileReader(String.valueOf(reviewPath));
         reviewTable = reviewJson.fromJson(reviewReader,Map.class);
-
+        MovieContainer.getInstance().addReviews(reviewTable);
     }
 
-    public static void main(String[] args)  {
-        /*BootstrapProgram test = new BootstrapProgram();
-        test.loadConfig();*/
-        ReviewManager review = new ReviewManager(new BootstrapProgram());
-        review.addToTable("100","Pretty good");
-        try {
-            review.saveReviews();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+
 
 
 }

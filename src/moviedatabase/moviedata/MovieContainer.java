@@ -10,6 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 public class MovieContainer {
@@ -32,6 +33,14 @@ public class MovieContainer {
             instance = new MovieContainer();
         }
         return instance;
+    }
+
+    public void addReviews(Map<String,String> reviewMap){
+        for(Movie thisMovie : movieList){
+            if(reviewMap.get(thisMovie.getImdbID())!=null){
+                thisMovie.setUserReview(reviewMap.get(thisMovie.getImdbID()));
+            }
+        }
     }
 
     /*
