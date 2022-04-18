@@ -14,7 +14,7 @@ import moviedatabase.moviedata.MovieContainer;
 // implement fuzzy searching
 
 /**
- * This is the class used to search the MovieList by whichever perameter is needed
+ * This is the class used to search the MovieList by whichever parameter is needed
  */
 public class Search {
     private final List<Movie> movieList = MovieContainer.getInstance().getMovieList();
@@ -40,7 +40,7 @@ public class Search {
      * @return list
      */
     public  List<Movie> searchByDirector(String director) {
-        List<Movie> results = new ArrayList<Movie>();
+        List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
             if (Objects.equals(movie.getDirector(), director)) {
                 results.add(movie);
@@ -55,7 +55,7 @@ public class Search {
      * @return list
      */
     public  List<Movie> searchByGenre(String genre) {
-        List<Movie> results = new ArrayList<Movie>();
+        List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
             if (movie.getGenre().contains(genre)) {
                 results.add(movie);
@@ -70,7 +70,7 @@ public class Search {
      * @return list
      */
     public  List<Movie> searchByActor(String actor) {
-        List<Movie> results = new ArrayList<Movie>();
+        List<Movie> results = new ArrayList<>();
         for (Movie movie : movieList) {
             if (Objects.equals(movie.getActors(), actor)) {
                 results.add(movie);
