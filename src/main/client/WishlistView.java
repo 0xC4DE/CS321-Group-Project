@@ -24,7 +24,7 @@ import java.util.List;
 
 public class WishlistView extends Frame {
     private List<ArrayList<Movie>> wishLists;
-    private ArrayList<JButton> buttons = new ArrayList<JButton>();
+    private ArrayList<JButton> buttons = new ArrayList<>();
     static JPopupMenu popup = new JPopupMenu(); // popup menu for actions
     private String listFn = "none";
     //private ActionListener menuListener;
@@ -47,10 +47,10 @@ public class WishlistView extends Frame {
         // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
         // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
         List<Movie> test = MovieContainer.getInstance().getMovieList();
-        List<ArrayList<Movie>> theList = new ArrayList<ArrayList<Movie>>();
+        List<ArrayList<Movie>> theList = new ArrayList<>();
         //sets up our test wishlists, 3 lists of 4 movies
         for(int i = 0; i < 3; i++){
-            theList.add(new ArrayList<Movie>());
+            theList.add(new ArrayList<>());
             for(int j = 0; j < 4; j++) {
                 theList.get(i).add(test.get(i+j));
             }
@@ -182,10 +182,10 @@ public class WishlistView extends Frame {
 
     /**
      * Takes in a movie object, and its new and old location, and moves the object inside the wishlist matrix accordingly
-     * @param movieToMove
-     * @param newList
-     * @param oldList
-     * @param oldListIndex
+     * @param movieToMove .
+     * @param newList .
+     * @param oldList .
+     * @param oldListIndex .
      */
     public void swapMovieList (Movie movieToMove, int newList, int oldList, int oldListIndex){
         //removing movie from previous list
