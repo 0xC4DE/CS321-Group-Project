@@ -107,4 +107,12 @@ public class UserAccount {
     public Boolean delUser(Path path) throws IOException, NoSuchAlgorithmException {
         return instance.user.delUser(path);
     }
+
+    /**
+     * Logs out a user
+     * shouldn't need to do anything robused when it comes to saving data as when it's modified it's already saved
+     */
+    public void logoutUser() {
+        this.user = new User();
+    }
 }

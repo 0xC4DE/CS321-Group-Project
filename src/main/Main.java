@@ -22,9 +22,9 @@ public class Main {
 
         //new TestConstantMovieContainer();
         //new TestConstantMovieContainer();
-
         //new TestGSON();
-       // new TestConstantUserAccount();
+        //new TestConstantUserAccount();
+
         Condition finished= lock.newCondition();
         LoginView test = new LoginView();
         //locking execution to start the await process
