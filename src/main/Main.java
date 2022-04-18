@@ -30,7 +30,7 @@ public class Main {
         //new TestGSON();
         //new TestConstantUserAccount();
 
-        Condition finished= lock.newCondition();
+      /*  Condition finished= lock.newCondition();
         LoginView test = new LoginView();
         //locking execution to start the await process
         //Basically, I place a lock on  this main thread, then await for the login to finish to continue with the program
@@ -45,7 +45,7 @@ public class Main {
         }
         finally {
             lock.unlock();
-        }
+        }*/
 
         Dashboard d = new Dashboard();
 

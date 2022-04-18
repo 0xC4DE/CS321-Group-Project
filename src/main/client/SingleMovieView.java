@@ -80,6 +80,7 @@ class SingleMovieView {
         });
 
         options.add(add);
+        options.add(reviewAdd);
         JOptionPane.showOptionDialog(null,options,movieToShow.getTitle(),JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
 
         /*JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\nDirector: "+movieToShow.getDirector()+"\nRated: "+

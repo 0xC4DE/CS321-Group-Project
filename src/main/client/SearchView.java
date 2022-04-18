@@ -85,10 +85,10 @@ public class SearchView extends JPanel implements ActionListener {
                 boxPanel.add(buttons.get(j));
 
             }
-
             setLayout (new BoxLayout (boxPanel, BoxLayout.X_AXIS));
             setSize(400,400);
             setVisible(true);
+            panel.revalidate();
 
         });
         boxPanel.add(textField);
