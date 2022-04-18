@@ -22,9 +22,14 @@ class SingleMovieView {
         JFrame jFrame = new JFrame();
         JPanel options = new JPanel(new GridLayout(8,1));
         JPanel whichList = new JPanel(new GridLayout(2,1));
-
+        JPanel reviewBox = new JPanel(new GridLayout(2,2));
+        JTextField review  = new JTextField();
+        JLabel reviewHint = new JLabel("Enter your review here");
+        reviewBox.add(reviewHint);
+        reviewBox.add(review);
         //Movie info
         JButton add = new JButton("Add to Wishlist");
+        JButton reviewAdd = new JButton("Add a review!");
         JLabel title = new JLabel("Title: "+movieToShow.getTitle());
         JLabel director = new JLabel("Director: "+movieToShow.getDirector());
         JLabel rated = new JLabel("Rated: "+movieToShow.getRated());
@@ -42,7 +47,15 @@ class SingleMovieView {
         options.add(genre);
         options.add(language);
         options.add(runtime);
+        options.add(similar);
 
+        reviewAdd.addActionListener(e -> {
+            JOptionPane.showOptionDialog(null,reviewBox,"Write a review",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
+        });
+
+        review.addActionListener(e->{
+            //write to reviewManager.addReview()
+        });
         //creates the pane for adding the movie to a wishlist
         add.addActionListener(e -> {
             WishlistView addCall = new WishlistView();
