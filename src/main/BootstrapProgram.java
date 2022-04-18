@@ -1,4 +1,5 @@
 package main;
+import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
 import java.io.*;
@@ -11,33 +12,43 @@ import java.util.Properties;
  * An admin user can edit this, and change where our data is pointed too
  */
 public class BootstrapProgram {
-    private Path configFile;
     private Path moviePath;
+    private Path configFile;
+
+    public Path getMoviePath() {
+        return moviePath;
+    }
+
+    public Path getReviewPath() {
+        return reviewPath;
+    }
+
     private Path reviewPath;
 
-    public BootstrapProgram() throws IOException {
+    private boolean loaded=false;
+
+    /**
+     * Base constructor BootstrapProgram, sets up a .properties file in the bsae directory of the project, and sets the locations of the data files to the users home directory
+     */
+    public BootstrapProgram() {
         Path test = Paths.get(System.getProperty("user.home"));
         Properties props = new Properties();
         //these are defaults
-        props.setProperty("moviePath", String.valueOf(test));
-        props.setProperty("reviewPath", String.valueOf(test));
+        props.setProperty("moviePath", String.valueOf(test)+"/movieFile.json");
+        props.setProperty("reviewPath", String.valueOf(test)+"/reviewFile.json");
+        try {
             //this will actually create the file, in the base directory of the project
             props.store(new FileWriter("config.properties"), "This contains the file locations of our data");
             configFile = Paths.get("config.properties");
 
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
-    /**
-     * Optional alternative to setConfigFile, where you dont have to update moviepath or reviewpath
-     * Can also set other attributes, should the config file need more attributes.
-     * @param newAttr
-     * @param attrName
-     * @throws IOException
-     */
 
     /**
      * SetConfigFile, allows an admin to set the locations of the data files we pull from for both the full list of movies and the path to the stored reviews
+     *
      * @param newMoviePath
      * @param newReviewPath
      * @throws IOException
@@ -55,20 +66,25 @@ public class BootstrapProgram {
 
     /**
      * loadConfig will load the previously created .properties file, populating the moviePath and reviewsPath
+     *
      * @return true if successful, false if writing failed
      */
-    public boolean loadConfig()  {
-       try( FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
-           Properties configInfo = new Properties();
-           configInfo.load(in);
-           moviePath = Path.of(configInfo.getProperty("moviePath"));
-           reviewPath = Path.of(configInfo.getProperty("reviewPath"));
-           return true;
-       }
-       catch (IOException e){
-           return false;
-       }
+    public boolean loadConfig() {
+        if(!loaded) {
+            try (FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
+                Properties configInfo = new Properties();
+                configInfo.load(in);
+                moviePath = Path.of(configInfo.getProperty("moviePath"));
+                reviewPath = Path.of(configInfo.getProperty("reviewPath"));
+                loaded = true;
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return true;
     }
+    
 
     //run this main to see how the Properties stuff works if you'd like to see :)
     public static void main(String []args) throws IOException {
