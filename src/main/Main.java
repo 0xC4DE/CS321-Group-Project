@@ -1,20 +1,13 @@
 package main;
 
-import main.client.Dashboard;
+import views.client.Dashboard;
 
-import main.client.LoginView;
+import views.client.LoginView;
 import main.reviews.ReviewManager;
-import moviedatabase.moviedata.Movie;
 
 import moviedatabase.moviedata.MovieContainer;
 import moviedatabase.userdata.UserAccount;
-import test.TestConstantMovieContainer;
-import test.TestConstantUserAccount;
-import test.TestGSON;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -24,7 +17,7 @@ public class Main {
         Lock lock = new ReentrantLock();
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
-
+        
 
         // creates test login
         UserAccount user = new UserAccount();
@@ -55,7 +48,6 @@ public class Main {
 
         BootstrapProgram bootstrapFiles = new BootstrapProgram();
         ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
-
         Dashboard d = new Dashboard();
 
     }

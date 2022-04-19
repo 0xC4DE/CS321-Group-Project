@@ -1,14 +1,11 @@
-package main.client;
+package views.client;
 
 import moviedatabase.userdata.UserAccount;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.security.spec.ECField;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class LoginView {
     private UserAccount myUser = UserAccount.getInstance();

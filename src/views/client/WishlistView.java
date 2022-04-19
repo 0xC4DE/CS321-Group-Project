@@ -1,18 +1,13 @@
-package main.client;
+package views.client;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 //import moviedatabase.userdata.User;
 import moviedatabase.userdata.UserAccount;
 
-import javax.naming.event.ObjectChangeListener;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 
-import java.awt.Insets;
-import java.awt.Dimension;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

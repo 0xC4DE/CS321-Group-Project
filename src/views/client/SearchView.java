@@ -1,4 +1,4 @@
-package main.client;
+package views.client;
 
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.swing.BoxLayout.Y_AXIS;
 
 // TODO: add search "button"
 // results below bar
@@ -25,9 +27,11 @@ public class SearchView extends JPanel implements ActionListener {
 
     public JPanel SearchBox() {
 
-        JFrame myFrame = new JFrame();
-        myFrame.setLayout(new FlowLayout());
         JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, Y_AXIS));
+
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new FlowLayout());
 
         actor.setBounds(100,50,100,30);
         director.setBounds(100,50,100,30);
@@ -46,17 +50,19 @@ public class SearchView extends JPanel implements ActionListener {
         bg.add(genre);
         bg.add(title);
 
-        panel.add(actor);
-        panel.add(director);
-        panel.add(genre);
-        panel.add(title);
+        searchPanel.add(actor);
+        searchPanel.add(director);
+        searchPanel.add(genre);
+        searchPanel.add(title);
 
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
+        boxPanel.setLayout(new BoxLayout(boxPanel, Y_AXIS));
+        JScrollPane boxScroll = new JScrollPane(boxPanel);
+        boxScroll.setPreferredSize(new Dimension(200, 200));
 
-        boxPanel.setSize(100,30);
-        //boxPanel.setLocale();
-        //setLayout(boxPanel, BoxLayout.Y_AXIS);
+        boxPanel.setSize(100,50);
+
         textField.addActionListener(e -> {
             List<Movie> foundMovies;
             Search searchFor = new Search();
@@ -85,19 +91,17 @@ public class SearchView extends JPanel implements ActionListener {
                 boxPanel.add(buttons.get(j));
 
             }
-            setLayout (new BoxLayout (boxPanel, BoxLayout.X_AXIS));
-            setSize(400,400);
+            setLayout(new BoxLayout (boxPanel, Y_AXIS));
+            setSize(600,400);
             setVisible(true);
             panel.revalidate();
 
         });
-        boxPanel.add(textField);
-        panel.add(boxPanel);
+        searchPanel.add(textField);
+
+        panel.add(searchPanel);
+        panel.add(boxScroll);
         return panel;
-    }
-    private void showMovies(List<Movie> moviesToShow){
-
-
     }
 
     public static void main(String[] args) {
@@ -106,7 +110,6 @@ public class SearchView extends JPanel implements ActionListener {
         SearchView test = new SearchView();
         test.SearchBox();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

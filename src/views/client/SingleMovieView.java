@@ -1,4 +1,4 @@
-package main.client;
+package views.client;
 // Java Program to create a popup and display
 // it on a parent frame
 import main.reviews.ReviewManager;
@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 class SingleMovieView {
     /**

@@ -1,8 +1,8 @@
-package main.client;
-
-import moviedatabase.moviesearch.Search;
+package views.client;
 
 import javax.swing.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class Dashboard {
 
@@ -25,7 +25,13 @@ public class Dashboard {
         tabPanel.add("Wishlists", wishlistPanel.showWishlists());
         tabPanel.add("Profile", profilePanel.showProfile());
         window.add(tabPanel);
-        window.setSize(700,400);
+        window.setSize(tabPanel.getWidth()+100,tabPanel.getHeight()+100);
+        window.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent componentEvent) {
+                tabPanel.setSize(window.getWidth()-100,window.getHeight()-100);
+                tabPanel.repaint();
+            }
+        });
         window.setLayout(null);
         window.setVisible(true);
 
