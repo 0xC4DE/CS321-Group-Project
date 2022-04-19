@@ -25,7 +25,7 @@ public class SearchView extends JPanel implements ActionListener {
     private JRadioButton genre = new JRadioButton("Genre", false);
     private JRadioButton title = new JRadioButton("Title", true);
 
-    public JPanel SearchBox() {
+    public JPanel SearchBox() implements JFrame {
 
         JFrame myFrame = new JFrame();
         myFrame.setLayout(new FlowLayout());
@@ -59,9 +59,8 @@ public class SearchView extends JPanel implements ActionListener {
         JScrollPane boxScroll = new JScrollPane(boxPanel);
         boxScroll.setPreferredSize(new Dimension(200, 200));
 
-        boxPanel.setSize(100,30);
-        //boxPanel.setLocale();
-        //setLayout(boxPanel, BoxLayout.Y_AXIS);
+        boxPanel.setSize(100,50);
+
         textField.addActionListener(e -> {
             List<Movie> foundMovies;
             Search searchFor = new Search();
@@ -91,7 +90,7 @@ public class SearchView extends JPanel implements ActionListener {
 
             }
             setLayout(new BoxLayout (boxPanel, Y_AXIS));
-            setSize(400,400);
+            setSize(600,400);
             setVisible(true);
             panel.revalidate();
 
@@ -100,10 +99,6 @@ public class SearchView extends JPanel implements ActionListener {
         panel.add(boxScroll);
         return panel;
     }
-    private void showMovies(List<Movie> moviesToShow){
-
-
-    }
 
     public static void main(String[] args) {
         MovieContainer cont = MovieContainer.getInstance();
@@ -111,7 +106,6 @@ public class SearchView extends JPanel implements ActionListener {
         SearchView test = new SearchView();
         test.SearchBox();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
