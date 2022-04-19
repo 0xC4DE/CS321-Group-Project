@@ -17,10 +17,9 @@ public class Main {
         Lock lock = new ReentrantLock();
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
+        
 
-        //new TestGSON();
-        //new TestConstantUserAccount();
-
+        // creates test login
         UserAccount user = new UserAccount();
         user.createAccount("user", "user", null);
         user.logoutUser();
@@ -45,6 +44,8 @@ public class Main {
             lock.unlock();
 
         }
+
+
         BootstrapProgram bootstrapFiles = new BootstrapProgram();
         ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
         Dashboard d = new Dashboard();

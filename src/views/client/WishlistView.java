@@ -38,8 +38,11 @@ public class WishlistView extends Frame {
         JFrame myFrame = new JFrame();
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
         JPanel wishlistPanel = new JPanel();
-        //ArrayList<JButton> buttons = new ArrayList<JButton>();
-
+        JButton addList = new JButton("Make a new list");
+        addList.addActionListener(e -> {
+            createList();
+            wishlistPanel.revalidate();
+        });
         // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
         // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
         List<Movie> test = MovieContainer.getInstance().getMovieList();
@@ -76,12 +79,7 @@ public class WishlistView extends Frame {
 
         // the buttons will be placed vertically, when we have a nested list, it should display in columns
         wishlistPanel.setLayout(new BoxLayout (wishlistPanel, BoxLayout.Y_AXIS));
-        //wishlistPanel.setSize(400,400);
         wishlistPanel.setVisible(true);
-        myFrame.add(wishlistPanel);
-        myFrame.setVisible(true);
-        myFrame.setSize(400, 400);
-
         return wishlistPanel;
     }
 
