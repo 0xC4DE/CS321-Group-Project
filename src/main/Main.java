@@ -25,13 +25,8 @@ public class Main {
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
 
-        // TODO: Make GSON actually eat the movie data instead of dying.
-        //System.out.println(cont.getMovieList().get(0).getTitle());
 
-
-        //new TestGSON();
-        //new TestConstantUserAccount();
-
+        // creates test login
         UserAccount user = new UserAccount();
         user.createAccount("user", "user", null);
         user.logoutUser();
@@ -56,6 +51,8 @@ public class Main {
             lock.unlock();
 
         }
+
+
         BootstrapProgram bootstrapFiles = new BootstrapProgram();
         ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
 
