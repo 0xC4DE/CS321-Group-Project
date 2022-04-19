@@ -23,7 +23,7 @@ public class Dashboard {
         // tab text is white when selected on macOS
         tabPanel.add("Search", searchPanel.SearchBox());
         tabPanel.add("Wishlists", wishlistPanel.showWishlists());
-        tabPanel.add("Profile", profilePanel.showProfile());
+        tabPanel.add("Profile", profilePanel.getProfile());
         window.add(tabPanel);
         window.setSize(tabPanel.getWidth()+100,tabPanel.getHeight()+100);
         window.addComponentListener(new ComponentAdapter() {
