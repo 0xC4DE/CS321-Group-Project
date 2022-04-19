@@ -18,7 +18,7 @@ public class LoginView {
      * @param lock
      */
     public void loginLoop(Condition loggedIn, Lock lock){
-
+        myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
         JPanel infoSection = new JPanel(new GridLayout(3,2));
         JTextField username  = new JTextField();
         JTextField password = new JTextField();
