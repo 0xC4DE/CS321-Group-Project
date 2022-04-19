@@ -53,6 +53,8 @@ public class SearchView extends JPanel implements ActionListener {
 
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
+        JScrollPane boxScroll = new JScrollPane(boxPanel);
+        boxScroll.setPreferredSize(new Dimension(200, 200));
 
         boxPanel.setSize(100,30);
         //boxPanel.setLocale();
@@ -85,14 +87,14 @@ public class SearchView extends JPanel implements ActionListener {
                 boxPanel.add(buttons.get(j));
 
             }
-            setLayout (new BoxLayout (boxPanel, BoxLayout.X_AXIS));
+            setLayout(new BoxLayout (boxPanel, BoxLayout.Y_AXIS));
             setSize(400,400);
             setVisible(true);
             panel.revalidate();
 
         });
-        boxPanel.add(textField);
-        panel.add(boxPanel);
+        panel.add(textField);
+        panel.add(boxScroll);
         return panel;
     }
     private void showMovies(List<Movie> moviesToShow){
