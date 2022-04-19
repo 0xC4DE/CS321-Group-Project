@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.swing.BoxLayout.Y_AXIS;
+
 // TODO: add search "button"
 // results below bar
 // remove previous results
@@ -53,6 +55,7 @@ public class SearchView extends JPanel implements ActionListener {
 
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
+        boxPanel.setLayout(new BoxLayout(boxPanel, Y_AXIS));
         JScrollPane boxScroll = new JScrollPane(boxPanel);
         boxScroll.setPreferredSize(new Dimension(200, 200));
 
@@ -87,7 +90,7 @@ public class SearchView extends JPanel implements ActionListener {
                 boxPanel.add(buttons.get(j));
 
             }
-            setLayout(new BoxLayout (boxPanel, BoxLayout.Y_AXIS));
+            setLayout(new BoxLayout (boxPanel, Y_AXIS));
             setSize(400,400);
             setVisible(true);
             panel.revalidate();
