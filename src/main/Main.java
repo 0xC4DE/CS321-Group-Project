@@ -7,6 +7,7 @@ import main.reviews.ReviewManager;
 import moviedatabase.moviedata.Movie;
 
 import moviedatabase.moviedata.MovieContainer;
+import moviedatabase.userdata.UserAccount;
 import test.TestConstantMovieContainer;
 import test.TestConstantUserAccount;
 import test.TestGSON;
@@ -38,6 +39,10 @@ public class Main {
         //Basically, I place a lock on  this main thread, then await for the login to finish to continue with the program
         lock.lock();
 
+
+        UserAccount user = new UserAccount();
+        user.createAccount("user", "user", null);
+        user.logoutUser();
         try {
             test.loginLoop(finished,lock);
             finished.await();

@@ -303,6 +303,9 @@ public class User {
      * @throws FileNotFoundException
      */
     private List<User> getUserFileList(Path userFile) throws IOException {
+        if (userFile == null){
+            userFile = Paths.get(System.getProperty("user.home"), ".users");
+        }
         userFile = getUserFilePath(userFile);
         Reader user_file = new FileReader(String.valueOf(userFile));
         Gson users = new Gson();

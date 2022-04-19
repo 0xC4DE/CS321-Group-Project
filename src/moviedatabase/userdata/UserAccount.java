@@ -121,6 +121,8 @@ public class UserAccount {
      * shouldn't need to do anything robused when it comes to saving data as when it's modified it's already saved
      */
     public void logoutUser() {
-        this.user = new User();
+        if (this.user != null) {
+            this.user = new User();
+        }
     }
 }
