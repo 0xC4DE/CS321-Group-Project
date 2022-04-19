@@ -32,10 +32,11 @@ public class WishlistView extends Frame {
 
 
     /**
-     * Default Constructor, creates a list of buttons matching the wishlists pulled in as well as the popup menu
-     * for wishlist actions
+     * Default Constructor, sets up wishlists from the file loaded wishlists
      */
-
+    public WishlistView(){
+        wishLists = UserAccount.getInstance().getWishlist();
+    }
     public JPanel showWishlists() {
         //setupPopUp();
         // setup panel & frame to display
@@ -206,18 +207,24 @@ public class WishlistView extends Frame {
 
     public void createList() {
     wishLists.add(new ArrayList<Movie>());
+        UserAccount.getInstance().SetList(wishLists);
     }
 
     public void deleteList(int indexToRemove) {
     wishLists.remove(indexToRemove);
+        UserAccount.getInstance().SetList(wishLists);
+
     }
 
     public void addMovietoList(int whichList, Movie movieToAdd) {
         wishLists.get(whichList).add(movieToAdd);
+        UserAccount.getInstance().SetList(wishLists);
     }
 
     public void removeMovieFromList(int whichList, Movie movieToRemove) {
     wishLists.get(whichList).remove(movieToRemove);
+        UserAccount.getInstance().SetList(wishLists);
+
     }
 
 

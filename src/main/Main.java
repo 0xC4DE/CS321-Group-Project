@@ -32,6 +32,10 @@ public class Main {
         //new TestGSON();
         //new TestConstantUserAccount();
 
+        UserAccount user = new UserAccount();
+        user.createAccount("user", "user", null);
+        user.logoutUser();
+
 
         Condition finished= lock.newCondition();
         LoginView test = new LoginView();
@@ -40,9 +44,7 @@ public class Main {
         lock.lock();
 
 
-        UserAccount user = new UserAccount();
-        user.createAccount("user", "user", null);
-        user.logoutUser();
+
         try {
             test.loginLoop(finished,lock);
             finished.await();
