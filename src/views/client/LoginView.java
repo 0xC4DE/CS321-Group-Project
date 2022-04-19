@@ -76,6 +76,9 @@ public class LoginView {
                     lock.unlock();
                 }
             }
+            else {
+                lock.unlock();
+            }
         } );
         guest.addActionListener(e->{
             lock.lock();

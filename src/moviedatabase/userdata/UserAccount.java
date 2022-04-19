@@ -98,7 +98,7 @@ public class UserAccount {
      */
     public void loginAsGuest(){
         this.user = new User();
-        user.guestUser(user);
+        this.user.guestUser(this.user);
     }
 
     public String getUserName(){
