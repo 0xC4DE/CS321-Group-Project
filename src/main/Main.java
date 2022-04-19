@@ -3,6 +3,7 @@ package main;
 import main.client.Dashboard;
 
 import main.client.LoginView;
+import main.reviews.ReviewManager;
 import moviedatabase.moviedata.Movie;
 
 import moviedatabase.moviedata.MovieContainer;
@@ -30,7 +31,8 @@ public class Main {
         //new TestGSON();
         //new TestConstantUserAccount();
 
-      /*  Condition finished= lock.newCondition();
+
+        Condition finished= lock.newCondition();
         LoginView test = new LoginView();
         //locking execution to start the await process
         //Basically, I place a lock on  this main thread, then await for the login to finish to continue with the program
@@ -45,7 +47,10 @@ public class Main {
         }
         finally {
             lock.unlock();
-        }*/
+
+        }
+        BootstrapProgram bootstrapFiles = new BootstrapProgram();
+        ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
 
         Dashboard d = new Dashboard();
 

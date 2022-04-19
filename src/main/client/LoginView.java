@@ -49,10 +49,16 @@ public class LoginView {
                 }
             }
             catch(Exception t){
+                JLabel error = new JLabel("Incorrect");
+                myFrame.add(error);
+                wait(1000);
+                myFrame.remove(error);
 
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         });
 
@@ -74,6 +80,8 @@ public class LoginView {
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         } );
         guest.addActionListener(e->{
@@ -87,6 +95,8 @@ public class LoginView {
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         });
         myFrame.setSize(700,400);
