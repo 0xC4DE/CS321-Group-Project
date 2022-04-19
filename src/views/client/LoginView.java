@@ -40,19 +40,19 @@ public class LoginView {
         //For each of these buttons, they have to be able to lock and unlock the thread, so we need the try catch finally in each, so the can lock, signal, then unlock
         login.addActionListener(e -> {
             lock.lock();
-                if (myUser.login(username.getText(), password.getText(), null)) {
-                    myFrame.remove(error);
-                    loggedIn.signal();
-                    lock.unlock();
-                    myFrame.setVisible(false);
-                    return;
+            if (myUser.login(username.getText(), password.getText(), null)) {
+                myFrame.remove(error);
+                loggedIn.signal();
+                lock.unlock();
+                myFrame.setVisible(false);
+                return;
 
-                }
-                else {
-                    myFrame.add(error);
-                    myFrame.revalidate();
-
-                }
+            }
+            else {
+                myFrame.add(error);
+                myFrame.revalidate();
+                lock.unlock();
+            }
 
         });
 

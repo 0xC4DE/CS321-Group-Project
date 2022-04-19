@@ -197,9 +197,9 @@ public class User {
                 }
             }
 
-            if (user_found == null){
+            if (user_found == null || user_found.getUsername().equals("")) {
                 // User not found, cannot login
-                System.out.println("uesr not found");
+                System.out.println("user not found");
                 return null;
             }
 
