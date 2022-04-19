@@ -62,7 +62,11 @@ public class UserProfile {
         });
 
         newName.addActionListener(e->{
-            user.changeName(newName.getText());
+            try {
+                user.changeName(newName.getText(), null);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             usernameChange.setVisible(false);
         });
 

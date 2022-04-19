@@ -23,6 +23,7 @@ public class User {
     private String Username;
     private String passwordHash;
     private List<ArrayList<Movie>> wishlistsToStore;
+    private boolean isAdmin;
 
     public List<ArrayList<Movie>> getWishlistsToStore() {
         return wishlistsToStore;
@@ -31,8 +32,6 @@ public class User {
     public void setWishlistsToStore(List<ArrayList<Movie>> wishlistsToStore) {
         this.wishlistsToStore = wishlistsToStore;
     }
-
-
 
 
     /**
@@ -48,6 +47,7 @@ public class User {
     public int getUUID() {return uuid;}
     public String getUsername() { return Username; }
     public String getPasswordHash() { return passwordHash; }
+    public Boolean isAdmin() { return isAdmin; }
 
     /**
      * This is the constructor for a proper User ONLY to be used for getUser.
@@ -238,10 +238,23 @@ public class User {
      * If there is any authentication to be done on a username it should be added here, and in createUser
      * @param newName
      */
-    public void setUsername(String newName){
+    public void changeUsername(String newName, Path userFile) throws IOException {
         // Sanitizing the name
         newName = newName.toLowerCase();
-        newName = newName.replace("", " ");
+        newName = newName.replace(" ", "");
+
+        List<User> userList = getUserFileList(getUserFilePath(userFile));
+        for (User u : userList){
+            if (u.getUsername().equals(Username)){
+                System.out.println("succeed");
+                u.setUsername(newName);
+            }
+        }
+        System.out.println("saving");
+        saveUserFile(userList, userFile);
+    }
+
+    public void setUsername(String newName){
         Username = newName;
     }
 
