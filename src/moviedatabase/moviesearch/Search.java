@@ -1,18 +1,15 @@
 package moviedatabase.moviesearch;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
 //TODO:
-// tokenize the genre, actors, etc so we search for each
-// search using "contains" for the multi-value fields
 // change to different search alg
 // ^^^ no <3 ^^^
 // implement fuzzy searching
+// ^^^ i tried, dunno how ^^^
 
 /**
  * This is the class used to search the MovieList by whichever parameter is needed
@@ -78,5 +75,50 @@ public class Search {
             }
         }
         return results;
+    }
+
+    /**
+     * Takes in a list and sorts it by name
+     * @param tempList .
+     * @return .
+     */
+    public List<Movie> sortByName(List<Movie> tempList) {
+        tempList.sort(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.getTitle().compareTo(o1.getTitle());
+            }
+        });
+        return tempList;
+    }
+
+    /**
+     * Takes in a list and sorts it by year
+     * @param tempList .
+     * @return .
+     */
+    public List<Movie> sortByYear(List<Movie> tempList) {
+        tempList.sort(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.getYear().compareTo(o1.getYear());
+            }
+        });
+        return tempList;
+    }
+
+    /**
+     * Takes in a list and sorts it by director
+     * @param tempList .
+     * @return .
+     */
+    public List<Movie> sortByDirector(List<Movie> tempList) {
+        tempList.sort(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o2.getDirector().compareTo(o1.getDirector());
+            }
+        });
+        return tempList;
     }
 }
