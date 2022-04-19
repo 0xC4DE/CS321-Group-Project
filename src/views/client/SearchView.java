@@ -27,9 +27,11 @@ public class SearchView extends JPanel implements ActionListener {
 
     public JPanel SearchBox() {
 
-        JFrame myFrame = new JFrame();
-        myFrame.setLayout(new FlowLayout());
         JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, Y_AXIS));
+
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new FlowLayout());
 
         actor.setBounds(100,50,100,30);
         director.setBounds(100,50,100,30);
@@ -48,10 +50,10 @@ public class SearchView extends JPanel implements ActionListener {
         bg.add(genre);
         bg.add(title);
 
-        panel.add(actor);
-        panel.add(director);
-        panel.add(genre);
-        panel.add(title);
+        searchPanel.add(actor);
+        searchPanel.add(director);
+        searchPanel.add(genre);
+        searchPanel.add(title);
 
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
@@ -95,7 +97,9 @@ public class SearchView extends JPanel implements ActionListener {
             panel.revalidate();
 
         });
-        panel.add(textField);
+        searchPanel.add(textField);
+
+        panel.add(searchPanel);
         panel.add(boxScroll);
         return panel;
     }
