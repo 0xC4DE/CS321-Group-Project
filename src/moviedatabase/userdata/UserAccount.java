@@ -26,6 +26,7 @@ public class UserAccount {
         user = null;
         instance = this;
     }
+    public boolean getIsAdmin(){return user.isAdmin();}
 
     /**
      * Gets the current instance of user, or null

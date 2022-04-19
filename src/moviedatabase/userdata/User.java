@@ -24,6 +24,12 @@ public class User {
     private String passwordHash;
     private List<ArrayList<Movie>> wishlistsToStore;
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    private boolean isAdmin;
+
     public List<ArrayList<Movie>> getWishlistsToStore() {
         return wishlistsToStore;
     }
@@ -43,6 +49,7 @@ public class User {
         uuid = 0;
         Username = null;
         passwordHash = null;
+        isAdmin = false;
     }
 
     public void guestUser(User u) {
@@ -135,6 +142,9 @@ public class User {
     public User createUser(String username, String password, Path userFile){
         // sanitize username entry
         username = username.toLowerCase().replace(" ", "");
+        if(username.equals("admin")){
+            isAdmin = true;
+        }
 
         // read the file and parse data
         try {

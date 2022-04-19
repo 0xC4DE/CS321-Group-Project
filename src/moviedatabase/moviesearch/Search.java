@@ -12,7 +12,7 @@ import moviedatabase.moviedata.MovieContainer;
 // search using "contains" for the multi-value fields
 // change to different search alg
 // ^^^ no <3 ^^^
-// implement fuzzy searching
+// implement fuzzy searching2
 
 /**
  * This is the class used to search the MovieList by whichever parameter is needed

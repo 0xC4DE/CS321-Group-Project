@@ -19,7 +19,12 @@ public class UserProfile {
         JButton logout = new JButton("Logout");
         JButton changeName = new JButton("Change username");
         JButton changePass = new JButton("Change Password");
+        JButton adminPanel = new JButton("Change config locations");
 
+    adminPanel.addActionListener(e -> {
+        ConfigurationView confv = new ConfigurationView();
+        confv.setVisible(true);
+    });
 
         newPass.addActionListener(e->{
             try {
@@ -67,6 +72,9 @@ public class UserProfile {
     profileView.add(logout);
     profileView.add(changeName);
     profileView.add(changePass);
+    if(user.getIsAdmin()){
+        profileView.add(adminPanel);
+    }
     profileView.setSize(100,100);
     return profileView;
     }
