@@ -1,9 +1,8 @@
-package main.client;
+package views.client;
 
 import moviedatabase.userdata.UserAccount;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 
 public class UserProfile {

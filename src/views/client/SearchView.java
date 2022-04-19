@@ -1,4 +1,4 @@
-package main.client;
+package views.client;
 
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
@@ -25,7 +25,7 @@ public class SearchView extends JPanel implements ActionListener {
     private JRadioButton genre = new JRadioButton("Genre", false);
     private JRadioButton title = new JRadioButton("Title", true);
 
-    public JPanel SearchBox() implements JFrame {
+    public JPanel SearchBox() {
 
         JFrame myFrame = new JFrame();
         myFrame.setLayout(new FlowLayout());

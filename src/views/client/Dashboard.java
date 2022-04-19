@@ -1,6 +1,4 @@
-package main.client;
-
-import moviedatabase.moviesearch.Search;
+package views.client;
 
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;

@@ -1,4 +1,4 @@
-package main.client;
+package views.client;
 
 import main.BootstrapProgram;
 
@@ -94,5 +94,3 @@ public class ConfigurationView extends JFrame {
         confv.setVisible(true);
     }
 }
-
-
