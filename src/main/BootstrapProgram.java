@@ -45,7 +45,7 @@ public class BootstrapProgram {
         }
     }
 
-<<<<<<< HEAD
+
     /**
      * SetConfigFile, allows an admin to set the locations of the data files we pull from for both the full list of movies and the path to the stored reviews
      *
@@ -59,7 +59,8 @@ public class BootstrapProgram {
         props.load(in);
         props.setProperty("moviePath", newMoviePath);
         props.setProperty("reviewPath", newReviewPath);
-=======
+    }
+
     public boolean setProperty(String prop, String value) throws IOException {
         if (this.config != null) {
             this.config.setProperty(prop, value);
@@ -68,7 +69,6 @@ public class BootstrapProgram {
         }
         return false;
     }
->>>>>>> origin/adminView
 
     public String getProperty(String prop) {
         if (this.config != null) {
@@ -82,14 +82,15 @@ public class BootstrapProgram {
      *
      * @return true if successful, false if writing failed
      */
-<<<<<<< HEAD
+
     public boolean loadConfig() {
-        if(!loaded) {
+        if(!(loaded) && this.config != null) {
             try (FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
                 Properties configInfo = new Properties();
                 configInfo.load(in);
                 moviePath = Path.of(configInfo.getProperty("moviePath"));
                 reviewPath = Path.of(configInfo.getProperty("reviewPath"));
+                this.config = configInfo;
                 loaded = true;
                 return true;
             } catch (IOException e) {
@@ -98,23 +99,6 @@ public class BootstrapProgram {
         }
         return true;
     }
-    
-=======
-    public boolean loadConfig()  {
-       try( FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
-           Properties configInfo = new Properties();
-           configInfo.load(in);
-           this.moviePath = Path.of(configInfo.getProperty("moviePath"));
-           this.reviewPath = Path.of(configInfo.getProperty("reviewPath"));
-           this.config = configInfo;
-           return true;
-       }
-       catch (IOException e){
-           return false;
-       }
-
-    }
->>>>>>> origin/adminView
 
     //run this main to see how the Properties stuff works if you'd like to see :)
     public static void main(String []args) throws IOException {
