@@ -36,27 +36,24 @@ public class LoginView {
         myFrame.add(infoSection);
         myFrame.add(buttonSection);
         myFrame.setLayout(new GridLayout(4,4));
+        JLabel error = new JLabel("Invalid Username or Password");
         //For each of these buttons, they have to be able to lock and unlock the thread, so we need the try catch finally in each, so the can lock, signal, then unlock
         login.addActionListener(e -> {
             lock.lock();
-            try {
-
                 if (myUser.login(username.getText(), password.getText(), null)) {
+                    myFrame.remove(error);
                     loggedIn.signal();
-                }
-            }
-            catch(Exception t){
-                JLabel error = new JLabel("Incorrect");
-                myFrame.add(error);
-                wait(1000);
-                myFrame.remove(error);
+                    lock.unlock();
+                    myFrame.setVisible(false);
+                    return;
 
-            }
-            finally {
-                lock.unlock();
-                myFrame.setVisible(false);
-                return;
-            }
+                }
+                else {
+                    myFrame.add(error);
+                    myFrame.revalidate();
+
+                }
+
         });
 
         create.addActionListener(e ->{
@@ -66,10 +63,10 @@ public class LoginView {
                     loggedIn.signal();
                 }
                 else{
-                    JLabel error = new JLabel("User already Exists");
-                    myFrame.add(error);
+                    JLabel error2 = new JLabel("User already Exists");
+                    myFrame.add(error2);
                     wait(1000);
-                    myFrame.remove(error);
+                    myFrame.remove(error2);
                 }
             }
             catch(Exception t){

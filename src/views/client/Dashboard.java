@@ -18,7 +18,7 @@ public class Dashboard {
         UserProfile profilePanel = new UserProfile();
 
         JTabbedPane tabPanel = new JTabbedPane();
-        tabPanel.setBounds(50,30,600,300);
+        tabPanel.setBounds(50,30,600,500);
 
         // tab text is white when selected on macOS
         tabPanel.add("Search", searchPanel.SearchBox());

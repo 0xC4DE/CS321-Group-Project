@@ -40,9 +40,15 @@ public class User {
      * (Check for uuid==-1 to prevent reviews for guests)
      */
     public User() {
-        uuid = -1;
-        Username = "guest";
-        passwordHash = "";
+        uuid = 0;
+        Username = null;
+        passwordHash = null;
+    }
+
+    public void guestUser(User u) {
+        u.uuid = -1;
+        u.Username = "guest";
+        u.passwordHash = "";
     }
 
     public int getUUID() {return uuid;}
