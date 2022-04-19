@@ -97,7 +97,6 @@ public class UserAccount {
      * Logs in as guest.
      */
     public void loginAsGuest(){
-
         this.user = new User();
         user.guestUser(user);
     }
