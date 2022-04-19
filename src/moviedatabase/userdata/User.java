@@ -43,6 +43,7 @@ public class User {
         uuid = 0;
         Username = null;
         passwordHash = null;
+
     }
 
     public void guestUser(User u) {

@@ -9,12 +9,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TODO:
 //  add submenus for the add and swap options
 //  generate default reviews list
-//  should singleMovieView have add to wishlist option? with dropdown to select which list to add to during searches
+//  sort wishlists with comparable
 
 
 public class WishlistView extends Frame {
@@ -29,9 +31,19 @@ public class WishlistView extends Frame {
     /**
      * Default Constructor, sets up wishlists from the file loaded wishlists
      */
-    public WishlistView(){
+    public WishlistView() {
         wishLists = UserAccount.getInstance().getWishlist();
     }
+
+    public void setReviewWishList(Map<String, String> reviewTable) { //id, review
+        if(wishLists.size() == 0) {
+            createList();
+        }
+
+
+
+    }
+
     public JPanel showWishlists() {
         //setupPopUp();
         // setup panel & frame to display
@@ -125,6 +137,7 @@ public class WishlistView extends Frame {
      * @param wishlistIndex ???
      * @param movieObj ???
      */
+
     public void handleMouse(JButton button, int wishlistIndex, Movie movieObj) {
         // handle the button click event
         button.addMouseListener(new MouseAdapter() {
