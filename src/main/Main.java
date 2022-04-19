@@ -54,7 +54,6 @@ public class Main {
         }
         BootstrapProgram bootstrapFiles = new BootstrapProgram();
         ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
-
         Dashboard d = new Dashboard();
 
     }

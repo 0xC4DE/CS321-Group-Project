@@ -1,6 +1,4 @@
 package main;
-import moviedatabase.moviedata.Movie;
-import moviedatabase.moviedata.MovieContainer;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -12,6 +10,7 @@ import java.util.Properties;
  * An admin user can edit this, and change where our data is pointed too
  */
 public class BootstrapProgram {
+    private Properties config;
     private Path moviePath;
     private Path configFile;
 
@@ -46,6 +45,7 @@ public class BootstrapProgram {
         }
     }
 
+<<<<<<< HEAD
     /**
      * SetConfigFile, allows an admin to set the locations of the data files we pull from for both the full list of movies and the path to the stored reviews
      *
@@ -59,9 +59,22 @@ public class BootstrapProgram {
         props.load(in);
         props.setProperty("moviePath", newMoviePath);
         props.setProperty("reviewPath", newReviewPath);
+=======
+    public boolean setProperty(String prop, String value) throws IOException {
+        if (this.config != null) {
+            this.config.setProperty(prop, value);
+            this.config.store(new FileWriter("config.properties"), "This contains the file locations of our data");
+            return true;
+        }
+        return false;
+    }
+>>>>>>> origin/adminView
 
-        // need to store changed props
-        props.store(new FileOutputStream("configFile"), null);
+    public String getProperty(String prop) {
+        if (this.config != null) {
+            return this.config.getProperty(prop);
+        }
+        return null;
     }
 
     /**
@@ -69,6 +82,7 @@ public class BootstrapProgram {
      *
      * @return true if successful, false if writing failed
      */
+<<<<<<< HEAD
     public boolean loadConfig() {
         if(!loaded) {
             try (FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
@@ -85,6 +99,22 @@ public class BootstrapProgram {
         return true;
     }
     
+=======
+    public boolean loadConfig()  {
+       try( FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
+           Properties configInfo = new Properties();
+           configInfo.load(in);
+           this.moviePath = Path.of(configInfo.getProperty("moviePath"));
+           this.reviewPath = Path.of(configInfo.getProperty("reviewPath"));
+           this.config = configInfo;
+           return true;
+       }
+       catch (IOException e){
+           return false;
+       }
+
+    }
+>>>>>>> origin/adminView
 
     //run this main to see how the Properties stuff works if you'd like to see :)
     public static void main(String []args) throws IOException {
