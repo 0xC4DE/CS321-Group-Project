@@ -19,6 +19,7 @@ public class ReviewManager {
 
     private static Map reviewTable;
     private static BootstrapProgram bootLocations;
+
     public ReviewManager(BootstrapProgram dataLocals){
        bootLocations = dataLocals;
        bootLocations.loadConfig();
@@ -32,6 +33,7 @@ public class ReviewManager {
             wishlistView.setReviewWishList(reviewTable);
         }
     }
+
     public ReviewManager(){
         if(bootLocations == null){
              new ReviewManager(new BootstrapProgram());

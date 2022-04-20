@@ -10,9 +10,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
 //TODO:
 // look into star wars acting bizzare with multiple monitors
+
+/**
+ * This is the popup view for a single movie
+ */
 class SingleMovieView {
+
     /**
      * Creates a popup with the selected movies info, with the option to add the movie to a wishlist,
      * which is entered as a number in a text box

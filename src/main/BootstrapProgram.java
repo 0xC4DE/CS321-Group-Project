@@ -14,10 +14,6 @@ public class BootstrapProgram {
     private Path moviePath;
     private Path configFile;
 
-    public Path getMoviePath() {
-        return moviePath;
-    }
-
     public Path getReviewPath() {
         return reviewPath;
     }
@@ -61,6 +57,13 @@ public class BootstrapProgram {
         props.setProperty("reviewPath", newReviewPath);
     }
 
+    /**
+     * Given a property and a value, set that property on teh global config.
+     * @param prop
+     * @param value
+     * @return
+     * @throws IOException
+     */
     public boolean setProperty(String prop, String value) throws IOException {
         if (this.config != null) {
             this.config.setProperty(prop, value);
@@ -70,6 +73,11 @@ public class BootstrapProgram {
         return false;
     }
 
+    /**
+     * get property of global config by name
+     * @param prop
+     * @return
+     */
     public String getProperty(String prop) {
         if (this.config != null) {
             return this.config.getProperty(prop);
@@ -82,7 +90,6 @@ public class BootstrapProgram {
      *
      * @return true if successful, false if writing failed
      */
-
     public boolean loadConfig() {
         if(!(loaded) && configFile != null) {
             try (FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
@@ -100,7 +107,11 @@ public class BootstrapProgram {
         return true;
     }
 
-    //run this main to see how the Properties stuff works if you'd like to see :)
+    /**
+     * Debug main for Bootstrap program to test config.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String []args) throws IOException {
         BootstrapProgram test = new BootstrapProgram();
         test.loadConfig();

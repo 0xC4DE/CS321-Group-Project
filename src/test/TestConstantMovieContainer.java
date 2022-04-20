@@ -2,6 +2,9 @@ package test;
 
 import moviedatabase.moviedata.MovieContainer;
 
+/**
+ * This tests that MovieContainer is always the same
+ */
 public class TestConstantMovieContainer extends Tester {
     public Boolean testSuccess;
 

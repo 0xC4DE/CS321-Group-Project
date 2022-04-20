@@ -12,6 +12,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * The main main of the program. This coordinates the views and dashboard, as well as the event loop
+ */
 public class Main {
     public static void main(String []args) throws Exception {
         Lock lock = new ReentrantLock();
@@ -19,7 +22,7 @@ public class Main {
         cont.collectMovies(null);
         
 
-        // creates test login
+        // Creates testing logins
         UserAccount user = new UserAccount();
         user.createAccount("user", "user", null);
         user.logoutUser();
@@ -30,12 +33,10 @@ public class Main {
 
         Condition finished= lock.newCondition();
         LoginView test = new LoginView();
+
         //locking execution to start the await process
         //Basically, I place a lock on  this main thread, then await for the login to finish to continue with the program
         lock.lock();
-
-
-
         try {
             test.loginLoop(finished,lock);
             finished.await();
@@ -48,10 +49,9 @@ public class Main {
 
         }
 
-
         BootstrapProgram bootstrapFiles = new BootstrapProgram();
-        ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
-        Dashboard d = new Dashboard();
+        new ReviewManager(bootstrapFiles);
+        new Dashboard();
 
     }
 }

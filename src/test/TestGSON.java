@@ -1,20 +1,16 @@
 package test;
 
 import com.google.gson.Gson;
+import views.client.UserProfile;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-class UserProfile {
-    String name;
-
-    public UserProfile(String jason) {
-        name = jason;
-    }
-}
-
+/**
+ * this was me testing for how GSON saves data. I think this doesnt work now.
+ */
 public class TestGSON extends Tester {
 
     public TestGSON() throws Exception {

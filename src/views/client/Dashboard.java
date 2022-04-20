@@ -7,7 +7,7 @@ import java.awt.event.ComponentEvent;
 public class Dashboard {
 
     /**
-     *Creates the dashboard
+     *Creates the dashboard, that is orchestrated throughout the program
      */
     public Dashboard() {
         JFrame window = new JFrame("Dashboard");
@@ -26,6 +26,8 @@ public class Dashboard {
         tabPanel.add("Profile", profilePanel.getProfile());
         window.add(tabPanel);
         window.setSize(tabPanel.getWidth()+100,tabPanel.getHeight()+100);
+
+        // Dynamic resizing
         window.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent componentEvent) {
                 tabPanel.setSize(window.getWidth()-100,window.getHeight()-100);

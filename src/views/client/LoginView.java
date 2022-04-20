@@ -7,6 +7,9 @@ import java.awt.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * This is the view used for login, I'll let the other comment explain the lock.
+ */
 public class LoginView {
     private UserAccount myUser = UserAccount.getInstance();
     private JFrame myFrame = new JFrame("Login");

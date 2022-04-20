@@ -4,6 +4,9 @@ import moviedatabase.userdata.UserAccount;
 
 import java.nio.file.Paths;
 
+/**
+ * This tests that the logged in user stays logged in.
+ */
 public class TestConstantUserAccount extends Tester {
     public Boolean testSuccess;
 

@@ -12,7 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * This is the singleton class that orchestrates our movie list as well as the GSON instance (incase it is needed twice)
+ */
 public class MovieContainer {
     private List<Movie> movieList;
     private Movie[] tempMovie;
@@ -35,6 +37,10 @@ public class MovieContainer {
         return instance;
     }
 
+    /**
+     * Add a review to a movie by IMDBID
+     * @param reviewMap
+     */
     public void addReviews(Map<String,String> reviewMap){
         for(Movie thisMovie : movieList){
             if(reviewMap.get(thisMovie.getImdbID())!=null){
@@ -43,8 +49,10 @@ public class MovieContainer {
         }
     }
 
-    /*
-    MovieCollection contains a collection of movies in a list (possible later a vector list)
+    /**
+     * MovieCollection contains a collection of movies in a list (possible later a vector list)
+     * @param filepath
+     * @return boolean, whether or not movies were loaded
      */
     public boolean collectMovies(Path filepath) {
         if (filepath == null) {

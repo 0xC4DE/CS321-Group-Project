@@ -1,7 +1,7 @@
 package moviedatabase.moviedata;
 
 /*
-Here's the schema.
+Here's the schema for a movie, this determines what our Movie class looks like.
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
@@ -130,7 +130,7 @@ Here's the schema.
  */
 
 /**
- * please don't make me do javadocs for all this, just read the function name
+ * Very simple attributes, with getters and setters
  */
 public class Movie {
     private String Title;
@@ -172,9 +172,6 @@ public class Movie {
     public void setUserReview(String userReview) {
         this.userReview = userReview;
     }
-
-
-
 
     public String getTitle() {
         return Title;

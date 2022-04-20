@@ -49,6 +49,13 @@ public class UserAccount {
         user.changeUsername(newName, null);
         return true;
     }
+
+    /**
+     * Self explanatory, sets a new password given old and new
+     * @param oldPass
+     * @param newPass
+     * @throws Exception
+     */
     public void changePassword(String oldPass, String newPass) throws Exception {
         user.setPassword(oldPass,newPass);
     }

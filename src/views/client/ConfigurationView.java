@@ -7,6 +7,9 @@ import java.awt.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * This is the view for configuring data.
+ */
 public class ConfigurationView extends JFrame {
 
     private JTextField reviewFile;
@@ -15,6 +18,9 @@ public class ConfigurationView extends JFrame {
     private JTextField movieFile;
     private JButton movieButton;
 
+    /**
+     * The constructor for ConfigurationView, this creates all the components we need.
+     */
     public ConfigurationView() {
         BootstrapProgram p = new BootstrapProgram();
         p.loadConfig();

@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 
+/**
+ * The profile for the user, complete with a ton of maybe unnecessary JPanels for the sake of orientation
+ */
 public class UserProfile {
     private JPanel userProfile = new JPanel();
 

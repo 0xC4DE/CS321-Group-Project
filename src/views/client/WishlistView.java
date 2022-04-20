@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * this is the view for a users' wishlists
+ */
 public class WishlistView extends Frame {
     private static List<ArrayList<Movie>> wishLists;
     private ArrayList<JButton> buttons = new ArrayList<>();
@@ -22,9 +24,8 @@ public class WishlistView extends Frame {
     private static JMenu submenu_add = new JMenu("Add");
     private static JMenuItem pRemove = new JMenuItem("Remove");
     private static JMenu submenu_swap = new JMenu("Swap");
-    private String listFn = "none";
     private static JPanel wishlistPanel = new JPanel();
-    //private ActionListener menuListener;
+
 
     /**
      * Default Constructor, sets up wishlists from the file loaded wishlists
