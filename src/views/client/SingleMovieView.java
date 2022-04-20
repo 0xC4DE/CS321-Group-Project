@@ -44,6 +44,7 @@ class SingleMovieView {
         JLabel language = new JLabel("Language: "+movieToShow.getLanguage());
         JLabel similar = new JLabel("Similar Movies: "+findSimilar(movieToShow));
         JLabel runtime = new JLabel("Runtime: "+movieToShow.getRuntime());
+        JLabel recordedReview;
 
         //adding that info into the panel
         options.add(title);
@@ -54,6 +55,10 @@ class SingleMovieView {
         options.add(language);
         options.add(runtime);
         options.add(similar);
+        if(movieToShow.getUserReview()!=null){
+            recordedReview = new JLabel("Review: "+movieToShow.getUserReview());
+            options.add(recordedReview);
+        }
 
         reviewAdd.addActionListener(e -> {
             JOptionPane.showOptionDialog(null,reviewBox,"Write a review",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
@@ -62,6 +67,7 @@ class SingleMovieView {
         review.addActionListener(e->{
             ReviewManager allReviews = new ReviewManager();
             allReviews.addToTable(movieToShow.getImdbID(),review.getText());
+            movieToShow.setUserReview(review.getText());
 
         });
 

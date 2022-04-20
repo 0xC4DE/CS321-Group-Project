@@ -26,5 +26,5 @@ out/
 *.*~
 
 .DS_Store
-config.properties
+*config.properties*
 .testdata

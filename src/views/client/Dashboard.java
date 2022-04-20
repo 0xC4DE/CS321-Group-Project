@@ -1,8 +1,13 @@
 package views.client;
 
+import moviedatabase.userdata.UserAccount;
+
 import javax.swing.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class Dashboard {
 
@@ -11,7 +16,20 @@ public class Dashboard {
      */
     public Dashboard() {
         JFrame window = new JFrame("Dashboard");
-        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
+
+        //sets up listener to both close the program and save all the changes made when the X is pressed
+        window.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    UserAccount.getInstance().logOut();
+                } catch (IOException ex) {
+                    System.out.println("logout failed");
+                }
+                finally{
+                    System.exit(0);
+                }
+            }
+        });
 
         SearchView searchPanel = new SearchView();
         WishlistView wishlistPanel = new WishlistView();

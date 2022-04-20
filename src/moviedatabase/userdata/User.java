@@ -2,6 +2,7 @@ package moviedatabase.userdata;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import main.reviews.ReviewManager;
 import moviedatabase.moviedata.Movie;
 
 import java.io.*;
@@ -312,6 +313,8 @@ public class User {
 
     public void logout() throws IOException {
         saveUserFile(getUserFileList(null),null);
+        ReviewManager saveReviews = new ReviewManager();
+        saveReviews.saveReviews();
 
     }
 
