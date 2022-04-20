@@ -13,7 +13,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * The main main of the program. This coordinates the views and dashboard, as well as the event loop
+ * The main of the program. This coordinates the views and dashboard, as well as the event loop
  */
 public class Main {
     public static void main(String []args) throws Exception {
