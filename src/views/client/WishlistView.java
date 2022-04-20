@@ -2,6 +2,7 @@ package views.client;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 //import moviedatabase.userdata.User;
+import moviedatabase.moviesearch.Search;
 import moviedatabase.userdata.UserAccount;
 
 import javax.swing.*;
@@ -39,7 +40,11 @@ public class WishlistView extends Frame {
         if(wishLists.size() == 0) {
             createList();
         }
-
+        Search search_movies = new Search();
+        wishLists.get(0).clear(); // make sure empty
+        for(Map.Entry<String,String> movie_id : reviewTable.entrySet()) {
+            addMovietoList(0, search_movies.searchByID(movie_id.getKey()));
+        }
 
 
     }
@@ -55,26 +60,26 @@ public class WishlistView extends Frame {
             createList();
             wishlistPanel.revalidate();
         });
-        // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
-        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
-        List<Movie> test = MovieContainer.getInstance().getMovieList();
-        List<ArrayList<Movie>> theList = new ArrayList<>();
-        //sets up our test wishlists, 3 lists of 4 movies
-        for(int i = 0; i < 3; i++){
-            theList.add(new ArrayList<>());
-            for(int j = 0; j < 4; j++) {
-                theList.get(i).add(test.get(i+j));
-            }
-        }
+//        // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
+//        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
+//        List<Movie> test = MovieContainer.getInstance().getMovieList();
+//        List<ArrayList<Movie>> theList = new ArrayList<>();
+//        //sets up our test wishlists, 3 lists of 4 movies
+//        for(int i = 0; i < 3; i++){
+//            theList.add(new ArrayList<>());
+//            for(int j = 0; j < 4; j++) {
+//                theList.get(i).add(test.get(i+j));
+//            }
+//        }
 
 
         // Setup buttons for movies in wishlist
-        for(int i = 0; i < theList.size(); i++){
+        for(int i = 0; i < wishLists.size(); i++){
             JPanel listPanel = new JPanel();
             listPanel.add(new JLabel("Wishlist #" + i));
 
-            for(int j=0;j<theList.get(i).size();j++){
-                Movie testMovie = theList.get(i).get(j);
+            for(int j=0;j<wishLists.get(i).size();j++){
+                Movie testMovie = wishLists.get(i).get(j);
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(e->
                 {

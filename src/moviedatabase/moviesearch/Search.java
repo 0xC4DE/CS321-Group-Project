@@ -80,13 +80,12 @@ public class Search {
         return results;
     }
 
-    public List<Movie> searchByID(String ID) {
-        List<Movie> results = new ArrayList<>();
+    public Movie searchByID(String ID) {
         for (Movie movie : movieList) {
             if (movie.getImdbID().contains(ID)) {
-                results.add(movie);
+                return movie;
             }
         }
-        return results;
+        return null;
     }
 }
