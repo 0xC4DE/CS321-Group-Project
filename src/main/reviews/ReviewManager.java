@@ -15,14 +15,12 @@ public class ReviewManager {
     public Map getReviewTable() {
         return reviewTable;
     }
-    public Path reviewPath;
 
     private static Map reviewTable;
     private static BootstrapProgram bootLocations;
     public ReviewManager(BootstrapProgram dataLocals){
        bootLocations = dataLocals;
        bootLocations.loadConfig();
-        reviewPath = bootLocations.getReviewPath();
         try {
             loadReviews();
         } catch (FileNotFoundException e) {
@@ -41,7 +39,7 @@ public class ReviewManager {
         reviewTable.put(id,review);
     }
     public void saveReviews() throws IOException {
-        FileWriter reviewWriter = new FileWriter(String.valueOf(reviewPath));
+        FileWriter reviewWriter = new FileWriter(String.valueOf(bootLocations.getReviewPath()));
         Gson reviewJson = new Gson();
         reviewJson.toJson(reviewTable,reviewWriter);
         reviewWriter.flush();
@@ -49,7 +47,7 @@ public class ReviewManager {
     }
     private void loadReviews() throws FileNotFoundException {
         Gson reviewJson = new Gson();
-        Reader reviewReader = new FileReader(String.valueOf(reviewPath));
+        Reader reviewReader = new FileReader(String.valueOf(bootLocations.getReviewPath()));
         reviewTable = reviewJson.fromJson(reviewReader, Map.class);
         if(reviewTable == null){
             reviewTable = new Hashtable<String,String>();
