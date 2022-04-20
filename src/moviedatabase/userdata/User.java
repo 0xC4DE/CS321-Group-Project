@@ -29,7 +29,6 @@ public class User {
         return isAdmin;
     }
 
-    private boolean isAdmin;
 
     public List<ArrayList<Movie>> getWishlistsToStore() {
         return wishlistsToStore;
@@ -60,7 +59,6 @@ public class User {
     public int getUUID() {return uuid;}
     public String getUsername() { return Username; }
     public String getPasswordHash() { return passwordHash; }
-    public Boolean isAdmin() { return isAdmin; }
 
     /**
      * This is the constructor for a proper User ONLY to be used for getUser.
@@ -158,12 +156,8 @@ public class User {
             for (User user : userList){
                 if (Objects.equals(user.getUsername(), username)) {
                     user_found = true;
-                    break;
+                    return user; // when found, return the user
                 }
-            }
-            if (user_found) {
-                // User already exists
-                return null;
             }
 
             // Save user to file
