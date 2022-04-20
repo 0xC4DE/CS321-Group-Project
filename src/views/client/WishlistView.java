@@ -28,6 +28,7 @@ public class WishlistView extends Frame {
     static JMenuItem pRemove = new JMenuItem("Remove");
     static JMenu submenu_swap = new JMenu("Swap");
     private String listFn = "none";
+    JPanel wishlistPanel = new JPanel();
     //private ActionListener menuListener;
 
     /**
@@ -47,50 +48,16 @@ public class WishlistView extends Frame {
                 wishLists.get(i).add(test.get(i+j));
             }
         }
-    }
 
-    public void setReviewWishList(Map<String, String> reviewTable) { //id, review
-        if(wishLists.size() == 0) {
-            createList();
-        }
-        Search search_movies = new Search();
-        wishLists.get(0).clear(); // make sure empty
-        for(Map.Entry<String,String> movie_id : reviewTable.entrySet()) {
-            addMovietoList(0, search_movies.searchByID(movie_id.getKey()));
-        }
-
-
-    }
-
-    public JPanel showWishlists() {
         //setupPopUp();
         // setup panel & frame to display
         JFrame myFrame = new JFrame();
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
-        JPanel wishlistPanel = new JPanel();
-        JButton addList = new JButton("Make a new list");
-        addList.addActionListener(e -> {
-            createList();
-            wishlistPanel.revalidate();
-        });
-//        // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
-//        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
-//        List<Movie> test = MovieContainer.getInstance().getMovieList();
-//        List<ArrayList<Movie>> theList = new ArrayList<>();
-//        //sets up our test wishlists, 3 lists of 4 movies
-//        for(int i = 0; i < 3; i++){
-//            theList.add(new ArrayList<>());
-//            for(int j = 0; j < 4; j++) {
-//                theList.get(i).add(test.get(i+j));
-//            }
-//        }
 
-
-        JLabel err = new JLabel("No Wishlists");
         if(wishLists.isEmpty()) {
-            wishlistPanel.add(err);
+            wishlistPanel.add(new JLabel("No Wishlists"));
         } else {
-            wishlistPanel.remove(err);
+            wishlistPanel.removeAll();
 
             // Setup buttons for movies in wishlist
             for (int i = 0; i < wishLists.size(); i++) {
@@ -113,7 +80,82 @@ public class WishlistView extends Frame {
                 wishlistPanel.add(listPanel);
             }
         }
+        JButton createListButton = new JButton("Create New Wishlist");
+        createListButton.addActionListener(e->
+        {
+            createList();
+        });
+        wishlistPanel.add(createListButton);
+        // the buttons will be placed vertically, when we have a nested list, it should display in columns
+        wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
+        wishlistPanel.setVisible(true);
+    }
 
+    public void setReviewWishList(Map<String, String> reviewTable) { //id, review
+        if(wishLists.size() == 0) {
+            createList();
+        }
+        Search search_movies = new Search();
+        wishLists.get(0).clear(); // make sure empty
+        for(Map.Entry<String,String> movie_id : reviewTable.entrySet()) {
+            addMovietoList(0, search_movies.searchByID(movie_id.getKey()));
+        }
+
+
+    }
+
+    public JPanel showWishlists() {
+        //setupPopUp();
+        // setup panel & frame to display
+        JFrame myFrame = new JFrame();
+        myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
+
+//        // TESTING - Setup Sample Wishlists (this will be the wishlist the user is interacting with)
+//        // List<ArrayList<Movie>> test = UserAccount.getInstance().getWishlist();
+//        List<Movie> test = MovieContainer.getInstance().getMovieList();
+//        List<ArrayList<Movie>> theList = new ArrayList<>();
+//        //sets up our test wishlists, 3 lists of 4 movies
+//        for(int i = 0; i < 3; i++){
+//            theList.add(new ArrayList<>());
+//            for(int j = 0; j < 4; j++) {
+//                theList.get(i).add(test.get(i+j));
+//            }
+//        }
+
+
+        if(wishLists.isEmpty()) {
+            wishlistPanel.add(new JLabel("No Wishlists"));
+        } else {
+            wishlistPanel.removeAll();
+            buttons.clear();
+
+            // Setup buttons for movies in wishlist
+            for (int i = 0; i < wishLists.size(); i++) {
+                JPanel listPanel = new JPanel();
+                listPanel.add(new JLabel("Wishlist #" + i));
+
+                for (int j = 0; j < wishLists.get(i).size(); j++) {
+                    Movie testMovie = wishLists.get(i).get(j);
+                    buttons.add(j, new JButton(testMovie.getTitle()));
+                    buttons.get(j).addActionListener(e ->
+                    {
+                        SingleMovieView movieShow = new SingleMovieView();
+                        movieShow.show(testMovie);
+                    });
+
+                    listPanel.add(buttons.get(j));
+                    handleMouse(buttons.get(j), i, testMovie);
+                }
+                setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+                wishlistPanel.add(listPanel);
+            }
+        }
+        JButton createListButton = new JButton("Create New Wishlist");
+        createListButton.addActionListener(e->
+        {
+            createList();
+        });
+        wishlistPanel.add(createListButton);
         // the buttons will be placed vertically, when we have a nested list, it should display in columns
         wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
         wishlistPanel.setVisible(true);
@@ -209,6 +251,7 @@ public class WishlistView extends Frame {
                                     System.out.println("Swapping movie " + movieObj.getTitle() + " to list");
                                 }
                             }
+
                         }};
 
                     submenu_add.addActionListener(menuListener);
@@ -237,17 +280,19 @@ public class WishlistView extends Frame {
         //removing movie from previous list
         wishLists.get(oldList).remove(oldListIndex);
         wishLists.get(newList).add(movieToMove);
-        //adds a new button that corresponds to the moved movie
-        buttons.add(new JButton(movieToMove.getTitle()));
-        //adds the action that clicking will bring up a single movie view of the movie
-        buttons.get(buttons.size()-1).addActionListener(e->{
-            SingleMovieView hey = new SingleMovieView();
-            hey.show(movieToMove);
-        });
-        //This should basically remake the whole view with the changed movie
-        setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
-        setSize(400,400);
-        setVisible(true);
+//        //adds a new button that corresponds to the moved movie
+//        buttons.add(new JButton(movieToMove.getTitle()));
+//        //adds the action that clicking will bring up a single movie view of the movie
+//        buttons.get(buttons.size()-1).addActionListener(e->{
+//            SingleMovieView hey = new SingleMovieView();
+//            hey.show(movieToMove);
+//        });
+//        //This should basically remake the whole view with the changed movie
+//        setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
+//        setSize(400,400);
+//        wishlistPanel.revalidate();
+//        setVisible(true);
+        showWishlists();
     }
 
     public void createList() {
@@ -256,23 +301,25 @@ public class WishlistView extends Frame {
         }
         wishLists.add(new ArrayList<Movie>());
         UserAccount.getInstance().SetList(wishLists);
+        showWishlists();
     }
 
     public void deleteList(int indexToRemove) {
         wishLists.remove(indexToRemove);
         UserAccount.getInstance().SetList(wishLists);
-
+        showWishlists();
     }
 
     public void addMovietoList(int whichList, Movie movieToAdd) {
         wishLists.get(whichList).add(movieToAdd);
         UserAccount.getInstance().SetList(wishLists);
+        showWishlists();
     }
 
     public void removeMovieFromList(int whichList, Movie movieToRemove) {
         wishLists.get(whichList).remove(movieToRemove);
         UserAccount.getInstance().SetList(wishLists);
-
+        showWishlists();
     }
 
 
