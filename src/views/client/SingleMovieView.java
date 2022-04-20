@@ -78,6 +78,7 @@ class SingleMovieView {
 
                   addCall.addMovietoList((list),movieToShow);
                   System.out.println("Added to wishlist "+list);
+                  addCall.showWishlists();
               }
             });
             JLabel hint = new JLabel("Enter which list to add to, numbers 1 to "+(ourList.size()-1));

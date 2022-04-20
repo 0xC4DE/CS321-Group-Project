@@ -156,6 +156,14 @@ public class WishlistView extends Frame {
             createList();
         });
         wishlistPanel.add(createListButton);
+
+//        JButton deleteListButton = new JButton("Delete Wishlist");
+          // add message box to choose which list to delete
+//        deleteListButton.addActionListener(e->
+//        {
+//            deleteList();
+//        });
+//        wishlistPanel.add(deleteListButton);
         // the buttons will be placed vertically, when we have a nested list, it should display in columns
         wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
         wishlistPanel.setVisible(true);
@@ -200,9 +208,12 @@ public class WishlistView extends Frame {
                 }
             }};
 
-        submenu_add.addActionListener(menuListener);
+
         pRemove.addActionListener(menuListener);
-        submenu_swap.addActionListener(menuListener);
+        for(int i = 1; i < wishLists.size(); i++) {
+            submenu_add.getItem(i).addActionListener(menuListener);
+            submenu_swap.getItem(i).addActionListener(menuListener);
+        }
         // end popup menu setup
     }
 
@@ -225,12 +236,6 @@ public class WishlistView extends Frame {
                     popup.add(submenu_add); popup.add(pRemove); popup.add(submenu_swap);
                     submenu_add.removeAll();submenu_swap.removeAll();
 
-                    for(int i = 1; i < wishLists.size(); i++) {
-                        submenu_add.add(String.valueOf(i));
-                        submenu_swap.add(String.valueOf(i));
-                    }
-
-                    popup.add(submenu_add); popup.add(submenu_swap);
 
                     // handle the popup menu options
                     ActionListener menuListener = new ActionListener() {
@@ -241,22 +246,48 @@ public class WishlistView extends Frame {
                                 case "Add" -> {
                                     addMovietoList(wishlistIndex, movieObj); // uncomment when wishlist is used
                                     System.out.println("Adding movie " + movieObj.getTitle() + " to list");
+                                    break;
                                 }
                                 case "Remove" -> {
-                                    //removeMovieFromList(wishlistIndex, movieObj);
+                                    removeMovieFromList(wishlistIndex, movieObj);
                                     System.out.println("Removing " + movieObj.getTitle() + " from list");
+                                    break;
                                 }
                                 case "Swap" -> {
                                     //swapMovieList(wishlistIndex, movieObj);
                                     System.out.println("Swapping movie " + movieObj.getTitle() + " to list");
+                                    break;
                                 }
+
+
                             }
 
                         }};
 
-                    submenu_add.addActionListener(menuListener);
                     pRemove.addActionListener(menuListener);
+                    for(int i = 1; i < wishLists.size(); i++) {
+                        JMenuItem n = new JMenuItem(String.valueOf(i));
+                        JMenuItem m = new JMenuItem(String.valueOf(i));
+                        submenu_add.add(n);
+                        submenu_swap.add(m);
+                        n.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                addMovietoList(Integer.parseInt(e.getActionCommand()), movieObj); // uncomment when wishlist is used
+                                System.out.println("Adding movie " + movieObj.getTitle() + " to list");
+                            }
+                        });
+                        m.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                swapMovieList(movieObj, Integer.parseInt(e.getActionCommand()), wishlistIndex);
+                                System.out.println("Swapping movie " + movieObj.getTitle() + " to list");
+                            }
+                        });
+                    }
                     submenu_swap.addActionListener(menuListener);
+                    submenu_add.addActionListener(menuListener);
+                    popup.add(submenu_add); popup.add(submenu_swap);
                     // end popup menu setup
 
                     // display info and popup menu
@@ -274,11 +305,10 @@ public class WishlistView extends Frame {
      * @param movieToMove .
      * @param newList .
      * @param oldList .
-     * @param oldListIndex .
      */
-    public void swapMovieList (Movie movieToMove, int newList, int oldList, int oldListIndex){
+    public void swapMovieList (Movie movieToMove, int newList, int oldList){
         //removing movie from previous list
-        wishLists.get(oldList).remove(oldListIndex);
+        wishLists.get(oldList).remove(movieToMove);
         wishLists.get(newList).add(movieToMove);
 //        //adds a new button that corresponds to the moved movie
 //        buttons.add(new JButton(movieToMove.getTitle()));
