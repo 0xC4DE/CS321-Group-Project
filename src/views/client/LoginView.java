@@ -21,7 +21,7 @@ public class LoginView {
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
         JPanel infoSection = new JPanel(new GridLayout(3,2));
         JTextField username  = new JTextField();
-        JTextField password = new JTextField();
+        JPasswordField password = new JPasswordField();
         JButton login = new JButton("Login");
         JButton create = new JButton("Create User");
         JButton guest = new JButton("Login As Guest");

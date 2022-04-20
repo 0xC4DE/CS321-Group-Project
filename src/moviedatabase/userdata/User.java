@@ -140,9 +140,6 @@ public class User {
     public User createUser(String username, String password, Path userFile){
         // sanitize username entry
         username = username.toLowerCase().replace(" ", "");
-        if(username.equals("admin")){
-            isAdmin = true;
-        }
 
         // read the file and parse data
         try {
@@ -156,6 +153,7 @@ public class User {
             for (User user : userList){
                 if (Objects.equals(user.getUsername(), username)) {
                     user_found = true;
+                    if(user.getUsername().equals("admin")) user.isAdmin = true;
                     return user; // when found, return the user
                 }
             }
@@ -198,6 +196,7 @@ public class User {
             for (User user : userList){
                 if (Objects.equals(user.getUsername(), username)){
                     user_found = user;
+                    if(user_found.getUsername().equals("admin")) user_found.isAdmin=true;
                 }
             }
 
