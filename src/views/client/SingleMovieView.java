@@ -59,9 +59,14 @@ class SingleMovieView {
             recordedReview = new JLabel("Review: "+movieToShow.getUserReview());
             options.add(recordedReview);
         }
-
         reviewAdd.addActionListener(e -> {
-            JOptionPane.showOptionDialog(null,reviewBox,"Write a review",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
+            int option = JOptionPane.showOptionDialog(null,reviewBox,"Write a review",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
+        if(option ==0) {
+            ReviewManager allReviews = new ReviewManager();
+            allReviews.addToTable(movieToShow.getImdbID(),review.getText());
+            movieToShow.setUserReview(review.getText());
+            System.out.println(review.getText());
+        }
         });
 
         review.addActionListener(e->{
