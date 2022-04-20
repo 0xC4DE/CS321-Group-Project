@@ -61,12 +61,18 @@ class SingleMovieView {
         //creates the pane for adding the movie to a wishlist
         add.addActionListener(e -> {
             WishlistView addCall = new WishlistView();
-            List< ArrayList<Movie>> ourList = UserAccount.getInstance().getWishlist();
+            List< ArrayList<Movie>> ourList;
+            if(UserAccount.getInstance().getWishlist().isEmpty()) {
+                ourList = new ArrayList<>();
+            }
+            else {
+                ourList = UserAccount.getInstance().getWishlist();
+            }
             //I could not make an array of buttons work, so we ask the user to enter the wishlist number in a text feild
             JTextField choose = new JTextField();
             choose.addActionListener(enter->{
              int list =  Integer.parseInt(choose.getText());
-              if(list>=1 && list<ourList.size()){
+              if(list>=1 && list< ourList.size()){
 
                   addCall.addMovietoList((list-1),movieToShow);
                   System.out.println("Added to wishlist "+list);
@@ -81,7 +87,8 @@ class SingleMovieView {
 
         options.add(add);
         options.add(reviewAdd);
-        JOptionPane.showOptionDialog(null,options,movieToShow.getTitle(),JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
+        jFrame.setSize(300, 300);
+        JOptionPane.showOptionDialog(jFrame,options,movieToShow.getTitle(),JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
 
         /*JOptionPane.showMessageDialog(jFrame, "Title: "+movieToShow.getTitle()+"\nDirector: "+movieToShow.getDirector()+"\nRated: "+
         movieToShow.getRated()+"\nCountry:"+movieToShow.getCountry()+"\nGenre: "+movieToShow.getGenre()+"\nLanguage: "+movieToShow.getLanguage()+"\nRuntime: "+
@@ -101,8 +108,9 @@ class SingleMovieView {
         Search test = new Search();
         String similar=" ";
         results = test.searchByGenre(base.getGenre());
-        for (Movie result : results) {
-            similar += result.getTitle() + ", ";
+
+        for (int i = 0; i < 4; i++) {
+            similar += results.get(i).getTitle() + ", ";
         }
         return similar;
 
