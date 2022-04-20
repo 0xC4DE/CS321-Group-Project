@@ -125,10 +125,18 @@ public class User {
     public void saveUserFile(List<User> userList, Path userFile) throws IOException {
         FileWriter writer = new FileWriter(String.valueOf(getUserFilePath(userFile)));
         Gson users = new Gson();
-        userList.set(this.uuid, this);
-        users.toJson(userList, writer);
-        writer.flush();
-        writer.close();
+        if(this.uuid ==-1){
+            users.toJson(userList, writer);
+            writer.flush();
+            writer.close();
+
+        }
+        else {
+            userList.set(this.uuid, this);
+            users.toJson(userList, writer);
+            writer.flush();
+            writer.close();
+        }
     }
 
     /**
