@@ -83,6 +83,8 @@ public class SearchView extends JPanel implements ActionListener {
 
             ArrayList<JButton> buttons = new ArrayList<JButton>();
 
+            searchFor.sortByName(foundMovies);
+
             for (int j = 0;j<foundMovies.size();j++) {
 
                 Movie testMovie = foundMovies.get(j);
@@ -98,6 +100,8 @@ public class SearchView extends JPanel implements ActionListener {
                 panel.revalidate();
 
             }
+
+
             setLayout(new BoxLayout (boxPanel, Y_AXIS));
             setSize(600,400);
             setVisible(true);

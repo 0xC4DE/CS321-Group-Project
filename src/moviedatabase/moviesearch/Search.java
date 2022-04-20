@@ -9,6 +9,8 @@ import java.util.*;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
+import static java.util.Collections.reverse;
+
 //TODO:
 // tokenize the genre, actors, etc so we search for each
 // search using "contains" for the multi-value fields
@@ -91,6 +93,7 @@ public class Search {
                 return o2.getTitle().compareTo(o1.getTitle());
             }
         });
+        reverse(tempList);
         return tempList;
     }
 
