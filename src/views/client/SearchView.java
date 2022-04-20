@@ -62,13 +62,15 @@ public class SearchView extends JPanel implements ActionListener {
 
         JTextField textField = new JTextField(20);
         JPanel boxPanel = new JPanel();
-        boxPanel.setLayout(new BoxLayout(boxPanel, Y_AXIS));
-        JScrollPane boxScroll = new JScrollPane(boxPanel);
-        boxScroll.setPreferredSize(new Dimension(200, 200));
 
+        JScrollPane boxScroll = new JScrollPane(boxPanel);
+        boxPanel.setLayout(new BoxLayout(boxPanel, Y_AXIS));
         boxPanel.setSize(100,50);
 
+        boxScroll.setPreferredSize(new Dimension(200, 200));
         textField.addActionListener(e -> {
+            boxPanel.removeAll();
+
             List<Movie> foundMovies;
             Search searchFor = new Search();
             String text = textField.getText();
@@ -82,11 +84,9 @@ public class SearchView extends JPanel implements ActionListener {
             };
 
             ArrayList<JButton> buttons = new ArrayList<JButton>();
-
             searchFor.sortByName(foundMovies);
 
             for (int j = 0;j<foundMovies.size();j++) {
-
                 Movie testMovie = foundMovies.get(j);
                 buttons.add(j,new JButton(testMovie.getTitle()));
                 buttons.get(j).addActionListener(f->

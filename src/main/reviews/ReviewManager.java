@@ -37,16 +37,18 @@ public class ReviewManager {
              new ReviewManager(new BootstrapProgram());
         }
     }
+
     public void addToTable(String id, String review){
         reviewTable.put(id,review);
     }
     public void saveReviews() throws IOException {
         FileWriter reviewWriter = new FileWriter(String.valueOf(reviewPath));
         Gson reviewJson = new Gson();
-        reviewJson.toJson(reviewTable,reviewWriter);
+        reviewJson.toJson(reviewTable, reviewWriter);
         reviewWriter.flush();
         reviewWriter.close();
     }
+
     private void loadReviews() throws FileNotFoundException {
         Gson reviewJson = new Gson();
         Reader reviewReader = new FileReader(String.valueOf(reviewPath));
@@ -58,9 +60,4 @@ public class ReviewManager {
         WishlistView wishlistView = new WishlistView();
         wishlistView.setReviewWishList(reviewTable);
     }
-
-
-
-
-
 }
