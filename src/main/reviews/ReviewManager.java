@@ -17,7 +17,7 @@ public class ReviewManager {
     }
     public Path reviewPath;
 
-    private Map reviewTable;
+    private static Map reviewTable;
     private static BootstrapProgram bootLocations;
     public ReviewManager(BootstrapProgram dataLocals){
        bootLocations = dataLocals;
@@ -48,6 +48,9 @@ public class ReviewManager {
         Gson reviewJson = new Gson();
         Reader reviewReader = new FileReader(String.valueOf(reviewPath));
         reviewTable = reviewJson.fromJson(reviewReader, Map.class);
+        if(reviewTable == null){
+            reviewTable = new Hashtable<String,String>();
+        }
         MovieContainer.getInstance().addReviews(reviewTable);
         WishlistView wishlistView = new WishlistView();
         wishlistView.setReviewWishList(reviewTable);
