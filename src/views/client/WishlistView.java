@@ -328,19 +328,8 @@ public class WishlistView extends Frame {
         //removing movie from previous list
         wishLists.get(oldList).remove(movieToMove);
         wishLists.get(newList).add(movieToMove);
-//        //adds a new button that corresponds to the moved movie
-//        buttons.add(new JButton(movieToMove.getTitle()));
-//        //adds the action that clicking will bring up a single movie view of the movie
-//        buttons.get(buttons.size()-1).addActionListener(e->{
-//            SingleMovieView hey = new SingleMovieView();
-//            hey.show(movieToMove);
-//        });
-//        //This should basically remake the whole view with the changed movie
-//        setLayout (new BoxLayout (this, BoxLayout.Y_AXIS));
-//        setSize(400,400);
-//        wishlistPanel.revalidate();
-//        setVisible(true);
         showWishlists();
+        wishlistPanel.revalidate();
     }
 
     public int getWishlistSize() {

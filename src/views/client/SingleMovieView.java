@@ -28,7 +28,6 @@ class SingleMovieView {
         reviewBox.add(reviewHint);
         reviewBox.add(review);
         //Movie info
-        JButton add = new JButton("Add to Wishlist");
         JButton reviewAdd = new JButton("Add a review!");
         JLabel title = new JLabel("Title: "+movieToShow.getTitle());
         JLabel director = new JLabel("Director: "+movieToShow.getDirector());
@@ -58,37 +57,8 @@ class SingleMovieView {
             allReviews.addToTable(movieToShow.getImdbID(),review.getText());
 
         });
-        //creates the pane for adding the movie to a wishlist
-        add.addActionListener(e -> {
-            whichList.removeAll();
-            WishlistView addCall = new WishlistView();
-            List< ArrayList<Movie>> ourList;
-            if(UserAccount.getInstance().getWishlist() == null || UserAccount.getInstance().getWishlist().isEmpty()) {
-                ourList = new ArrayList<>();
-                ourList.add(new ArrayList<Movie>());
-            }
-            else {
-                ourList = UserAccount.getInstance().getWishlist();
-            }
-            //I could not make an array of buttons work, so we ask the user to enter the wishlist number in a text feild
-            JTextField choose = new JTextField();
-            choose.addActionListener(enter->{
-             int list =  Integer.parseInt(choose.getText());
-              if(list>=1 && list< ourList.size()){
 
-                  addCall.addMovietoList((list),movieToShow);
-                  System.out.println("Added to wishlist "+list);
-                  addCall.showWishlists();
-              }
-            });
-            JLabel hint = new JLabel("Enter which list to add to, numbers 1 to "+(ourList.size()-1));
-            whichList.add(hint);
-            whichList.add(choose);
-            //dialog for adding the movie to a list
-            JOptionPane.showOptionDialog(null,whichList,"Add movie to a list",JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
-        });
 
-        options.add(add);
         options.add(reviewAdd);
         jFrame.setSize(300, 300);
         JOptionPane.showOptionDialog(jFrame,options,movieToShow.getTitle(),JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE,null,null,null);
