@@ -1,14 +1,11 @@
-package main.client;
+package views.client;
 
 import moviedatabase.userdata.UserAccount;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.security.spec.ECField;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class LoginView {
     private UserAccount myUser = UserAccount.getInstance();
@@ -49,10 +46,16 @@ public class LoginView {
                 }
             }
             catch(Exception t){
+                JLabel error = new JLabel("Incorrect");
+                myFrame.add(error);
+                wait(1000);
+                myFrame.remove(error);
 
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         });
 
@@ -74,6 +77,8 @@ public class LoginView {
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         } );
         guest.addActionListener(e->{
@@ -87,6 +92,8 @@ public class LoginView {
             }
             finally {
                 lock.unlock();
+                myFrame.setVisible(false);
+                return;
             }
         });
         myFrame.setSize(700,400);

@@ -128,6 +128,10 @@ Here's the schema.
   ]
 }
  */
+
+/**
+ * please don't make me do javadocs for all this, just read the function name
+ */
 public class Movie {
     private String Title;
     private String Year;
@@ -155,6 +159,9 @@ public class Movie {
     private String Website;
     private String Response;
 
+
+    private String userReview;
+
     public Movie() {
     }
 
@@ -166,7 +173,7 @@ public class Movie {
         this.userReview = userReview;
     }
 
-    private String userReview;
+
 
 
     public String getTitle() {

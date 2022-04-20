@@ -34,20 +34,28 @@ public class UserAccount {
     public static UserAccount getInstance(){
         return instance;
     }
+    public void logOut() throws IOException {
+        user.logout();
+    }
 
     /**
      * This will change the name of a user, this is mainly a wrapper, so there is less exposed GSON code
      * @param newName
+     * @param userFile
      * @return Boolean (Username was changed)
      */
-    public Boolean changeName(String newName){
-        user.setUsername(newName);
+    public Boolean changeName(String newName, Path userFile) throws IOException {
+        user.changeUsername(newName, null);
         return true;
     }
+    public void changePassword(String oldPass, String newPass) throws Exception {
+        user.setPassword(oldPass,newPass);
+    }
 
-    public List<ArrayList<Movie>> getWishlist(){return user.wishlistsToStore;}
+
+    public List<ArrayList<Movie>> getWishlist(){return user.getWishlistsToStore();}
     public void SetList(List<ArrayList<Movie>> listToSet){
-        user.wishlistsToStore = listToSet;
+        user.setWishlistsToStore(listToSet);
     }
 
     /**
@@ -96,6 +104,7 @@ public class UserAccount {
     public String getUserName(){
         return instance.user.getUsername();
     }
+
 
     /**
      * Deletes the currently logged-in user

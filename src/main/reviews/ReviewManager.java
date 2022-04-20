@@ -17,7 +17,7 @@ public class ReviewManager {
     public Path reviewPath;
 
     private Map reviewTable;
-    private BootstrapProgram bootLocations;
+    private static BootstrapProgram bootLocations;
     public ReviewManager(BootstrapProgram dataLocals){
        bootLocations = dataLocals;
        bootLocations.loadConfig();
@@ -26,6 +26,11 @@ public class ReviewManager {
             loadReviews();
         } catch (FileNotFoundException e) {
             reviewTable = new HashMap<String,String>();
+        }
+    }
+    public ReviewManager(){
+        if(bootLocations == null){
+             new ReviewManager(new BootstrapProgram());
         }
     }
     public void addToTable(String id, String review){

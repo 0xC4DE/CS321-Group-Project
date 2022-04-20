@@ -1,16 +1,13 @@
 package main;
 
-import main.client.LoginView;
-import moviedatabase.moviedata.Movie;
+import views.client.Dashboard;
+
+import views.client.LoginView;
+import main.reviews.ReviewManager;
+
 import moviedatabase.moviedata.MovieContainer;
 import moviedatabase.userdata.UserAccount;
-import test.TestConstantMovieContainer;
-import test.TestConstantUserAccount;
-import test.TestGSON;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,12 +17,13 @@ public class Main {
         Lock lock = new ReentrantLock();
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
+        
 
-        new TestConstantMovieContainer();
-        new TestConstantMovieContainer();
+        // creates test login
+        UserAccount user = new UserAccount();
+        user.createAccount("user", "user", null);
+        user.logoutUser();
 
-        //new TestGSON();
-        //new TestConstantUserAccount();
 
         Condition finished= lock.newCondition();
         LoginView test = new LoginView();
@@ -34,9 +32,7 @@ public class Main {
         lock.lock();
 
 
-        UserAccount user = new UserAccount();
-        user.createAccount("user", "user", null);
-        user.logoutUser();
+
         try {
             test.loginLoop(finished,lock);
             finished.await();
@@ -46,9 +42,13 @@ public class Main {
         }
         finally {
             lock.unlock();
+
         }
 
-        //continue
+
+        BootstrapProgram bootstrapFiles = new BootstrapProgram();
+        ReviewManager setupReviews = new ReviewManager(bootstrapFiles);
+        Dashboard d = new Dashboard();
 
     }
 }

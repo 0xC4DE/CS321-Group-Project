@@ -22,7 +22,17 @@ public class User {
     private int uuid;
     private String Username;
     private String passwordHash;
-    public List<ArrayList<Movie>> wishlistsToStore;
+    private List<ArrayList<Movie>> wishlistsToStore;
+    private boolean isAdmin;
+
+    public List<ArrayList<Movie>> getWishlistsToStore() {
+        return wishlistsToStore;
+    }
+
+    public void setWishlistsToStore(List<ArrayList<Movie>> wishlistsToStore) {
+        this.wishlistsToStore = wishlistsToStore;
+    }
+
 
     /**
      * This is a guest login. Guest's shouldn't be able to leave reviews
@@ -37,6 +47,7 @@ public class User {
     public int getUUID() {return uuid;}
     public String getUsername() { return Username; }
     public String getPasswordHash() { return passwordHash; }
+    public Boolean isAdmin() { return isAdmin; }
 
     /**
      * This is the constructor for a proper User ONLY to be used for getUser.
@@ -227,10 +238,23 @@ public class User {
      * If there is any authentication to be done on a username it should be added here, and in createUser
      * @param newName
      */
-    public void setUsername(String newName){
+    public void changeUsername(String newName, Path userFile) throws IOException {
         // Sanitizing the name
         newName = newName.toLowerCase();
-        newName = newName.replace("", " ");
+        newName = newName.replace(" ", "");
+
+        List<User> userList = getUserFileList(getUserFilePath(userFile));
+        for (User u : userList){
+            if (u.getUsername().equals(Username)){
+                System.out.println("succeed");
+                u.setUsername(newName);
+            }
+        }
+        System.out.println("saving");
+        saveUserFile(userList, userFile);
+    }
+
+    public void setUsername(String newName){
         Username = newName;
     }
 
@@ -276,6 +300,12 @@ public class User {
         String hash = HexFormat.of().formatHex(digest);
         return hash;
     }
+
+    public void logout() throws IOException {
+        saveUserFile(getUserFileList(null),null);
+
+    }
+
 
     /**
      * Given the path to a file that contains JSON of users, return List\<User\>
