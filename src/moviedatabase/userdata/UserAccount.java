@@ -26,6 +26,7 @@ public class UserAccount {
         user = null;
         instance = this;
     }
+    public boolean getIsAdmin(){return user.isAdmin();}
 
     /**
      * Gets the current instance of user, or null
@@ -99,6 +100,7 @@ public class UserAccount {
      */
     public void loginAsGuest(){
         this.user = new User();
+        this.user.guestUser(this.user);
     }
 
     public String getUserName(){

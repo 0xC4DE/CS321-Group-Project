@@ -18,7 +18,7 @@ public class LoginView {
      * @param lock
      */
     public void loginLoop(Condition loggedIn, Lock lock){
-
+        myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
         JPanel infoSection = new JPanel(new GridLayout(3,2));
         JTextField username  = new JTextField();
         JTextField password = new JTextField();
@@ -36,65 +36,58 @@ public class LoginView {
         myFrame.add(infoSection);
         myFrame.add(buttonSection);
         myFrame.setLayout(new GridLayout(4,4));
+        JLabel error = new JLabel("Invalid Username or Password");
+        JLabel myError = new JLabel("User already Exists");
         //For each of these buttons, they have to be able to lock and unlock the thread, so we need the try catch finally in each, so the can lock, signal, then unlock
         login.addActionListener(e -> {
             lock.lock();
-            try {
-
-                if (myUser.login(username.getText(), password.getText(), null)) {
-                    loggedIn.signal();
-                }
-            }
-            catch(Exception t){
-                JLabel error = new JLabel("Incorrect");
-                myFrame.add(error);
-                wait(1000);
+            if (myUser.login(username.getText(), password.getText(), null)) {
                 myFrame.remove(error);
-
-            }
-            finally {
+                myFrame.remove(myError);
+                loggedIn.signal();
                 lock.unlock();
                 myFrame.setVisible(false);
                 return;
+
             }
+            else {
+                myFrame.remove(myError);
+                myFrame.add(error);
+                myFrame.revalidate();
+                lock.unlock();
+            }
+
         });
 
         create.addActionListener(e ->{
             lock.lock();
-            try {
-                if(myUser.createAccount(username.getText(), password.getText(), null)) {
+            if(!username.getText().equals("")) {
+                if (myUser.createAccount(username.getText(), password.getText(), null)) {
                     loggedIn.signal();
-                }
-                else{
-                    JLabel error = new JLabel("User already Exists");
-                    myFrame.add(error);
-                    wait(1000);
+                    myFrame.remove(myError);
                     myFrame.remove(error);
+                    lock.unlock();
+                    myFrame.setVisible(false);
+                    return;
+                } else {
+                    myFrame.add(myError);
+                    myFrame.remove(error);
+                    myFrame.revalidate();
+                    lock.unlock();
                 }
             }
-            catch(Exception t){
-
-            }
-            finally {
+            else {
                 lock.unlock();
-                myFrame.setVisible(false);
-                return;
             }
         } );
         guest.addActionListener(e->{
             lock.lock();
-            try {
-                myUser.loginAsGuest();
-                loggedIn.signal();
-            }
-            catch(Exception t){
+            myUser.loginAsGuest();
+            loggedIn.signal();
+            lock.unlock();
+            myFrame.setVisible(false);
+            return;
 
-            }
-            finally {
-                lock.unlock();
-                myFrame.setVisible(false);
-                return;
-            }
         });
         myFrame.setSize(700,400);
         myFrame.setVisible(true);

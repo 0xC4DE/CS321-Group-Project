@@ -25,6 +25,12 @@ public class User {
     private List<ArrayList<Movie>> wishlistsToStore;
     private boolean isAdmin;
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    private boolean isAdmin;
+
     public List<ArrayList<Movie>> getWishlistsToStore() {
         return wishlistsToStore;
     }
@@ -39,9 +45,16 @@ public class User {
      * (Check for uuid==-1 to prevent reviews for guests)
      */
     public User() {
-        uuid = -1;
-        Username = "guest";
-        passwordHash = "";
+        uuid = 0;
+        Username = null;
+        passwordHash = null;
+        isAdmin = false;
+    }
+
+    public void guestUser(User u) {
+        u.uuid = -1;
+        u.Username = "guest";
+        u.passwordHash = "";
     }
 
     public int getUUID() {return uuid;}
@@ -129,6 +142,9 @@ public class User {
     public User createUser(String username, String password, Path userFile){
         // sanitize username entry
         username = username.toLowerCase().replace(" ", "");
+        if(username.equals("admin")){
+            isAdmin = true;
+        }
 
         // read the file and parse data
         try {
@@ -191,9 +207,9 @@ public class User {
                 }
             }
 
-            if (user_found == null){
+            if (user_found == null || user_found.getUsername().equals("")) {
                 // User not found, cannot login
-                System.out.println("uesr not found");
+                System.out.println("user not found");
                 return null;
             }
 

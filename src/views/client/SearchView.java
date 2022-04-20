@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class SearchView extends JPanel implements ActionListener {
     private JRadioButton director = new JRadioButton("Director Name", false);
     private JRadioButton genre = new JRadioButton("Genre", false);
     private JRadioButton title = new JRadioButton("Title", true);
+    JPopupMenu searchPop = new JPopupMenu(); // popup menu for actions
+    static JMenu pAdd = new JMenu("Add");
+    WishlistView listView = new WishlistView();
 
     public JPanel SearchBox() {
 
@@ -89,6 +94,8 @@ public class SearchView extends JPanel implements ActionListener {
                 });
                 // adding the buttons so that Movies can be displayed
                 boxPanel.add(buttons.get(j));
+                listView.handleSearchMouse(buttons.get(j), testMovie);
+                panel.revalidate();
 
             }
             setLayout(new BoxLayout (boxPanel, Y_AXIS));

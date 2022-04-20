@@ -23,6 +23,9 @@ public class Main {
         UserAccount user = new UserAccount();
         user.createAccount("user", "user", null);
         user.logoutUser();
+        UserAccount admin = new UserAccount();
+        admin.createAccount("admin", "admin", null);
+        admin.logoutUser();
 
 
         Condition finished= lock.newCondition();

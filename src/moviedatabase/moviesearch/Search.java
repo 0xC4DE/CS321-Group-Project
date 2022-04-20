@@ -1,15 +1,17 @@
 package moviedatabase.moviesearch;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.*;
 
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 
 //TODO:
-// change to different search alg
-// ^^^ no <3 ^^^
-// implement fuzzy searching
-// ^^^ i tried, dunno how ^^^
+// tokenize the genre, actors, etc so we search for each
+// search using "contains" for the multi-value fields
 
 /**
  * This is the class used to search the MovieList by whichever parameter is needed
@@ -120,5 +122,18 @@ public class Search {
             }
         });
         return tempList;
+    }
+
+    public Movie searchByID(String ID) {
+        for (Movie movie : movieList) {
+            if (movie.getImdbID().contains(ID)) {
+                return movie;
+            }
+        }
+        return null;
+    }
+
+    public List<Movie> showAll() {
+        return movieList;
     }
 }

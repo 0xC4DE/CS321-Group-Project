@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import main.BootstrapProgram;
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
+import views.client.WishlistView;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -16,7 +17,7 @@ public class ReviewManager {
     }
     public Path reviewPath;
 
-    private Map reviewTable;
+    private static Map reviewTable;
     private static BootstrapProgram bootLocations;
     public ReviewManager(BootstrapProgram dataLocals){
        bootLocations = dataLocals;
@@ -26,6 +27,9 @@ public class ReviewManager {
             loadReviews();
         } catch (FileNotFoundException e) {
             reviewTable = new HashMap<String,String>();
+            MovieContainer.getInstance().addReviews(reviewTable);
+            WishlistView wishlistView = new WishlistView();
+            wishlistView.setReviewWishList(reviewTable);
         }
     }
     public ReviewManager(){
@@ -46,8 +50,13 @@ public class ReviewManager {
     private void loadReviews() throws FileNotFoundException {
         Gson reviewJson = new Gson();
         Reader reviewReader = new FileReader(String.valueOf(reviewPath));
-        reviewTable = reviewJson.fromJson(reviewReader,Map.class);
+        reviewTable = reviewJson.fromJson(reviewReader, Map.class);
+        if(reviewTable == null){
+            reviewTable = new Hashtable<String,String>();
+        }
         MovieContainer.getInstance().addReviews(reviewTable);
+        WishlistView wishlistView = new WishlistView();
+        wishlistView.setReviewWishList(reviewTable);
     }
 
 

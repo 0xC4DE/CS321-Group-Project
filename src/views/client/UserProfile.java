@@ -19,7 +19,7 @@ public class UserProfile {
         JPanel textboxPanel = new JPanel();
         JPanel passwordChange = new JPanel();
 
-      
+
         passwordChange.setLayout(new GridLayout(2,2));
         JTextField newPass= new JTextField(30);
         JTextField oldPass = new JTextField(30);
@@ -42,7 +42,12 @@ public class UserProfile {
         JButton logout = new JButton("Logout");
         JButton changeName = new JButton("Change username");
         JButton changePass = new JButton("Change Password");
+        JButton adminPanel = new JButton("Change config locations");
 
+    adminPanel.addActionListener(e -> {
+        ConfigurationView confv = new ConfigurationView();
+        confv.setVisible(true);
+    });
 
         newPass.addActionListener(e->{
             try {
@@ -90,7 +95,11 @@ public class UserProfile {
 
     userProfile.add(buttonPanel);
     userProfile.add(textboxPanel);
-    
+    userProfile.revalidate();
+
+    if(user.getIsAdmin()){
+        userProfile.add(adminPanel);
+    }
     textboxPanel.setSize(100,100);
 
     return this.userProfile;
