@@ -27,6 +27,9 @@ public class ReviewManager {
             loadReviews();
         } catch (FileNotFoundException e) {
             reviewTable = new HashMap<String,String>();
+            MovieContainer.getInstance().addReviews(reviewTable);
+            WishlistView wishlistView = new WishlistView();
+            wishlistView.setReviewWishList(reviewTable);
         }
     }
     public ReviewManager(){

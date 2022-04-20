@@ -95,6 +95,7 @@ public class SearchView extends JPanel implements ActionListener {
                 // adding the buttons so that Movies can be displayed
                 boxPanel.add(buttons.get(j));
                 listView.handleSearchMouse(buttons.get(j), testMovie);
+                panel.revalidate();
 
             }
             setLayout(new BoxLayout (boxPanel, Y_AXIS));
