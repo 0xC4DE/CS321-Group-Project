@@ -77,14 +77,19 @@ public class SearchView extends JPanel implements ActionListener {
             List<Movie> foundMovies;
             Search searchFor = new Search();
             String text = textField.getText();
-
+            //default switch case
+            foundMovies = searchFor.searchByName(text);
             // What to search by
-            foundMovies = switch (searchBy) {
-                case "Actor" -> searchFor.searchByActor(text);
-                case "Director" -> searchFor.searchByDirector(text);
-                case "Genre" -> searchFor.searchByGenre(text);
-                default ->  // search by title
-                        searchFor.searchByName(text);
+             switch (searchBy) {
+                case "Actor" ->searchFor.searchByActor(text);
+                case "Director" -> {
+                    foundMovies = searchFor.searchByDirector(text);
+                    searchFor.sortByDirector(foundMovies);
+                }
+                case "Genre" -> {
+                    foundMovies = searchFor.searchByGenre(text);
+                }
+
             };
 
             ArrayList<JButton> buttons = new ArrayList<JButton>();
