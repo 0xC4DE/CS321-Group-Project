@@ -84,7 +84,7 @@ public class BootstrapProgram {
      */
 
     public boolean loadConfig() {
-        if(!(loaded) && this.config != null) {
+        if(!(loaded) && configFile != null) {
             try (FileInputStream in = new FileInputStream(String.valueOf(configFile))) {
                 Properties configInfo = new Properties();
                 configInfo.load(in);
