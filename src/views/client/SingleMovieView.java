@@ -65,7 +65,6 @@ class SingleMovieView {
             ReviewManager allReviews = new ReviewManager();
             allReviews.addToTable(movieToShow.getImdbID(),review.getText());
             movieToShow.setUserReview(review.getText());
-            System.out.println(review.getText());
         }
         });
 
