@@ -81,9 +81,16 @@ class SingleMovieView {
         Search test = new Search();
         String similar=" ";
         results = test.searchByGenre(base.getGenre());
+        System.out.println(results);
+        int count = 0;
 
-        for (int i = 0; i < 4; i++) {
-            similar += results.get(i).getTitle() + ", ";
+        // loop through similar movies but no more than 4
+        for (Movie aMovie : results) {
+            similar += aMovie.getTitle() + ", ";
+            count += 1;
+            if(count >= 4){
+                return similar;
+            }
         }
         return similar;
 

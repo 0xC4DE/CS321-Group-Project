@@ -1,4 +1,5 @@
 package views.client;
+
 import moviedatabase.moviedata.Movie;
 import moviedatabase.moviedata.MovieContainer;
 //import moviedatabase.userdata.User;
@@ -12,7 +13,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 
 public class WishlistView extends Frame {
@@ -34,7 +34,7 @@ public class WishlistView extends Frame {
         JFrame myFrame = new JFrame();
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
 
-        if(wishLists == null || wishLists.isEmpty()) {
+        if (wishLists == null || wishLists.isEmpty()) {
             wishlistPanel.add(new JLabel("No Wishlists"));
         } else {
             wishlistPanel.removeAll();
@@ -61,7 +61,7 @@ public class WishlistView extends Frame {
             }
         }
         JButton createListButton = new JButton("Create New Wishlist");
-        createListButton.addActionListener(e->
+        createListButton.addActionListener(e ->
         {
             createList();
         });
@@ -69,28 +69,35 @@ public class WishlistView extends Frame {
 
         JButton deleteListButton = new JButton("Delete Wishlist");
         //add message box to choose which list to delete
-        deleteListButton.addActionListener(e->
-        {
-            popup.removeAll();
-            for(int i = 1; i < wishLists.size(); i++) {
-                popup.add(String.valueOf(i));
-            }
-            deleteList(Integer.parseInt(e.getActionCommand()));
-        });
-        wishlistPanel.add(deleteListButton);
+        deleteListButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                popup.removeAll();
+                for (int i = 1; i < wishLists.size(); i++) {
+                    JMenuItem n = new JMenuItem(String.valueOf(i));
+                    popup.add(n);
+                    n.addActionListener(e1 ->
+                    {
+                        deleteList(Integer.parseInt(e1.getActionCommand()));
+                    });
+                }
+                popup.show(deleteListButton, e.getX(), e.getY());
+                wishlistPanel.add(deleteListButton);
 
-        // the buttons will be placed vertically, when we have a nested list, it should display in columns
-        wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
-        wishlistPanel.setVisible(true);
+                // the buttons will be placed vertically, when we have a nested list, it should display in columns
+                wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
+                wishlistPanel.setVisible(true);
+            }
+        });
     }
 
+
     public void setReviewWishList(Map<String, String> reviewTable) { //id, review
-        if(wishLists == null || wishLists.size() == 0) {
+        if (wishLists == null || wishLists.size() == 0) {
             createList();
         } else {
             Search search_movies = new Search();
             wishLists.get(0).clear(); // make sure empty
-            for(Map.Entry<String,String> movie_id : reviewTable.entrySet()) {
+            for (Map.Entry<String, String> movie_id : reviewTable.entrySet()) {
                 addMovietoList(0, search_movies.searchByID(movie_id.getKey()));
             }
         }
@@ -104,7 +111,7 @@ public class WishlistView extends Frame {
         myFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // close window on 'X' always
         wishlistPanel.removeAll();
 
-        if(wishLists == null || wishLists.isEmpty()) {
+        if (wishLists == null || wishLists.isEmpty()) {
             wishlistPanel.add(new JLabel("No Wishlists"));
         } else {
             wishlistPanel.removeAll();
@@ -132,22 +139,34 @@ public class WishlistView extends Frame {
             }
         }
         JButton createListButton = new JButton("Create New Wishlist");
-        createListButton.addActionListener(e->
+        createListButton.addActionListener(e ->
         {
             createList();
         });
         wishlistPanel.add(createListButton);
 
         JButton deleteListButton = new JButton("Delete Wishlist");
-           //add message box to choose which list to delete
-        deleteListButton.addActionListener(e->
-        {
-            popup.removeAll();
-            for(int i = 1; i < wishLists.size(); i++) {
-                popup.add(String.valueOf(i));
+        //add message box to choose which list to delete
+        deleteListButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                popup.removeAll();
+                for (int i = 1; i < wishLists.size(); i++) {
+                    JMenuItem n = new JMenuItem(String.valueOf(i));
+                    popup.add(n);
+                    n.addActionListener(e1 ->
+                    {
+                        deleteList(Integer.parseInt(e1.getActionCommand()));
+                    });
+                }
+                popup.show(deleteListButton, e.getX(), e.getY());
+                wishlistPanel.add(deleteListButton);
+
+                // the buttons will be placed vertically, when we have a nested list, it should display in columns
+                wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
+                wishlistPanel.setVisible(true);
             }
-            deleteList(Integer.parseInt(e.getActionCommand()));
         });
+
         wishlistPanel.add(deleteListButton);
         // the buttons will be placed vertically, when we have a nested list, it should display in columns
         wishlistPanel.setLayout(new BoxLayout(wishlistPanel, BoxLayout.Y_AXIS));
@@ -204,37 +223,42 @@ public class WishlistView extends Frame {
 
     /**
      * used to handle what happens when the mouse in clicked on a button
-     * @param button button being acted upon
+     *
+     * @param button        button being acted upon
      * @param wishlistIndex ???
-     * @param movieObj ???
+     * @param movieObj      ???
      */
 
     public void handleMouse(JButton button, int wishlistIndex, Movie movieObj) {
         // handle the button click event
         button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
-                if(me.getButton() == MouseEvent.BUTTON3) { // right click button
+                if (me.getButton() == MouseEvent.BUTTON3) { // right click button
 
                     // popup menu setup -- create on right click to ensure popup is interacting with correct Movie
                     popup.removeAll();
                     // popup menu setup
-                    popup.add(submenu_add); popup.add(pRemove); popup.add(submenu_swap);
-                    submenu_add.removeAll();submenu_swap.removeAll();
+                    popup.add(submenu_add);
+                    popup.add(pRemove);
+                    popup.add(submenu_swap);
+                    submenu_add.removeAll();
+                    submenu_swap.removeAll();
 
 
                     // handle the popup menu options
                     ActionListener menuListener = new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             System.out.println("Popup menu item [" + event.getActionCommand() + "] was selected.");
-                            if(event.getActionCommand().equals("Remove")) {
+                            if (event.getActionCommand().equals("Remove")) {
                                 removeMovieFromList(wishlistIndex, movieObj);
                                 System.out.println("Removing " + movieObj.getTitle() + " from list");
                             }
 
-                        }};
+                        }
+                    };
 
                     pRemove.addActionListener(menuListener);
-                    for(int i = 1; i < wishLists.size(); i++) {
+                    for (int i = 1; i < wishLists.size(); i++) {
                         JMenuItem n = new JMenuItem(String.valueOf(i));
                         JMenuItem m = new JMenuItem(String.valueOf(i));
                         submenu_add.add(n);
@@ -256,7 +280,8 @@ public class WishlistView extends Frame {
                     }
                     submenu_swap.addActionListener(menuListener);
                     submenu_add.addActionListener(menuListener);
-                    popup.add(submenu_add); popup.add(submenu_swap);
+                    popup.add(submenu_add);
+                    popup.add(submenu_swap);
                     // end popup menu setup
 
                     // display info and popup menu
@@ -264,14 +289,15 @@ public class WishlistView extends Frame {
                     System.out.println("Movie object: " + movieObj.getTitle() + " " + movieObj.getCountry());
                     popup.show(button, me.getX(), me.getY());
                 }
-            }});
+            }
+        });
     }
 
     public void handleSearchMouse(JButton button, Movie movieObj) {
         // handle the button click event
         button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
-                if(me.getButton() == MouseEvent.BUTTON3) { // right click button
+                if (me.getButton() == MouseEvent.BUTTON3) { // right click button
 
                     // popup menu setup -- create on right click to ensure popup is interacting with correct Movie
                     popup.removeAll();
@@ -280,7 +306,7 @@ public class WishlistView extends Frame {
                     submenu_add.removeAll();
 
 
-                    for(int i = 1; i < wishLists.size(); i++) {
+                    for (int i = 1; i < wishLists.size(); i++) {
                         JMenuItem n = new JMenuItem(String.valueOf(i));
                         submenu_add.add(n);
                         n.addActionListener(new ActionListener() {
@@ -299,17 +325,19 @@ public class WishlistView extends Frame {
                     System.out.println("Movie object: " + movieObj.getTitle() + " " + movieObj.getCountry());
                     popup.show(button, me.getX(), me.getY());
                 }
-            }});
+            }
+        });
     }
 
 
     /**
      * Takes in a movie object, and its new and old location, and moves the object inside the wishlist matrix accordingly
+     *
      * @param movieToMove .
-     * @param newList .
-     * @param oldList .
+     * @param newList     .
+     * @param oldList     .
      */
-    public void swapMovieList (Movie movieToMove, int newList, int oldList){
+    public void swapMovieList(Movie movieToMove, int newList, int oldList) {
         //removing movie from previous list
         wishLists.get(oldList).remove(movieToMove);
         wishLists.get(newList).add(movieToMove);
@@ -320,8 +348,9 @@ public class WishlistView extends Frame {
     public int getWishlistSize() {
         return wishLists.size();
     }
+
     public void createList() {
-        if(wishLists == null || wishLists.isEmpty()) {
+        if (wishLists == null || wishLists.isEmpty()) {
             wishLists = new ArrayList<>();
         }
         wishLists.add(new ArrayList<Movie>());
@@ -353,11 +382,11 @@ public class WishlistView extends Frame {
 
 
     // main method
-    public static void main(String args[]){
+    public static void main(String args[]) {
         //maybe do a for loop, change the view to do one wishlist at a time
         MovieContainer cont = MovieContainer.getInstance();
         cont.collectMovies(null);
-        WishlistView b=new WishlistView();
+        WishlistView b = new WishlistView();
         b.showWishlists();
     }
 

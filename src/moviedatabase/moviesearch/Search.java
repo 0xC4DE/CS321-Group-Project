@@ -11,9 +11,6 @@ import moviedatabase.moviedata.MovieContainer;
 //TODO:
 // tokenize the genre, actors, etc so we search for each
 // search using "contains" for the multi-value fields
-// change to different search alg
-// ^^^ no <3 ^^^
-// implement fuzzy searching2
 
 /**
  * This is the class used to search the MovieList by whichever parameter is needed
@@ -88,5 +85,9 @@ public class Search {
             }
         }
         return null;
+    }
+
+    public List<Movie> showAll() {
+        return movieList;
     }
 }
