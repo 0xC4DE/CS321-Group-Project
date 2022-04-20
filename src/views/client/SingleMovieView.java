@@ -60,10 +60,12 @@ class SingleMovieView {
         });
         //creates the pane for adding the movie to a wishlist
         add.addActionListener(e -> {
+            whichList.removeAll();
             WishlistView addCall = new WishlistView();
             List< ArrayList<Movie>> ourList;
-            if(UserAccount.getInstance().getWishlist().isEmpty()) {
+            if(UserAccount.getInstance().getWishlist() == null || UserAccount.getInstance().getWishlist().isEmpty()) {
                 ourList = new ArrayList<>();
+                ourList.add(new ArrayList<Movie>());
             }
             else {
                 ourList = UserAccount.getInstance().getWishlist();
@@ -72,9 +74,9 @@ class SingleMovieView {
             JTextField choose = new JTextField();
             choose.addActionListener(enter->{
              int list =  Integer.parseInt(choose.getText());
-              if(list>=1 && list< ourList.size()){
+              if(list>=1 && list<= ourList.size()){
 
-                  addCall.addMovietoList((list-1),movieToShow);
+                  addCall.addMovietoList((list),movieToShow);
                   System.out.println("Added to wishlist "+list);
               }
             });
