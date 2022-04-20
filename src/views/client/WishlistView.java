@@ -21,14 +21,14 @@ import java.util.Map;
 
 
 public class WishlistView extends Frame {
-    private List<ArrayList<Movie>> wishLists;
+    private static List<ArrayList<Movie>> wishLists;
     private ArrayList<JButton> buttons = new ArrayList<>();
     static JPopupMenu popup = new JPopupMenu(); // popup menu for actions
     static JMenu submenu_add = new JMenu("Add");
     static JMenuItem pRemove = new JMenuItem("Remove");
     static JMenu submenu_swap = new JMenu("Swap");
     private String listFn = "none";
-    JPanel wishlistPanel = new JPanel();
+    static JPanel wishlistPanel = new JPanel();
     //private ActionListener menuListener;
 
     /**
@@ -241,25 +241,9 @@ public class WishlistView extends Frame {
                     ActionListener menuListener = new ActionListener() {
                         public void actionPerformed(ActionEvent event) {
                             System.out.println("Popup menu item [" + event.getActionCommand() + "] was selected.");
-                            listFn = event.getActionCommand();
-                            switch (listFn) {
-                                case "Add" -> {
-                                    addMovietoList(wishlistIndex, movieObj); // uncomment when wishlist is used
-                                    System.out.println("Adding movie " + movieObj.getTitle() + " to list");
-                                    break;
-                                }
-                                case "Remove" -> {
-                                    removeMovieFromList(wishlistIndex, movieObj);
-                                    System.out.println("Removing " + movieObj.getTitle() + " from list");
-                                    break;
-                                }
-                                case "Swap" -> {
-                                    //swapMovieList(wishlistIndex, movieObj);
-                                    System.out.println("Swapping movie " + movieObj.getTitle() + " to list");
-                                    break;
-                                }
-
-
+                            if(event.getActionCommand().equals("Remove")) {
+                                removeMovieFromList(wishlistIndex, movieObj);
+                                System.out.println("Removing " + movieObj.getTitle() + " from list");
                             }
 
                         }};
@@ -298,6 +282,40 @@ public class WishlistView extends Frame {
             }});
     }
 
+    public void handleSearchMouse(JButton button, Movie movieObj) {
+        // handle the button click event
+        button.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if(me.getButton() == MouseEvent.BUTTON3) { // right click button
+
+                    // popup menu setup -- create on right click to ensure popup is interacting with correct Movie
+                    popup.removeAll();
+                    // popup menu setup
+                    popup.add(submenu_add);
+                    submenu_add.removeAll();
+
+
+                    for(int i = 1; i < wishLists.size(); i++) {
+                        JMenuItem n = new JMenuItem(String.valueOf(i));
+                        submenu_add.add(n);
+                        n.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                addMovietoList(Integer.parseInt(e.getActionCommand()), movieObj); // uncomment when wishlist is used
+                                System.out.println("Adding movie " + movieObj.getTitle() + " to list");
+                            }
+                        });
+                    }
+                    popup.add(submenu_add);
+                    // end popup menu setup
+
+                    // display info and popup menu
+                    System.out.println("Selected " + button.getText());
+                    System.out.println("Movie object: " + movieObj.getTitle() + " " + movieObj.getCountry());
+                    popup.show(button, me.getX(), me.getY());
+                }
+            }});
+    }
 
 
     /**
@@ -325,6 +343,9 @@ public class WishlistView extends Frame {
         showWishlists();
     }
 
+    public int getWishlistSize() {
+        return wishLists.size();
+    }
     public void createList() {
         if(wishLists.isEmpty()) {
             wishLists = new ArrayList<>();
@@ -332,26 +353,29 @@ public class WishlistView extends Frame {
         wishLists.add(new ArrayList<Movie>());
         UserAccount.getInstance().SetList(wishLists);
         showWishlists();
+        wishlistPanel.revalidate();
     }
 
     public void deleteList(int indexToRemove) {
         wishLists.remove(indexToRemove);
         UserAccount.getInstance().SetList(wishLists);
         showWishlists();
+        wishlistPanel.revalidate();
     }
 
     public void addMovietoList(int whichList, Movie movieToAdd) {
         wishLists.get(whichList).add(movieToAdd);
         UserAccount.getInstance().SetList(wishLists);
         showWishlists();
+        wishlistPanel.revalidate();
     }
 
     public void removeMovieFromList(int whichList, Movie movieToRemove) {
         wishLists.get(whichList).remove(movieToRemove);
         UserAccount.getInstance().SetList(wishLists);
         showWishlists();
+        wishlistPanel.revalidate();
     }
-
 
 
     // main method

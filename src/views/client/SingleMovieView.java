@@ -73,8 +73,8 @@ class SingleMovieView {
             //I could not make an array of buttons work, so we ask the user to enter the wishlist number in a text feild
             JTextField choose = new JTextField();
             choose.addActionListener(enter->{
-             int list =  Integer.parseInt(choose.getText())-1;
-              if(list>=1 && list<= ourList.size()){
+             int list =  Integer.parseInt(choose.getText());
+              if(list>=1 && list< ourList.size()){
 
                   addCall.addMovietoList((list),movieToShow);
                   System.out.println("Added to wishlist "+list);
