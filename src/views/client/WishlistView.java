@@ -91,7 +91,10 @@ public class WishlistView extends Frame {
         });
     }
 
-
+    /**
+     * Populates wishlist 0 with reviews from previous sessions, if they exist. If no reviews exist, an empty list is created
+     * @param reviewTable
+     */
     public void setReviewWishList(Map<String, String> reviewTable) { //id, review
         if (wishLists == null || wishLists.size() == 0) {
             createList();
@@ -106,6 +109,10 @@ public class WishlistView extends Frame {
 
     }
 
+    /**
+     * Creates the GUI of the wishlist page
+     * @return panel with wishlist info
+     */
     public JPanel showWishlists() {
         // setup panel & frame to display
         JFrame myFrame = new JFrame();
@@ -175,52 +182,6 @@ public class WishlistView extends Frame {
         return wishlistPanel;
 
     }
-
-    /**
-     * sets up the layout of the popup menus :)
-     */
-//    public void setupPopUp(){
-//        // popup menu setup -- create on right click to ensure popup is interacting with correct Movie
-//        popup.removeAll();
-//        // popup menu setup
-//        popup.add(submenu_add); popup.add(pRemove); popup.add(submenu_swap);
-//        submenu_add.removeAll();submenu_swap.removeAll();
-//
-//        for(int i = 1; i < wishLists.size(); i++) {
-//            submenu_add.add(String.valueOf(i));
-//            submenu_swap.add(String.valueOf(i));
-//        }
-//
-//        popup.add(submenu_add); popup.add(submenu_swap);
-//
-//        ActionListener menuListener = new ActionListener() {
-//            public void actionPerformed(ActionEvent event) {
-//                System.out.println("Popup menu item [" + event.getActionCommand() + "] was selected.");
-//                listFn = event.getActionCommand();
-//                switch (listFn) {
-//                    case "Add" -> {
-//                        //addMovietoList(wishlistIndex, movieObj); // uncomment when wishlist is used
-//                        System.out.println("Adding movie to list");
-//                    }
-//                    case "Remove" -> {
-//                        //removeMovieFromList(wishlistIndex, movieObj);
-//                        System.out.println("Removing movie from list");
-//                    }
-//                    case "Swap" -> {
-//                        //swapMovieList(wishlistIndex, movieObj);
-//                        System.out.println("Swapping movie to list");
-//                    }
-//                }
-//            }};
-//
-//
-//        pRemove.addActionListener(menuListener);
-//        for(int i = 1; i < wishLists.size(); i++) {
-//            submenu_add.getItem(i).addActionListener(menuListener);
-//            submenu_swap.getItem(i).addActionListener(menuListener);
-//        }
-//        // end popup menu setup
-//    }
 
     /**
      * used to handle what happens when the mouse in clicked on a button

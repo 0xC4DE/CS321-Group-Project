@@ -51,7 +51,7 @@ public class UserAccount {
     }
 
     /**
-     * Self explanatory, sets a new password given old and new
+     * sets a new password given old and new
      * @param oldPass
      * @param newPass
      * @throws Exception

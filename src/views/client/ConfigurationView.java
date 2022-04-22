@@ -95,8 +95,4 @@ public class ConfigurationView extends JFrame {
         add(movieButton);
     }
 
-    public static void main(String[] args) {
-        ConfigurationView confv = new ConfigurationView();
-        confv.setVisible(true);
-    }
 }

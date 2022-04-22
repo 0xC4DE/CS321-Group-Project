@@ -14,11 +14,7 @@ import java.util.List;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 
-// TODO: add search "button"
-// results below bar
-// remove previous results
-// scroll bar for results
-// make results instantly active (mine only show after click)
+
 
 public class SearchView extends JPanel implements ActionListener {
     private String searchBy = "Title";
@@ -30,6 +26,10 @@ public class SearchView extends JPanel implements ActionListener {
     static JMenu pAdd = new JMenu("Add");
     WishlistView listView = new WishlistView();
 
+    /**
+     * creates Search page, returning a panel for Dashboard to use
+     * @return
+     */
     public JPanel SearchBox() {
 
         JPanel panel = new JPanel();

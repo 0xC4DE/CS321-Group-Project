@@ -14,6 +14,11 @@ import static javax.swing.BoxLayout.Y_AXIS;
 public class UserProfile {
     private JPanel userProfile = new JPanel();
 
+    /**
+     * creates panel with user info and options to change info about the user
+     * returns panel for dashboard to use
+     * @return
+     */
     public JPanel getProfile(){
         userProfile.setLayout(new BoxLayout(userProfile, Y_AXIS));
 
@@ -108,12 +113,5 @@ public class UserProfile {
     return this.userProfile;
     }
 
-    public static void main(String[] args) {
-        JFrame test = new JFrame();
-        UserProfile trying = new UserProfile();
-        test.add(trying.getProfile());
-        test.setVisible(true);
-
-    }
 
 }

@@ -82,7 +82,7 @@ public class Search {
     }
 
     /**
-     * Takes in a list and sorts it by name
+     * Takes in a list and sorts it by name using compare
      * @param tempList .
      * @return .
      */

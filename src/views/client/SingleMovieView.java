@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO:
-// look into star wars acting bizzare with multiple monitors
+// look into star wars acting bizarre with multiple monitors
 
 /**
  * This is the popup view for a single movie
